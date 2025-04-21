@@ -1,0 +1,11 @@
+[[ssh-keys]]
+vault = "Private"
+item = "SSH Jorge"
+
+[[ssh-keys]]
+vault = "Employee"
+item = "BASF SSH Key"
+
+[[ssh-keys]]
+vault = "Employee"
+item = "BASF SSH Key GH"
