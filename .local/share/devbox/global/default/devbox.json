@@ -7,7 +7,12 @@
     "zoxide@latest",
     "fzf@latest",
     "eza@latest",
-    "thefuck@latest"
+    "thefuck@latest",
+    "docker@latest",
+    "_1password-cli@latest",
+    "k9s@latest",
+    "coder@latest",
+    "yq@latest"
   ],
   "shell": {
     "init_hook": [],
