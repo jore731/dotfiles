@@ -3,6 +3,14 @@ compinit
 
 setopt HIST_IGNORE_ALL_DUPS
 
+# Setup 1password SSH Agent
+export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
+# SSL Setup
+export SSL_CERT_DIR="/etc/ssl/certs"
+export SSL_CERT_FILE="$SSL_CERT_DIR/BASF_internal_and_public_ca_bundle.crt"
+export NIX_SSL_CERT_FILE=$SSL_CERT_FILE
+
 # Devbox
 DEVBOX_NO_PROMPT=true
 eval "$(devbox global shellenv --init-hook)"
@@ -14,6 +22,7 @@ LANG=en_US.UTF-8
 source <(devbox completion zsh)
 source <(docker completion zsh)
 source <(kubectl completion zsh)
+source <(op completion zsh)
 
 # Starship
 eval "$(starship init zsh)"
@@ -61,10 +70,19 @@ zstyle ':completion:*' menu yes select
 # Aliases
 alias ls='eza --long --all --no-permissions --no-filesize --no-user --no-time --git'
 alias lst='eza --long --all --no-permissions --no-filesize --no-user --git --sort modified'
-alias fzfp='fzf --preview \"bat --style numbers --color always {}\"'
+alias fzfp='fzf --preview "bat --number --color always {}"'
 alias cat='bat --paging never --theme DarkNeon --style plain'
 alias kubectl='kubecolor'
+alias k='kubectl'
+alias kls="k config get-contexts" 
+alias kns="k config set-context --current --namespace $1"
+alias kuse="k config use-context $1"
+alias de="devbox"
 
 export PATH="$HOME/go/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/hooks:$PATH"
+export PATH="$VENV_DIR/bin:$PATH"
+
+export EDITOR="nano"
