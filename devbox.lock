@@ -1,6 +1,70 @@
 {
   "lockfile_version": "1",
   "packages": {
+    "azure-cli@latest": {
+      "last_modified": "2025-04-05T00:48:53Z",
+      "resolved": "github:NixOS/nixpkgs/250b695f41e0e2f5afbf15c6b12480de1fe0001b#azure-cli",
+      "source": "devbox-search",
+      "version": "2.71.0",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/mrr05agr4rrapkngn634a30lfyc1r43k-python3.12-azure-cli-2.71.0",
+              "default": true
+            },
+            {
+              "name": "dist",
+              "path": "/nix/store/brd5lf9v9jh5ywv75485cq7gpx9rnbgw-python3.12-azure-cli-2.71.0-dist"
+            }
+          ],
+          "store_path": "/nix/store/mrr05agr4rrapkngn634a30lfyc1r43k-python3.12-azure-cli-2.71.0"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/4bnv1yb07msbf0v537npjzx4a58y801a-python3.12-azure-cli-2.71.0",
+              "default": true
+            },
+            {
+              "name": "dist",
+              "path": "/nix/store/nz60gv3s7k2cmq7fq4gnbh7vqjkipz5y-python3.12-azure-cli-2.71.0-dist"
+            }
+          ],
+          "store_path": "/nix/store/4bnv1yb07msbf0v537npjzx4a58y801a-python3.12-azure-cli-2.71.0"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/ic0jf2hjvpgcahwbjf8xh1z538c4bvyv-python3.12-azure-cli-2.71.0",
+              "default": true
+            },
+            {
+              "name": "dist",
+              "path": "/nix/store/znqr4vpfvqlh5fac1kl86hryxamzf74q-python3.12-azure-cli-2.71.0-dist"
+            }
+          ],
+          "store_path": "/nix/store/ic0jf2hjvpgcahwbjf8xh1z538c4bvyv-python3.12-azure-cli-2.71.0"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/pv8ackl9m0j6yrb98sv11gcf0xr91rrq-python3.12-azure-cli-2.71.0",
+              "default": true
+            },
+            {
+              "name": "dist",
+              "path": "/nix/store/kwjjd1z3v50pwqifbjjc7z3r8nmq793i-python3.12-azure-cli-2.71.0-dist"
+            }
+          ],
+          "store_path": "/nix/store/pv8ackl9m0j6yrb98sv11gcf0xr91rrq-python3.12-azure-cli-2.71.0"
+        }
+      }
+    },
     "gh@2.50.0": {
       "last_modified": "2024-06-12T20:55:33Z",
       "resolved": "github:NixOS/nixpkgs/a9858885e197f984d92d7fe64e9fff6b2e488d40#gh",
@@ -49,53 +113,9 @@
         }
       }
     },
-    "google-cloud-sdk@478.0.0": {
-      "last_modified": "2024-07-07T16:08:25Z",
-      "resolved": "github:NixOS/nixpkgs/ab82a9612aa45284d4adf69ee81871a389669a9e#google-cloud-sdk",
-      "source": "devbox-search",
-      "version": "478.0.0",
-      "systems": {
-        "aarch64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/7b1gy3fzmm4zjpd8q4n74gpyf3h6526z-google-cloud-sdk-478.0.0",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/7b1gy3fzmm4zjpd8q4n74gpyf3h6526z-google-cloud-sdk-478.0.0"
-        },
-        "aarch64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/ayih9w3rw7hzns4mmpm3mb9rqzm9drwr-google-cloud-sdk-478.0.0",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/ayih9w3rw7hzns4mmpm3mb9rqzm9drwr-google-cloud-sdk-478.0.0"
-        },
-        "x86_64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/zx04k60d39vvql75d67gxya23wkizaxp-google-cloud-sdk-478.0.0",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/zx04k60d39vvql75d67gxya23wkizaxp-google-cloud-sdk-478.0.0"
-        },
-        "x86_64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/s37928lihr4pirv2ah1c5f8a46x63ald-google-cloud-sdk-478.0.0",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/s37928lihr4pirv2ah1c5f8a46x63ald-google-cloud-sdk-478.0.0"
-        }
-      }
+    "github:NixOS/nixpkgs/nixpkgs-unstable": {
+      "last_modified": "2025-05-02T17:15:29Z",
+      "resolved": "github:NixOS/nixpkgs/9a7caecf30a0494c88b7daeeed29244cd9a52e7d?lastModified=1746206129&narHash=sha256-JA4DynBKhY7t4DdJZTuomRLAiXFDUgCGGwxgt%2BXGiik%3D"
     },
     "gum@0.14.1": {
       "last_modified": "2024-07-07T16:08:25Z",
@@ -406,6 +426,54 @@
             }
           ],
           "store_path": "/nix/store/xiznwi415zwc8ahkiyivaii32vlg80cv-kubectl-1.30.1"
+        }
+      }
+    },
+    "kubernetes-helm@latest": {
+      "last_modified": "2025-04-10T20:20:34Z",
+      "resolved": "github:NixOS/nixpkgs/d19cf9dfc633816a437204555afeb9e722386b76#kubernetes-helm",
+      "source": "devbox-search",
+      "version": "3.17.3",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/4dmgpl8ldac8i190r5blsi6f95nb8sb8-kubernetes-helm-3.17.3",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/4dmgpl8ldac8i190r5blsi6f95nb8sb8-kubernetes-helm-3.17.3"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/hzmprxfipk2l3yb6455n849ks4gypl9g-kubernetes-helm-3.17.3",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/hzmprxfipk2l3yb6455n849ks4gypl9g-kubernetes-helm-3.17.3"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/0nx384vvzwwwbrk5vqvsy1wzcravxn7j-kubernetes-helm-3.17.3",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/0nx384vvzwwwbrk5vqvsy1wzcravxn7j-kubernetes-helm-3.17.3"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/4gz844q6xmiklm4416vzzr4h7sw8ajf9-kubernetes-helm-3.17.3",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/4gz844q6xmiklm4416vzzr4h7sw8ajf9-kubernetes-helm-3.17.3"
         }
       }
     },
