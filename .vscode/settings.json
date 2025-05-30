@@ -1,0 +1,144 @@
+{
+    // Vscode style settings
+    "workbench.colorTheme": "Default Dark+",
+    "window.title": "${dirty}${rootNameShort}",
+    "editor.tokenColorCustomizations": {
+        "[*Light*]": {
+            "textMateRules": [
+                {
+                    "scope": "ref.matchtext",
+                    "settings": {
+                        "foreground": "#000"
+                    }
+                }
+            ]
+        },
+        "[*Dark*]": {
+            "textMateRules": [
+                {
+                    "scope": "ref.matchtext",
+                    "settings": {
+                        "foreground": "#fff"
+                    }
+                }
+            ]
+        }
+    },
+    "window.newWindowProfile": "Default",
+    "workbench.tree.indent": 10,
+    "workbench.tree.renderIndentGuides": "always",
+    // VSCode saving behavior
+    "files.autoSave": "onFocusChange",
+    "editor.formatOnSave": true,
+    // Jupyter
+    "jupyter.askForKernelRestart": false,
+    "jupyter.widgetScriptSources": [
+        "jsdelivr.com",
+        "unpkg.com"
+    ],
+    "notebook.output.textLineLimit": 60,
+    // Git settings
+    "git.rebaseWhenSync": true,
+    "git.autoStash": true,
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "git.blame.statusBarItem.enabled": true,
+    "git.replaceTagsWhenPull": true,
+    // Formatters
+    "[terraform]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "hashicorp.terraform"
+    },
+    "[hcl]": {
+        "editor.formatOnSave": true
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    },
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff",
+    },
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml",
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[github-actions-workflow]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    // Makefile settings
+    "makefile.configureOnOpen": true,
+    // Editor settings
+    "editor.accessibilitySupport": "off",
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.cache": true,
+        "**/.mypy_cache": true,
+        "**/.ruff_cache": true
+    },
+    // Python settings
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.extraPaths": [
+        "src"
+    ],
+    "python.testing.pytestArgs": [
+        "--disable-warnings"
+    ],
+    "python.analysis.inlayHints.pytestParameters": true,
+    "python.autoComplete.extraPaths": [],
+    "python.analysis.autoSearchPaths": false,
+    // Remote Development settings
+    "remote.otherPortsAttributes": {
+        "onAutoForward": "notify"
+    },
+    "remote.autoForwardPortsSource": "hybrid",
+    "remote.SSH.connectTimeout": 1800,
+    "remote.SSH.localServerDownload": "always",
+    "terminal.integrated.suggest.enabled": true,
+    // Docker settings
+    "dev.containers.dockerPath": "podman",
+    // Devbox settings
+    "devbox.enableDebugMode": true,
+    // Github settings
+    "github-actions.workflows.pinned.refresh.enabled": true,
+    "githubPullRequests.pullBranch": "never",
+    // Copilot settings
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "scminput": false
+    },
+    "mcp": {
+        "servers": {
+            "kubernetes": {
+                "command": "npx",
+                "args": [
+                    "mcp-server-kubernetes"
+                ],
+                "env": {}
+            }
+        },
+        "inputs": []
+    },
+    // JSON schemas
+    "json.schemas": [],
+    // Editor settings
+    "editor.fontFamily": "Fira Code",
+    "editor.fontLigatures": true,
+    // Terminal settings
+    "terminal.integrated.profiles.osx": {
+        "devboxCompatibleShell": {
+            "path": "/bin/zsh",
+            "args": []
+        }
+    },
+    "terminal.integrated.defaultProfile.osx": "devboxCompatibleShell",
+    // File handling settings 
+    "security.promptForLocalFileProtocolHandling": false,
+    "files.eol": "\n"
+    // Miscellaneous settings
+}
