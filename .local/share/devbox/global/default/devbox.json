@@ -11,11 +11,11 @@
     "docker@latest",
     "_1password-cli@latest",
     "k9s@latest",
-    "coder@latest",
-    "yq@latest"
+    "yq@latest",
+    "nodejs@latest"
   ],
   "shell": {
     "init_hook": [],
-    "scripts":   {}
+    "scripts": {}
   }
 }
