@@ -138,6 +138,7 @@
     // Editor settings
     "editor.fontFamily": "Fira Code",
     "editor.fontLigatures": true,
+    "window.openFoldersInNewWindow": "on",
     // Terminal settings
     "terminal.integrated.profiles.osx": {
         "devboxCompatibleShell": {
