@@ -24,7 +24,6 @@
             ]
         }
     },
-    "window.newWindowProfile": "Default",
     "workbench.tree.indent": 10,
     "workbench.tree.renderIndentGuides": "always",
     // VSCode saving behavior
@@ -120,6 +119,16 @@
                     "mcp-server-kubernetes"
                 ],
                 "env": {}
+            },
+            "global-memory": {
+                "command": "npx",
+                "args": [
+                    "-y",
+                    "@modelcontextprotocol/server-memory"
+                ],
+                "env": {
+                    "MEMORY_FILE_PATH": "${userHome}/.copilot/global-memory.json"
+                }
             }
         },
         "inputs": []
