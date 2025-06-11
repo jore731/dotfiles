@@ -21,6 +21,8 @@ brew install kubecolor
 # https://github.com/sharkdp/bat
 brew install bat
 
+brew install visual-studio-code
+
 brew install podman-desktop
 
 brew install docker-credential-helper
@@ -30,4 +32,6 @@ az extension add --name azure-devops
 
 brew install microsoft-azure-storage-explorer
 
-devbox run 
+brew install alacritty
+
+devbox run -- ./sync.sh
