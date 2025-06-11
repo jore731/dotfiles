@@ -133,8 +133,22 @@
         },
         "inputs": []
     },
+    // YAML schemas
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/okteto/okteto/master/schema.json": [
+            "okteto.yml",
+            "okteto.yaml",
+        ]
+    },
     // JSON schemas
-    "json.schemas": [],
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "devbox.json"
+            ],
+            "url": "https://raw.githubusercontent.com/jetpack-io/devbox/main/.schema/devbox.schema.json"
+        }
+    ],
     // Editor settings
     "editor.fontFamily": "Fira Code",
     "editor.fontLigatures": true,
