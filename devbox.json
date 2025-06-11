@@ -1,7 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.11.0/.schema/devbox.schema.json",
   "packages": [
-    "kind@0.23.0",
     "gum@0.14.1",
     "teller@1.5.6",
     "stow@2.4.0",
@@ -13,11 +12,7 @@
     "azure-cli@latest"
   ],
   "shell": {
-    "init_hook": [
-      "autoload -Uz compinit",
-      "compinit",
-      "source <(kubectl completion zsh)"
-    ],
+    "init_hook": [],
     "scripts": {}
   }
 }
