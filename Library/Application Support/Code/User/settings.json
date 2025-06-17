@@ -112,6 +112,20 @@
         "scminput": false
     },
     "mcp": {
+        "inputs": [
+            {
+                "type": "promptString",
+                "id": "argo-cd-url",
+                "description": "Argo-CD Base URL",
+                "password": false
+            },
+            {
+                "type": "promptString",
+                "id": "argo-cd-token",
+                "description": "Argo-CD Token",
+                "password": true
+            }
+        ],
         "servers": {
             "kubernetes": {
                 "command": "npx",
@@ -129,9 +143,37 @@
                 "env": {
                     "MEMORY_FILE_PATH": "${userHome}/.copilot/global-memory.json"
                 }
+            },
+            "Azure Server": {
+                "command": "npx",
+                "args": [
+                    "-y",
+                    "@azure/mcp@latest",
+                    "server",
+                    "start"
+                ]
+            },
+            "argocd-mcp-stdio": {
+                "type": "stdio",
+                "command": "npx",
+                "args": [
+                    "argocd-mcp@latest",
+                    "stdio"
+                ],
+                "env": {
+                    "ARGOCD_BASE_URL": "${input:argo-cd-url}",
+                    "ARGOCD_API_TOKEN": "${input:argo-cd-token}"
+                }
+            },
+            "context7": {
+                "type": "stdio",
+                "command": "npx",
+                "args": [
+                    "-y",
+                    "@upstash/context7-mcp"
+                ]
             }
-        },
-        "inputs": []
+        }
     },
     // YAML schemas
     "yaml.schemas": {
@@ -163,6 +205,9 @@
     "terminal.integrated.defaultProfile.osx": "devboxCompatibleShell",
     // File handling settings 
     "security.promptForLocalFileProtocolHandling": false,
-    "files.eol": "\n"
+    "files.eol": "\n",
     // Miscellaneous settings
+    "remote.SSH.remotePlatform": {
+        "coder-vscode.coder.ds.basf.net--jore731--coffee-locust-39": "linux"
+    }
 }
