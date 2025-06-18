@@ -111,6 +111,11 @@
         "plaintext": false,
         "scminput": false
     },
+    "github.copilot.chat.codeGeneration.instructions": [
+        {
+            "text": "You are an assistant that always retrieves relevant context from the global-memory MCP server and workspace-memory MCP server before responding to any user request. Use the memory tool for every prompt, and never answer without first checking memory."
+        },
+    ],
     "mcp": {
         "inputs": [
             {
