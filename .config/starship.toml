@@ -1,6 +1,99 @@
-"$schema" = 'https://starship.rs/config-schema.json'
+# "$schema" = 'https://starship.rs/config-schema.json'
 
 add_newline = true
+continuation_prompt = "[▸▹ ](dimmed white)"
+
+format = """$directory\
+$nix_shell\
+$container\
+$git_metrics\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+\n\
+$cmd_duration\
+$hostname\
+$localip\
+$shlvl\
+$shell\
+$env_var\
+$jobs\
+$sudo\
+$username\
+$character """
+
+right_format = """
+$singularity\
+$kubernetes\
+$vcsh\
+$fossil_branch\
+$hg_branch\
+$pijul_channel\
+$docker_context\
+$package\
+$c\
+$cpp\
+$cmake\
+$cobol\
+$daml\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$fennel\
+$golang\
+$guix_shell\
+$haskell\
+$haxe\
+$helm\
+$java\
+$julia\
+$kotlin\
+$gradle\
+$lua\
+$nim\
+$nodejs\
+$ocaml\
+$opa\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$python\
+$raku\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$solidity\
+$swift\
+$terraform\
+$vlang\
+$vagrant\
+$zig\
+$buf\
+$conda\
+$pixi\
+$meson\
+$spack\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$crystal\
+$custom\
+$status\
+$os\
+$battery\
+$time"""
+
+[fill]
+symbol = ' '
 
 [character]
 success_symbol = '[➜](bold green)'
@@ -17,20 +110,27 @@ format = 'underwent [$duration](bold yellow)'
 disabled = true
 
 [azure]
-format = 'on [$symbol($subscription)]($style) '
-disabled = true
+format = '[$symbol(\[$username @ $subscription\])]($style) '
+symbol = ' '
+disabled = false
+
+[azure.subscription_aliases]
+BASF_SC_BMDIS_IN_PROD = 'BMDIS'
+BASF_SC_RDCP_IN_PROD = 'RDCP'
+BASF_SC_RDCP-RG_IN_PROD = 'RDCP-RG'
 
 [gcloud]
 disabled = true
 
 [directory]
 truncate_to_repo = true
+format = '[$path/]($style)[$read_only]($read_only_style) '
 
 [docker_context]
 disabled = true
 
-[git_branch]
-ignore_branches = ['master', 'main']
+# [git_branch]
+# ignore_branches = ['master', 'main']
 
 [git_status]
 conflicted = '🏳'
@@ -51,6 +151,9 @@ disabled = true
 
 [kubernetes]
 disabled = false
+symbol = '󱃾 '
+style = ""
+format = '[$symbol](cyan)[\[$namespace @ $context\]](cyan bold) '
 
 [shell]
 disabled = false
@@ -62,7 +165,10 @@ impure_msg = 'devbox'
 format = 'via [$symbol$state](bold purple) '
 
 [sudo]
-disabled = false
+disabled = true
 
 [nodejs]
+disabled = true
+
+[conda]
 disabled = true
