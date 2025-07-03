@@ -6,11 +6,6 @@ if ! git rev-parse --is-inside-work-tree &>/dev/null; then
     exit 1
 fi
 
-# Ensure valid key
-if ! [[ "$1" =~ ^(personal|basf)$ ]]; then
-    echo "Available keys are personal or basf"
-    exit 1
-fi
 
 url=$(git remote get-url origin)
 
@@ -22,4 +17,4 @@ if [[ -z "$project" ]]; then
     exit 1
 fi
 
-git remote set-url origin "$1git:$project"
+git remote set-url origin "git@github.com:$project"
