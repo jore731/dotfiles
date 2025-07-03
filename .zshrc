@@ -78,6 +78,7 @@ alias kls="k config get-contexts"
 alias kns="k config set-context --current --namespace $1"
 alias kuse="k config use-context $1"
 alias de="devbox"
+alias amd64="env /usr/bin/arch -x86_64 /bin/zsh --login"
 
 export PATH="$HOME/go/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
@@ -86,3 +87,12 @@ export PATH="$HOME/.local/hooks:$PATH"
 export PATH="$VENV_DIR/bin:$PATH"
 
 export EDITOR="nano"
+
+# Docker wrapper
+docker() {
+    if [[ $1 == "build" ]]; then
+        command docker "$@" --secret id=ca-certificates,src=$SSL_CERT_FILE
+    else
+        command docker "$@"
+    fi
+}
