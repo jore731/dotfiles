@@ -15,6 +15,4 @@ ENV=$HOME/.shrc; export ENV
 if [ -x /usr/bin/resizewin ] ; then /usr/bin/resizewin -z ; fi
 
 # Uncomment to display a random cookie on each login.
-# if [ -x /usr/bin/fortune ] ; then /usr/bin/fortune -s ; fi
-
-alias code="$HOME/Applications/Visual\ Studio\ Code.app/Contents/MacOS/Electron"
+if [ -x /usr/bin/fortune ] ; then /usr/bin/fortune -s ; fi
