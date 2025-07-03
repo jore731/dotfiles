@@ -1,0 +1,91 @@
+plugins:
+  argocd:
+    # https://github.com/derailed/k9s/blob/master/plugins/argocd.yaml
+    shortCut: "s"
+    description: Sync ArgoCD Application
+    scopes:
+      - application
+    command: argocd
+    args:
+      - app
+      - sync
+      - $NAME
+      - --app-namespace
+      - $NAMESPACE
+    background: true
+    confirm: true
+
+  refresh-apps:
+    # https://github.com/derailed/k9s/blob/master/plugins/argocd.yaml
+    shortCut: Shift-R
+    confirm: false
+    scopes:
+      - apps
+    description: Refresh a argocd app hard
+    command: bash
+    background: false
+    args:
+      - -c
+      - "kubectl annotate applications -n argocd $NAME argocd.argoproj.io/refresh=hard"
+
+  disable-auto-sync:
+    # https://github.com/derailed/k9s/blob/master/plugins/argocd.yaml
+    shortCut: Shift-J
+    confirm: false
+    scopes:
+      - apps
+    description: Disable argocd sync
+    command: kubectl
+    background: false
+    args:
+      - patch
+      - applications
+      - -n
+      - argocd
+      - $NAME
+      - "--type=json"
+      - '-p=[{"op":"replace", "path": "/spec/syncPolicy", "value": {}}]'
+
+  enable-auto-sync:
+    # https://github.com/derailed/k9s/blob/master/plugins/argocd.yaml
+    shortCut: Shift-B
+    confirm: false
+    scopes:
+      - apps
+    description: Enable argocd sync
+    command: kubectl
+    background: false
+    args:
+      - patch
+      - applications
+      - -n
+      - argocd
+      - $NAME
+      - --type=merge
+      - '-p={"spec":{"syncPolicy":{"automated":{"prune":true,"selfHeal":true},"syncOptions":["ApplyOutOfSyncOnly=true","CreateNamespace=true","PruneLast=true","PrunePropagationPolicy=foreground"]}}}'
+  debug:
+    # https://github.com/derailed/k9s/blob/master/plugins/debug-container.yaml
+    shortCut: Shift-D
+    description: Add debug container
+    dangerous: true
+    scopes:
+      - containers
+    command: bash
+    background: false
+    confirm: true
+    args:
+      - -c
+      - "kubectl --kubeconfig=$KUBECONFIG debug -it --context $CONTEXT -n=$NAMESPACE $POD --target=$NAME --image=ubuntu:latest --share-processes -- bash"
+  debug-node:
+    # https://github.com/derailed/k9s/blob/master/plugins/debug-container.yaml
+    shortCut: Shift-D
+    description: Debug
+    dangerous: true
+    scopes:
+      - nodes
+    command: bash
+    background: false
+    confirm: true
+    args:
+      - -c
+      - "kubectl --kubeconfig=$KUBECONFIG debug -it --context $CONTEXT node/$NAME --image=ubuntu:latest --share-processes -- bash"
