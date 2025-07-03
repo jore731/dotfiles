@@ -41,7 +41,7 @@
     "git.autoStash": true,
     "git.confirmSync": false,
     "git.autofetch": true,
-    "git.blame.statusBarItem.enabled": true,
+    "git.blame.statusBarItem.enabled": false,
     "git.replaceTagsWhenPull": true,
     // Formatters
     "[terraform]": {
@@ -97,7 +97,6 @@
     "remote.autoForwardPortsSource": "hybrid",
     "remote.SSH.connectTimeout": 1800,
     "remote.SSH.localServerDownload": "always",
-    "terminal.integrated.suggest.enabled": true,
     // Docker settings
     "dev.containers.dockerPath": "podman",
     // Devbox settings
@@ -197,7 +196,7 @@
         }
     ],
     // Editor settings
-    "editor.fontFamily": "Fira Code",
+    "editor.fontFamily": "'Fira Code', 'Hack Nerd Font'",
     "editor.fontLigatures": true,
     "window.openFoldersInNewWindow": "on",
     // Terminal settings
@@ -208,11 +207,20 @@
         }
     },
     "terminal.integrated.defaultProfile.osx": "devboxCompatibleShell",
+    "terminal.integrated.fontFamily": "'monospace', 'Hack Nerd Font'",
     // File handling settings 
     "security.promptForLocalFileProtocolHandling": false,
     "files.eol": "\n",
+    // Markdown settings
+    "workbench.editorAssociations": {
+        "*.md": "vscode.markdown.preview.editor"
+    },
     // Miscellaneous settings
     "remote.SSH.remotePlatform": {
-        "coder-vscode.coder.ds.basf.net--jore731--coffee-locust-39": "linux"
-    }
+        "coder-vscode.coder.ds.basf.net--jore731--coffee-locust-39": "linux",
+        "coder-vscode.coder.ds.basf.net--pulidoJ--copper-jay-83": "linux"
+    },
+    "diffEditor.ignoreTrimWhitespace": true,
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "git.blame.editorDecoration.enabled": true,
 }
