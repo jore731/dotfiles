@@ -3,16 +3,14 @@ sudo rm -rf \
     ~/.cache/devbox \
     .local/share/devbox \
     ~/.zshrc \
-    ~/.config/starship.toml \
-    ~/.config/fabric
+    ~/.config/starship.toml
 
-brew uninstall font-fira-code-nerd-font
+brew uninstall font-fira-code-nerd-font font-hack-nerd-font
 
 brew uninstall starship
 
 brew uninstall thefuck
 
-brew uninstall font-fira-code
 
 brew uninstall eza
 
