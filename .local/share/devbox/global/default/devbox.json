@@ -12,10 +12,16 @@
     "_1password-cli@latest",
     "k9s@latest",
     "yq@latest",
-    "nodejs@latest"
+    "nodejs@latest",
+    "argocd@latest",
+    "kubelogin@latest",
+    "docker-compose@latest",
+    "kind@latest",
+    "kubectl@latest",
+    "kubernetes-helm@latest"
   ],
   "shell": {
     "init_hook": [],
-    "scripts": {}
+    "scripts":   {}
   }
 }
