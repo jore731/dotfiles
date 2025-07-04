@@ -1,6 +1,12 @@
+# Completions
+fpath=("$HOME/.local/share/devbox/global/default/.devbox/nix/profile/default/share/zsh/site-functions" $fpath)
+
 autoload -Uz compinit
 compinit
 
+source <(devbox completion zsh)
+
+# Ignore duplicates in history
 setopt HIST_IGNORE_ALL_DUPS
 
 # Setup 1password SSH Agent
@@ -20,9 +26,6 @@ LANG=en_US.UTF-8
 
 # Completions
 source <(devbox completion zsh)
-source <(docker completion zsh)
-source <(kubectl completion zsh)
-source <(op completion zsh)
 
 # Starship
 eval "$(starship init zsh)"

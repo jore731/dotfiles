@@ -1,14 +1,15 @@
 # Enable Rosetta 2 for Apple Silicon
 softwareupdate --install-rosetta --agree-to-license
 
-brew install font-fira-code-nerd-font
+# Enable touch id for terminal sudo commands
+sed "s/^#auth/auth/" /etc/pam.d/sudo_local.template | sudo tee /etc/pam.d/sudo_local
+
+# https://github.com/ryanoasis/nerd-fonts?tab=readme-ov-file
+brew install font-fira-code-nerd-font font-hack-nerd-font
 
 # https://github.com/zdharma-continuum/zinit?tab=readme-ov-file#install
-bash -c "$(curl --fail --show-error --silent \
-    --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
+bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
 
-# https://github.com/tonsky/FiraCode/wiki/Installing
-brew install --cask font-fira-code
 
 # https://www.kcl-lang.io/docs/user_docs/getting-started/install#homebrew-macos-1
 brew install kcl-lang/tap/kcl-lsp
