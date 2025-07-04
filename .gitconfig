@@ -1,0 +1,14 @@
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[include]
+  path = ./.gitconfig.d/personal.gitconfig
+
+[includeIf "hasconfig:remote.*.url:**github.com:basf-global/**"]
+	path = ./.gitconfig.d/basf.gitconfig
+
+[includeIf "hasconfig:remote.*.url:**gitlab.roqs.basf.net/**"]
+	path = ./.gitconfig.d/basf.gitconfig
