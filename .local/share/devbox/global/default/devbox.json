@@ -18,7 +18,8 @@
     "docker-compose@latest",
     "kind@latest",
     "kubectl@latest",
-    "kubernetes-helm@latest"
+    "kubernetes-helm@latest",
+    "gum@latest"
   ],
   "shell": {
     "init_hook": [],
