@@ -216,10 +216,6 @@
         "*.md": "vscode.markdown.preview.editor"
     },
     // Miscellaneous settings
-    "remote.SSH.remotePlatform": {
-        "coder-vscode.coder.ds.basf.net--jore731--coffee-locust-39": "linux",
-        "coder-vscode.coder.ds.basf.net--pulidoJ--copper-jay-83": "linux"
-    },
     "diffEditor.ignoreTrimWhitespace": true,
     "github.copilot.nextEditSuggestions.enabled": true,
     "git.blame.editorDecoration.enabled": true,
