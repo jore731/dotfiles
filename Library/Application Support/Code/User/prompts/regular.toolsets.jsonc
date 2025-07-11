@@ -1,0 +1,35 @@
+{
+    "context-read": {
+        "tools": [
+            "get-library-docs",
+            "resolve-library-id",
+        ],
+        "description": "Read permissions for context7 MCP Servers",
+        "icon": "database"
+    },
+    "memory-read": {
+        "tools": [
+            "read_graph",
+            "search_nodes",
+            "open_nodes"
+        ],
+        "description": "Read permissions for memory MCP Servers",
+        "icon": "database"
+    },
+    "kubernetes-read": {
+        "tools": [
+            "kubectl_describe",
+            "kubectl_get",
+            "kubectl_logs",
+            "kubectl_list",
+            "get_application",
+            "get_application_events",
+            "get_application_managed_resources",
+            "get_application_resource_tree",
+            "get_application_workload_logs",
+            "list_applications"
+        ],
+        "description": "Read permissions for Kubernetes and Argo MCP Servers",
+        "icon": "search"
+    }
+}
