@@ -6,3 +6,6 @@
 /install.sh
 /.git
 README.md
+scripts
+devbox.json
+devbox.lock

@@ -1,0 +1,7 @@
+#! /bin/sh
+
+scripts/macos-setup.sh
+scripts/homebrew-setup.sh
+scripts/zsh-setup.sh
+scripts/vscode-setup.sh
+scripts/k9s-setup.sh

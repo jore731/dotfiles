@@ -16,7 +16,7 @@
     "when": "textInputFocus"
   },
   {
-    "key": "cmd+o",
+    "key": "cmd+r",
     "command": "ruff.executeAutofix"
   },
   {
@@ -28,5 +28,10 @@
     "key": "ctrl+shift+right",
     "command": "-editor.action.smartSelect.expand",
     "when": "editorTextFocus"
+  },
+  {
+    "key": "cmd+r",
+    "command": "-workbench.action.terminal.runRecentCommand",
+    "when": "accessibilityModeEnabled && terminalFocus && terminalHasBeenCreated || accessibilityModeEnabled && terminalFocus && terminalProcessSupported || accessibilityModeEnabled && accessibleViewIsShown && terminalHasBeenCreated && accessibleViewCurrentProviderId == 'terminal' || accessibilityModeEnabled && accessibleViewIsShown && terminalProcessSupported && accessibleViewCurrentProviderId == 'terminal'"
   }
 ]
