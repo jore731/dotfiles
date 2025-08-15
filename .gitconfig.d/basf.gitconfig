@@ -1,5 +1,5 @@
 [user]
 	email = "jorge.pulido@basf.com"
-	name = "Jorge Pulido"
+	name = "pulidoj_basf"
 [core]
     sshCommand = "ssh -i ~/.ssh/basf_git.pub"
