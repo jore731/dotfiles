@@ -1,0 +1,55 @@
+{
+	"servers": {
+		"kubernetes": {
+			"command": "npx",
+			"args": [
+				"mcp-server-kubernetes"
+			],
+			"env": {},
+			"type": "stdio"
+		},
+		"global-memory": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"@modelcontextprotocol/server-memory"
+			],
+			"env": {
+				"MEMORY_FILE_PATH": "${userHome}/.copilot/global-memory.json"
+			},
+			"type": "stdio"
+		},
+		"Azure Server": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"@azure/mcp@latest",
+				"server",
+				"start"
+			],
+			"type": "stdio"
+		},
+		"context7": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"-y",
+				"@upstash/context7-mcp"
+			]
+		}
+	},
+	"inputs": [
+		{
+			"type": "promptString",
+			"id": "argo-cd-url",
+			"description": "Argo-CD Base URL",
+			"password": false
+		},
+		{
+			"type": "promptString",
+			"id": "argo-cd-token",
+			"description": "Argo-CD Token",
+			"password": true
+		}
+	]
+}

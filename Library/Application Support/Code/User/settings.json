@@ -45,17 +45,16 @@
     "git.replaceTagsWhenPull": true,
     // Formatters
     "[terraform]": {
-        "editor.formatOnSave": true,
         "editor.defaultFormatter": "hashicorp.terraform"
-    },
-    "[hcl]": {
-        "editor.formatOnSave": true
     },
     "[markdown]": {
         "editor.defaultFormatter": "yzhang.markdown-all-in-one"
     },
     "[python]": {
         "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        },
     },
     "[yaml]": {
         "editor.defaultFormatter": "redhat.vscode-yaml",
@@ -115,70 +114,6 @@
             "text": "You are an assistant that always retrieves relevant context from the global-memory MCP server and workspace-memory MCP server before responding to any user request. Use the memory tool for every prompt, and never answer without first checking memory."
         },
     ],
-    "mcp": {
-        "inputs": [
-            {
-                "type": "promptString",
-                "id": "argo-cd-url",
-                "description": "Argo-CD Base URL",
-                "password": false
-            },
-            {
-                "type": "promptString",
-                "id": "argo-cd-token",
-                "description": "Argo-CD Token",
-                "password": true
-            }
-        ],
-        "servers": {
-            "kubernetes": {
-                "command": "npx",
-                "args": [
-                    "mcp-server-kubernetes"
-                ],
-                "env": {}
-            },
-            "global-memory": {
-                "command": "npx",
-                "args": [
-                    "-y",
-                    "@modelcontextprotocol/server-memory"
-                ],
-                "env": {
-                    "MEMORY_FILE_PATH": "${userHome}/.copilot/global-memory.json"
-                }
-            },
-            "Azure Server": {
-                "command": "npx",
-                "args": [
-                    "-y",
-                    "@azure/mcp@latest",
-                    "server",
-                    "start"
-                ]
-            },
-            "argocd-mcp-stdio": {
-                "type": "stdio",
-                "command": "npx",
-                "args": [
-                    "argocd-mcp@latest",
-                    "stdio"
-                ],
-                "env": {
-                    "ARGOCD_BASE_URL": "${input:argo-cd-url}",
-                    "ARGOCD_API_TOKEN": "${input:argo-cd-token}"
-                }
-            },
-            "context7": {
-                "type": "stdio",
-                "command": "npx",
-                "args": [
-                    "-y",
-                    "@upstash/context7-mcp"
-                ]
-            }
-        }
-    },
     // YAML schemas
     "yaml.schemas": {
         "https://raw.githubusercontent.com/okteto/okteto/master/schema.json": [
@@ -219,4 +154,5 @@
     "diffEditor.ignoreTrimWhitespace": true,
     "github.copilot.nextEditSuggestions.enabled": true,
     "git.blame.editorDecoration.enabled": true,
+    "devbox.autoShellOnTerminal": false,
 }
