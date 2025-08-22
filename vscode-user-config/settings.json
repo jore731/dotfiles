@@ -154,9 +154,6 @@
     "diffEditor.ignoreTrimWhitespace": true,
     "github.copilot.nextEditSuggestions.enabled": true,
     "git.blame.editorDecoration.enabled": true,
-<<<<<<<< HEAD:vscode-user-config/settings.json
     "devbox.autoShellOnTerminal": false,
-========
     "editor.codeActionsOnSave": {}
->>>>>>>> 5b99c93 (Adapt to windows+wsl and remove shit):vscode/settings.json
 }

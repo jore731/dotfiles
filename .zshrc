@@ -88,6 +88,7 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/hooks:$PATH"
 export PATH="$VENV_DIR/bin:$PATH"
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
 export EDITOR="nano"
 

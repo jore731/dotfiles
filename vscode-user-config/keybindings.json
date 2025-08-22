@@ -16,11 +16,7 @@
     "when": "textInputFocus"
   },
   {
-<<<<<<<< HEAD:vscode-user-config/keybindings.json
-    "key": "cmd+r",
-========
     "key": "ctrl+o",
->>>>>>>> 5b99c93 (Adapt to windows+wsl and remove shit):vscode/keybindings.json
     "command": "ruff.executeAutofix"
   },
   {

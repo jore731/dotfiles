@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 source $(dirname $0)/../functions/gum.sh # Relative path to gum.sh
 
 title "Homebrew Config Dump"
