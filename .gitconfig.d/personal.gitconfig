@@ -1,5 +1,0 @@
-[user]
-	email = "jorge.pulido@hotmail.com"
-	name = "Jorge Pulido"
-[core]
-    sshCommand = "ssh -i ~/.ssh/personal_git.pub"

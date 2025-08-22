@@ -11,5 +11,6 @@ is_windows() {
 }
 
 is_wsl() {
-    [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]
+    return 0
+    #[[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]
 }

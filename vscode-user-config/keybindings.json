@@ -1,12 +1,12 @@
 // Place your key bindings in this file to override the defaults
 [
   {
-    "key": "shift+cmd+f",
+    "key": "shift+ctrl+f",
     "command": "-workbench.action.terminal.searchWorkspace",
     "when": "terminalFocus && terminalProcessSupported && terminalTextSelected"
   },
   {
-    "key": "shift+cmd+f",
+    "key": "shift+ctrl+f",
     "command": "-workbench.view.search",
     "when": "workbench.view.search.active && neverMatch =~ /doesNotMatch/"
   },
@@ -16,11 +16,11 @@
     "when": "textInputFocus"
   },
   {
-    "key": "cmd+r",
+    "key": "ctrl+o",
     "command": "ruff.executeAutofix"
   },
   {
-    "key": "cmd+i",
+    "key": "ctrl+i",
     "command": "editor.action.smartSelect.expand",
     "when": "editorTextFocus"
   },

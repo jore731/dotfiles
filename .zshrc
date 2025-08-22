@@ -10,12 +10,12 @@ source <(devbox completion zsh)
 setopt HIST_IGNORE_ALL_DUPS
 
 # Setup 1password SSH Agent
-export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+#export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 
 # SSL Setup
-export SSL_CERT_DIR="/etc/ssl/certs"
-export SSL_CERT_FILE="$SSL_CERT_DIR/BASF_internal_and_public_ca_bundle.crt"
-export NIX_SSL_CERT_FILE=$SSL_CERT_FILE
+#export SSL_CERT_DIR="/etc/ssl/certs"
+#export SSL_CERT_FILE="$SSL_CERT_DIR/BASF_internal_and_public_ca_bundle.crt"
+#export NIX_SSL_CERT_FILE=$SSL_CERT_FILE
 
 # Devbox
 DEVBOX_NO_PROMPT=true
@@ -81,21 +81,22 @@ alias kls="k config get-contexts"
 alias kns="k config set-context --current --namespace $1"
 alias kuse="k config use-context $1"
 alias de="devbox"
-alias amd64="env /usr/bin/arch -x86_64 /bin/zsh --login"
+#alias amd64="env /usr/bin/arch -x86_64 /bin/zsh --login"
 
 export PATH="$HOME/go/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/hooks:$PATH"
 export PATH="$VENV_DIR/bin:$PATH"
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
 export EDITOR="nano"
 
 # Docker wrapper
-docker() {
-    if [[ $1 == "build" ]]; then
-        command docker "$@" --secret id=ca-certificates,src=$SSL_CERT_FILE
-    else
-        command docker "$@"
-    fi
-}
+# docker() {
+#     if [[ $1 == "build" ]]; then
+#         command docker "$@" --secret id=ca-certificates,src=$SSL_CERT_FILE
+#     else
+#         command docker "$@"
+#     fi
+# }

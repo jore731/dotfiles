@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 scripts/homebrew-config-dump.sh
 scripts/vscode-config-dump.sh
