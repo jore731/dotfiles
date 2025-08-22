@@ -1,7 +1,8 @@
 #! /bin/sh
 
-scripts/macos-setup.sh
-scripts/homebrew-setup.sh
-scripts/zsh-setup.sh
-scripts/vscode-setup.sh
-scripts/k9s-setup.sh
+scripts/devbox-setup.sh
+devbox run -- scripts/macos-setup.sh
+devbox run -- scripts/homebrew-setup.sh
+devbox run -- scripts/zsh-setup.sh
+devbox run -- scripts/vscode-setup.sh
+devbox run -- scripts/k9s-setup.sh
