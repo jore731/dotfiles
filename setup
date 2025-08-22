@@ -1,8 +1,23 @@
 #! /bin/sh
+source $(dirname $0)/functions/utils.sh # Relative path to utils.sh
 
-scripts/devbox-setup.sh
-devbox run -- scripts/macos-setup.sh
-devbox run -- scripts/homebrew-setup.sh
-devbox run -- scripts/zsh-setup.sh
-devbox run -- scripts/vscode-setup.sh
-devbox run -- scripts/k9s-setup.sh
+if is_windows; then
+    echo "Windows setup goes here"
+elif is_macos; then
+    scripts/devbox-initial-setup.sh
+    devbox run -- scripts/devbox-setup.sh
+    devbox run -- scripts/macos-setup.sh
+    devbox run -- scripts/homebrew-setup.sh
+    devbox run -- scripts/zsh-setup.sh
+    devbox run -- scripts/vscode-setup.sh
+    devbox run -- scripts/k9s-setup.sh
+elif is_wsl; then
+    scripts/devbox-initial-setup.sh
+    devbox run -- scripts/devbox-setup.sh
+    devbox run -- scripts/homebrew-setup.sh
+    devbox run -- scripts/zsh-setup.sh
+    devbox run -- scripts/vscode-setup.sh
+    devbox run -- scripts/k9s-setup.sh
+else
+    echo "Unsupported platform. Skipping..."
+fi
