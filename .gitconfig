@@ -1,14 +1,12 @@
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+[user]
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFAIkApEPpbX4VL9UxhLYIAvWrNn37u0jKS6HQYVPbzc
+  name = Marcosino4
+  email = morenolpz.marcos@gmail.com
+[gpg]
+  format = ssh
 
-[include]
-  path = ./.gitconfig.d/personal.gitconfig
+[gpg "ssh"]
+  program = "/mnt/c/Users/Marcos/AppData/Local/Microsoft/WindowsApps/op-ssh-sign-wsl.exe"
 
-[includeIf "hasconfig:remote.*.url:**github.com:basf-global/**"]
-	path = ./.gitconfig.d/basf.gitconfig
-
-[includeIf "hasconfig:remote.*.url:**gitlab.roqs.basf.net/**"]
-	path = ./.gitconfig.d/basf.gitconfig
+[commit]
+  gpgsign = true

@@ -155,4 +155,5 @@
     "github.copilot.nextEditSuggestions.enabled": true,
     "git.blame.editorDecoration.enabled": true,
     "devbox.autoShellOnTerminal": false,
+    "editor.codeActionsOnSave": {}
 }

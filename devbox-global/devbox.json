@@ -20,10 +20,11 @@
     "kubernetes-helm@latest",
     "gum@latest",
     "wget@latest",
-    "watch@latest"
+    "watch@latest",
+    "kubecolor@latest"
   ],
   "shell": {
     "init_hook": [],
-    "scripts":   {}
+    "scripts": {}
   }
 }
