@@ -1,5 +1,5 @@
 # Completions
-fpath=("$HOME/.local/share/devbox/global/default/.devbox/nix/profile/default/share/zsh/site-functions" $fpath)
+fpath=("$PWD/.devbox/virtenv/zsh" "$HOME/.local/share/devbox/global/default/.devbox/nix/profile/default/share/zsh/site-functions" $fpath)
 
 autoload -Uz compinit
 compinit
@@ -23,9 +23,6 @@ eval "$(devbox global shellenv --init-hook)"
 
 # Git
 LANG=en_US.UTF-8
-
-# Completions
-source <(devbox completion zsh)
 
 # Starship
 eval "$(starship init zsh)"
@@ -98,4 +95,13 @@ docker() {
     else
         command docker "$@"
     fi
+}
+
+
+export GITHUB_TOKEN=$(gh auth token)
+
+restart_gp() {
+    launchctl unload /Library/LaunchAgents/com.paloaltonetworks.gp.pangp*
+    sleep 5
+    launchctl load /Library/LaunchAgents/com.paloaltonetworks.gp.pangp*
 }
