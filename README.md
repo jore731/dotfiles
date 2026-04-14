@@ -24,7 +24,7 @@ Setup is driven by [`AGENTS.md`](AGENTS.md) — an AI agent reads those instruct
 
 **Cloud** — Azure CLI, Azure Storage Explorer, Colima
 
-**AI Assistants** — GitHub Copilot, Claude Code, Codex (Azure OpenAI), MCP servers (Figma, Azure, K8s, draw.io)
+**AI Assistants** — GitHub Copilot, Claude Code, MCP servers (Figma, Azure, K8s, draw.io)
 
 **Apps** — VS Code (56 extensions), Obsidian, Raycast, Figma, Slack, Teams, Chrome, and more
 
@@ -34,8 +34,8 @@ Setup is driven by [`AGENTS.md`](AGENTS.md) — an AI agent reads those instruct
 
 ```
 dotfiles/
+├── .agents/              # Agent instructions, MCP servers, skills
 ├── .config/              # Alacritty, fastfetch, starship, 1Password SSH
-├── .copilot/             # Copilot instructions, MCP servers, skills
 ├── .docker/              # Docker context and ACR registries
 ├── .gitconfig            # Git config with conditional includes
 ├── .gitconfig.d/         # Per-identity git configs (personal / BASF)
@@ -45,7 +45,6 @@ dotfiles/
 ├── .ssh/                 # SSH config and public keys (1Password agent)
 ├── .vscode/              # Workspace-level VS Code settings
 ├── Brewfile              # Auto-generated — GUI apps, fonts, extensions
-├── codex-config/         # Codex AI config (→ ~/.codex)
 ├── devbox-global/        # ~30 global CLI tools (→ ~/.local/share/devbox/global)
 ├── devbox.json           # Project-local: stow only
 ├── k9s-config/           # k9s views (→ ~/Library/Application Support/k9s)
@@ -53,7 +52,7 @@ dotfiles/
 └── zsh/                  # .zshrc (→ $HOME)
 ```
 
-Items at the root are symlinked into `$HOME` via `stow .`. Named packages (e.g. `zsh/`, `codex-config/`) are stowed to specific target directories.
+Items at the root are symlinked into `$HOME` via `stow .`. Named packages (e.g. `zsh/`, `k9s-config/`) are stowed to specific target directories.
 
 ## Quick Start
 

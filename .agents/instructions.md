@@ -19,6 +19,7 @@ Platform engineer working with Kubernetes, Azure, and DevOps tooling. I work acr
 
 ## Conventions
 
+- **Agent configuration goes in `.agents/`** — use `.agents/` for instructions, skills, and agent config in any repo. Do not use `.copilot/`, `.claude/`, or other tool-specific directories. The `COPILOT_CUSTOM_INSTRUCTIONS_DIRS` env var points Copilot CLI to `~/.agents/`.
 - **Always use `devbox run`** to execute commands in projects that have a `devbox.json`. Use the pattern `devbox run "cd target_directory && command"` because devbox opens in the project root.
 - **Python projects**: Initialize with `devbox init`, `devbox add uv`, then `uv init` — prompt me for project name, type (app/lib), and options step by step.
 - **Keep setup minimal**: Don't add VS Code extension recommendations, extra configs, or boilerplate unless I ask for it. Start with the bare minimum.

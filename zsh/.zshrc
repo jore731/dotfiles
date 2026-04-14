@@ -21,6 +21,9 @@ export NIX_SSL_CERT_FILE=$SSL_CERT_FILE
 DEVBOX_NO_PROMPT=true
 eval "$(devbox global shellenv --init-hook)"
 
+# Agent config (Copilot CLI reads instructions from this dir)
+export COPILOT_CUSTOM_INSTRUCTIONS_DIRS="$HOME/.agents"
+
 # Git
 LANG=en_US.UTF-8
 
