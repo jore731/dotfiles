@@ -1,0 +1,8 @@
+{
+  "name": "npm-global",
+  "private": true,
+  "description": "Global npm packages managed via dotfiles",
+  "dependencies": {
+    "defuddle": "^0.16.0"
+  }
+}

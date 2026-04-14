@@ -13,6 +13,7 @@ This repository contains dotfiles and configuration for provisioning a developme
 | `vscode-user-config/` | `~/Library/Application Support/Code/User` | `~/.config/Code/User` |
 | `k9s-config/` | `~/Library/Application Support/k9s` | `~/.config/k9s` |
 | `devbox-global/` | `~/.local/share/devbox/global/default` | `~/.local/share/devbox/global/default` |
+| `npm-global/` | `~/.npm-global` | `~/.npm-global` |
 | Root (`stow .`) | `$HOME` | `$HOME` |
 
 Within `.agents/skills/`, the Obsidian skills from `kepano/obsidian-skills` are stowed from the submodule at `.agents/thirdparty/obsidian-skills`.
@@ -70,6 +71,18 @@ devbox global install
 ```
 
 After this phase, all tools defined in `devbox-global/devbox.json` are available in the shell (once `eval "$(devbox global shellenv)"` is sourced, which `.zshrc` handles).
+
+### Phase 3b — npm Global Packages
+
+Some CLI tools (like `defuddle`) are distributed via npm and not available in Nix. These are managed via a stowed `package.json` at `~/.npm-global/`.
+
+```sh
+mkdir -p "$HOME/.npm-global"
+devbox run "stow --target=$HOME/.npm-global npm-global"
+cd "$HOME/.npm-global" && npm install
+```
+
+After this, binaries are available at `~/.npm-global/node_modules/.bin/` (added to PATH by `.zshrc`).
 
 ### Phase 4 — macOS-Specific Setup
 
@@ -226,6 +239,8 @@ brew bundle dump --file=Brewfile --force
 Then commit the updated Brewfile. Never edit `Brewfile` by hand — it's auto-generated.
 
 **Add a new CLI tool**: Add the package to `devbox-global/devbox.json`, then run `devbox global install`.
+
+**Add a new npm global tool**: Add the package to `npm-global/package.json`, then run `cd ~/.npm-global && npm install`. Commit the updated `package.json` and `package-lock.json`.
 
 **Add a new app config**: Create a new top-level directory in this repo, place config files inside mirroring the target directory structure, add the directory name to `.stow-local-ignore`, then stow with the appropriate `--target`.
 

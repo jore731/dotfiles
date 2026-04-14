@@ -9,5 +9,6 @@ devbox-global
 devbox.json
 devbox.lock
 k9s-config
+npm-global
 vscode-user-config
 zsh

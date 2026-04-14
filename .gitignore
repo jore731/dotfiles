@@ -2,3 +2,4 @@
 /kubeconfig.yaml
 /something.png
 /dotfiles
+npm-global/node_modules/

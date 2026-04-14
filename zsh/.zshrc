@@ -53,6 +53,7 @@ alias kuse="k config use-context $1"
 alias de="devbox"
 alias amd64="env /usr/bin/arch -x86_64 /bin/zsh --login"
 
+export PATH="$HOME/.npm-global/node_modules/.bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
