@@ -1,0 +1,39 @@
+# views:
+#   # Alters the pod view column layout. Uses GVR as key
+#   v1/pods:
+#     # Overrides default sort column
+#     sortColumn: AGE:asc
+#     columns:
+#       - AGE
+#       - NAMESPACE|WR # => 🌚 Specifies the NAMESPACE column to be right aligned and only visible while in wide mode
+#       - ZORG:.metadata.labels.fred\.io\.kubernetes\.blee # => 🌚 extract fred.io.kubernetes.blee label into it's own column
+#       - BLEE:.metadata.annotations.blee|R # => 🌚 extract annotation blee into it's own column and right align it
+#       - NAME
+#       - BLEE:.metadata.annotations.blee|R # => 🌚 extract annotation blee into it's own column and right align it
+#       - IP
+#       - NODE
+#       - STATUS
+#       - READY
+#       - MEM/RL|S # => 🌚 Overrides std resource default wide attribute via `S` for `Show`
+#       - "%MEM/R|" # => NOTE! column names with non alpha names need to be quoted as columns must be strings!
+
+#   v1/pods@fred: # => 🌚 As of v0.40.6, you can now further customize pod view for a specific namespace
+#     # Overrides default sort column
+#     sortColumn: NAME:asc
+#     columns:
+#       - NAME|WR
+#       - AGE
+
+#   cool-kid: # => 🌚 New v0.40.8! You can also reference a specific alias and display a custom view for it
+#     columns:
+#       - AGE
+#       - NAMESPACE|WR
+
+#   # Alters the service view column layout
+#   v1/services:
+#     columns:
+#       - AGE
+#       - NAMESPACE
+#       - NAME
+#       - TYPE
+#       - CLUSTER-IP

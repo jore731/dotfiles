@@ -1,0 +1,70 @@
+{
+  "mcpServers": {
+    "figma": {
+      "tools": [
+        "*"
+      ],
+      "type": "http",
+      "url": "https://mcp.figma.com/mcp",
+      "headers": {},
+      "source": "user",
+      "sourcePath": "/Users/jorgepulidolopez/.copilot/mcp-config.json"
+    },
+    "azure-mcp": {
+      "tools": [
+        "*"
+      ],
+      "type": "local",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@azure/mcp@latest",
+        "server",
+        "start"
+      ],
+      "source": "user",
+      "sourcePath": "/Users/jorgepulidolopez/.copilot/mcp-config.json"
+    },
+    "kubernetes": {
+      "tools": [
+        "*"
+      ],
+      "type": "local",
+      "command": "npx",
+      "args": [
+        "-y",
+        "kubernetes-mcp-server@latest"
+      ],
+      "source": "user",
+      "sourcePath": "/Users/jorgepulidolopez/.copilot/mcp-config.json"
+    },
+    "drawio": {
+      "tools": [
+        "*"
+      ],
+      "type": "local",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@drawio/mcp"
+      ],
+      "source": "user",
+      "sourcePath": "/Users/jorgepulidolopez/.copilot/mcp-config.json"
+    },
+    "proxmox": {
+      "type": "local",
+      "command": "${workspaceFolder}/thirdparty/ProxmoxMCP/.venv/bin/python",
+      "tools": [
+        "*"
+      ],
+      "args": [
+        "-m",
+        "proxmox_mcp.server"
+      ],
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/thirdparty/ProxmoxMCP/src",
+        "PROXMOX_MCP_CONFIG": "${workspaceFolder}/.vscode/proxmox-config.json"
+      }
+    }
+  }
+}
