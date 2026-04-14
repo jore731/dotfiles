@@ -2,8 +2,8 @@
 
 This repository contains dotfiles and configuration for provisioning a development machine. It uses two core tools:
 
-- **Devbox** (Nix-based): Manages all CLI tool installations — both a project-local set (`devbox.json`) and a global set (`devbox-global/devbox.json`).
-- **GNU Stow**: Symlinks configuration directories from this repo to their OS-specific target paths. Each top-level directory is a stow "package" that mirrors the target directory structure internally.
+- **Devbox** (Nix-based): Manages CLI tool installations. The project-local `devbox.json` provides `stow` for setup tasks. The global set at `devbox-global/devbox.json` provides ~30 CLI tools used across all projects (starship, fzf, kubectl, claude-code, neovim, etc.).
+- **GNU Stow**: Symlinks configuration directories from this repo to their OS-specific target paths. Each top-level directory is a stow "package" that mirrors the target directory structure internally. Stow is available via `devbox run "stow ..."`.
 
 ## Stow Target Mappings
 
@@ -18,7 +18,18 @@ This repository contains dotfiles and configuration for provisioning a developme
 
 Within `.copilot/skills/`, the Obsidian skills from `kepano/obsidian-skills` are stowed from the submodule at `.copilot/thirdparty/obsidian-skills`.
 
-Root stow links `.config/`, `.gitconfig`, `.gitconfig.d/`, `.ssh/`, `.profile`, `.colima/`, `.docker/`, `.kube/`, `.local/`, and `.copilot/` into `$HOME`. The `.stow-local-ignore` file controls which top-level items are excluded from root stow.
+Root stow links the following into `$HOME` (individual files are symlinked, not directories):
+- `.config/` — alacritty, fastfetch, starship, 1Password SSH agent
+- `.copilot/` — copilot-instructions.md, mcp-config.json, skills/
+- `.docker/config.json` — Docker context and ACR registries
+- `.gitconfig`, `.gitconfig.d/` — Git configuration with conditional includes
+- `.kube/color.yaml` — kubecolor theming
+- `.local/hooks/` — azure-login-hook, git-reset
+- `.profile` — POSIX shell profile
+- `.ssh/` — SSH config and public keys
+- `.vscode/` — project-specific VS Code settings (terminal profile)
+
+The `.stow-local-ignore` file controls which top-level items are excluded from root stow.
 
 ## Full Machine Setup
 
@@ -46,14 +57,14 @@ curl -fsSL https://get.jetify.com/devbox | bash
 
 ### Phase 3 — Devbox Global Setup
 
-This installs all global CLI tools (starship, eza, fzf, zoxide, thefuck, k9s, kubectl, helm, git, docker, gum, etc.).
+This installs all global CLI tools (~30 packages including starship, eza, fzf, zoxide, kubectl, helm, claude-code, neovim, etc.). The project-local `devbox.json` only contains `stow` — everything else comes from global.
 
 ```sh
 # Create the global config directory if it doesn't exist
 mkdir -p "$HOME/.local/share/devbox/global/default"
 
 # Link the global devbox config from this repo
-stow --target="$HOME/.local/share/devbox/global/default" devbox-global
+devbox run "stow --target=$HOME/.local/share/devbox/global/default devbox-global"
 
 # Install all global packages
 devbox global install
@@ -93,7 +104,7 @@ Install all packages from the Brewfile:
 brew bundle
 ```
 
-This installs CLI tools available only via Homebrew (kubecolor, bat, azure-cli, git-lfs), GUI apps (Alacritty, VS Code, Podman Desktop, Raycast, etc.), and VS Code extensions.
+This installs CLI tools available only via Homebrew (kubecolor, bat, git-lfs), GUI apps (Alacritty, VS Code, Obsidian, Podman Desktop, Raycast, etc.), and VS Code extensions.
 
 ### Phase 6 — Zsh Setup
 
@@ -131,38 +142,38 @@ git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-$HOME/
 
 ```sh
 rm -f ~/.zshrc
-stow --target="$HOME" zsh
+devbox run "stow --target=$HOME zsh"
 ```
 
 ### Phase 7 — App Config Linking
 
-For each app, create the target directory if it doesn't exist, then stow.
+For each app, create the target directory if it doesn't exist, then stow. All stow commands use `devbox run`.
 
 **VS Code** (skip on WSL — configure from the Windows side instead):
 
 ```sh
 # macOS
-stow --target="$HOME/Library/Application Support/Code/User" vscode-user-config
+devbox run "stow --target='$HOME/Library/Application Support/Code/User' vscode-user-config"
 
 # Linux
-stow --target="$HOME/.config/Code/User" vscode-user-config
+devbox run "stow --target=$HOME/.config/Code/User vscode-user-config"
 ```
 
 **k9s**:
 
 ```sh
 # macOS
-stow --target="$HOME/Library/Application Support/k9s" k9s-config
+devbox run "stow --target='$HOME/Library/Application Support/k9s' k9s-config"
 
 # Linux
-stow --target="$HOME/.config/k9s" k9s-config
+devbox run "stow --target=$HOME/.config/k9s k9s-config"
 ```
 
 **OpenAI Codex**:
 
 ```sh
 mkdir -p "$HOME/.codex"
-stow --target="$HOME/.codex" codex-config
+devbox run "stow --target=$HOME/.codex codex-config"
 ```
 
 ### Phase 7b — Obsidian Second Brain Setup
@@ -177,17 +188,17 @@ git clone git@github.com:jore731/secondbrain.git ~/secondbrain
 
 ```sh
 git submodule update --init
-stow --dir=.copilot/thirdparty/obsidian-skills --target=.copilot/skills skills
+devbox run "stow --dir=.copilot/thirdparty/obsidian-skills --target=.copilot/skills skills"
 ```
 
 The Obsidian Git plugin config is committed in the vault at `.obsidian/plugins/obsidian-git/data.json` (auto-save/push/pull every 5 minutes, rebase sync). On first launch, open the vault in Obsidian and install the "Obsidian Git" community plugin — the settings will be picked up automatically.
 
 ### Phase 8 — Root Stow
 
-Link all remaining dotfiles (`.config/`, `.gitconfig`, `.ssh/`, etc.) into `$HOME`:
+Link all remaining dotfiles (`.config/`, `.gitconfig`, `.ssh/`, `.docker/`, `.copilot/`, etc.) into `$HOME`:
 
 ```sh
-stow .
+devbox run "stow ."
 ```
 
 ### Phase 9 — Post-Setup
@@ -203,7 +214,7 @@ source ~/.zshrc
 **Re-sync configs after editing files in this repo**:
 
 ```sh
-stow .
+devbox run "stow ."
 ```
 
 For app-specific configs, re-run the stow command with the appropriate `--target`.
@@ -224,14 +235,18 @@ Then commit the updated Brewfile. Never edit `Brewfile` by hand — it's auto-ge
 
 ```sh
 cd .copilot/thirdparty/obsidian-skills && git pull origin main && cd ../../..
-stow --dir=.copilot/thirdparty/obsidian-skills --target=.copilot/skills skills
+devbox run "stow --dir=.copilot/thirdparty/obsidian-skills --target=.copilot/skills skills"
 ```
 
 ## Important Notes
 
-- **Git config** uses conditional includes: `.gitconfig.d/personal.gitconfig` is the default; `.gitconfig.d/basf.gitconfig` activates for remotes matching `github.com:basf-global` or `gitlab.roqs.basf.net`.
+- **Git config** uses conditional includes: `.gitconfig.d/personal.gitconfig` is the default; `.gitconfig.d/basf.gitconfig` activates for remotes matching `github.com:basf-global` or `gitlab.roqs.basf.net`. Credentials use `gh auth git-credential`.
 - **SSH** uses the 1Password SSH agent (`~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock`). Keys are referenced by public key files in `.ssh/`.
 - **Alacritty themes** are a git submodule at `.config/alacritty/themes`. Run `git submodule update --init` if themes are missing.
 - **Starship prompt** config is at `.config/starship.toml` — it's stowed via root stow, not a separate package.
-- **Shell**: `.zshrc` uses Oh My Zsh with plugins: git, history-substring-search, macos, zsh-syntax-highlighting, zsh-autosuggestions, zsh-completions.
+- **Shell**: `.zshrc` (in `zsh/` stow package) uses Oh My Zsh with plugins: git, history-substring-search, macos, zsh-syntax-highlighting, zsh-autosuggestions, zsh-completions.
+- **MCP servers** are configured in `.copilot/mcp-config.json` (not VS Code `mcp.json`). Includes figma, azure, kubernetes, drawio, and proxmox servers.
+- **Docker** config at `.docker/config.json` stores ACR registry names and context settings. Credentials are in macOS Keychain via `credsStore: osxkeychain` — no secrets in the file.
+- **Codex** config at `codex-config/config.toml` points to Azure OpenAI. The API key is read from `AZURE_OPENAI_API_KEY` env var — no secrets in the file.
 - **Obsidian second brain**: The vault at `~/secondbrain` is a private git repo (`jore731/secondbrain`). The Obsidian Git plugin handles auto-sync. Obsidian skills from `kepano/obsidian-skills` are stowed as a submodule at `.copilot/thirdparty/obsidian-skills`. A custom `obsidian` skill at `.copilot/skills/obsidian/SKILL.md` guides agents on vault structure and when to use it.
+- **Devbox project vs global**: The project `devbox.json` only contains `stow` (for setup tasks). All other CLI tools come from `devbox-global/devbox.json` which is stowed to the global devbox path.
