@@ -16,10 +16,10 @@ This repository contains dotfiles and configuration for provisioning a developme
 | `npm-global/` | `~/.npm-global` | `~/.npm-global` |
 | Root (`stow .`) | `$HOME` | `$HOME` |
 
-Within `.agents/skills/`, the Obsidian skills from `kepano/obsidian-skills` are stowed from the submodule at `.agents/thirdparty/obsidian-skills`.
+Within `.copilot/skills/`, the Obsidian skills from `kepano/obsidian-skills` are stowed from the submodule at `.copilot/thirdparty/obsidian-skills`.
 
 Root stow links the following into `$HOME` (individual files are symlinked, not directories):
-- `.agents/` — instructions.md, mcp-config.json, skills/
+- `.copilot/` — copilot-instructions.md, mcp-config.json, skills/
 - `.config/` — alacritty, fastfetch, starship, 1Password SSH agent
 - `.docker/config.json` — Docker context and ACR registries
 - `.gitconfig`, `.gitconfig.d/` — Git configuration with conditional includes
@@ -189,30 +189,24 @@ devbox run "stow --target=$HOME/.config/k9s k9s-config"
 git clone git@github.com:jore731/secondbrain.git ~/secondbrain
 ```
 
-**Stow the Obsidian skills** from the submodule into `.agents/skills/`:
+**Stow the Obsidian skills** from the submodule into `.copilot/skills/`:
 
 ```sh
 git submodule update --init
-devbox run "stow --dir=.agents/thirdparty/obsidian-skills --target=.agents/skills skills"
+devbox run "stow --dir=.copilot/thirdparty/obsidian-skills --target=.copilot/skills skills"
 ```
 
 The Obsidian Git plugin config is committed in the vault at `.obsidian/plugins/obsidian-git/data.json` (auto-save/push/pull every 5 minutes, rebase sync). On first launch, open the vault in Obsidian and install the "Obsidian Git" community plugin — the settings will be picked up automatically.
 
 ### Phase 8 — Root Stow
 
-Link all remaining dotfiles (`.config/`, `.gitconfig`, `.ssh/`, `.docker/`, `.agents/`, etc.) into `$HOME`:
+Link all remaining dotfiles (`.config/`, `.gitconfig`, `.ssh/`, `.docker/`, `.copilot/`, etc.) into `$HOME`:
 
 ```sh
 devbox run "stow ."
 ```
 
 ### Phase 9 — Post-Setup
-
-**Symlink MCP config** into Copilot's runtime directory (Copilot CLI expects it at `~/.copilot/`):
-
-```sh
-ln -sf "$HOME/.agents/mcp-config.json" "$HOME/.copilot/mcp-config.json"
-```
 
 Remind the user to start a new shell or run:
 
@@ -247,19 +241,19 @@ Then commit the updated Brewfile. Never edit `Brewfile` by hand — it's auto-ge
 **Update Obsidian skills**: Pull the latest from the submodule, then re-stow:
 
 ```sh
-cd .agents/thirdparty/obsidian-skills && git pull origin main && cd ../../..
-devbox run "stow --dir=.agents/thirdparty/obsidian-skills --target=.agents/skills skills"
+cd .copilot/thirdparty/obsidian-skills && git pull origin main && cd ../../..
+devbox run "stow --dir=.copilot/thirdparty/obsidian-skills --target=.copilot/skills skills"
 ```
 
 ## Important Notes
 
-- **Agent config convention**: All agent configuration (instructions, skills, MCP servers) lives in `.agents/` — not `.copilot/`, `.claude/`, or other tool-specific directories. The `COPILOT_CUSTOM_INSTRUCTIONS_DIRS` env var (set in `.zshrc`) includes `$HOME/.agents` (global) and `.agents` (per-repo), so Copilot CLI picks up instructions from both locations. MCP config is symlinked into `~/.copilot/` in Phase 9.
+- **Agent config convention**: All agent configuration (instructions, skills, MCP servers) lives in `.copilot/` as required by Copilot CLI. Root stow links `.copilot/` contents into `~/.copilot/` alongside Copilot's runtime files.
 - **Git config** uses conditional includes: `.gitconfig.d/personal.gitconfig` is the default; `.gitconfig.d/basf.gitconfig` activates for remotes matching `github.com:basf-global` or `gitlab.roqs.basf.net`. Credentials use `gh auth git-credential`.
 - **SSH** uses the 1Password SSH agent (`~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock`). Keys are referenced by public key files in `.ssh/`.
 - **Alacritty themes** are a git submodule at `.config/alacritty/themes`. Run `git submodule update --init` if themes are missing.
 - **Starship prompt** config is at `.config/starship.toml` — it's stowed via root stow, not a separate package.
-- **Shell**: `.zshrc` (in `zsh/` stow package) uses Oh My Zsh with plugins: git, history-substring-search, macos, zsh-syntax-highlighting, zsh-autosuggestions, zsh-completions. Sets `COPILOT_CUSTOM_INSTRUCTIONS_DIRS` to `$HOME/.agents:.agents` (global + per-repo).
-- **MCP servers** are configured in `.agents/mcp-config.json` (symlinked to `~/.copilot/mcp-config.json`). Includes figma, azure, kubernetes, drawio, and proxmox servers.
+- **Shell**: `.zshrc` (in `zsh/` stow package) uses Oh My Zsh with plugins: git, history-substring-search, macos, zsh-syntax-highlighting, zsh-autosuggestions, zsh-completions.
+- **MCP servers** are configured in `.copilot/mcp-config.json` (stowed to `~/.copilot/mcp-config.json`). Includes figma, azure, kubernetes, drawio, and proxmox servers.
 - **Docker** config at `.docker/config.json` stores ACR registry names and context settings. Credentials are in macOS Keychain via `credsStore: osxkeychain` — no secrets in the file.
-- **Obsidian second brain**: The vault at `~/secondbrain` is a private git repo (`jore731/secondbrain`). The Obsidian Git plugin handles auto-sync. Obsidian skills from `kepano/obsidian-skills` are stowed as a submodule at `.agents/thirdparty/obsidian-skills`. A custom `obsidian` skill at `.agents/skills/obsidian/SKILL.md` guides agents on vault structure and when to use it.
+- **Obsidian second brain**: The vault at `~/secondbrain` is a private git repo (`jore731/secondbrain`). The Obsidian Git plugin handles auto-sync. Obsidian skills from `kepano/obsidian-skills` are stowed as a submodule at `.copilot/thirdparty/obsidian-skills`. A custom `obsidian` skill at `.copilot/skills/obsidian/SKILL.md` guides agents on vault structure and when to use it.
 - **Devbox project vs global**: The project `devbox.json` only contains `stow` (for setup tasks). All other CLI tools come from `devbox-global/devbox.json` which is stowed to the global devbox path.

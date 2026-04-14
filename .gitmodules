@@ -1,6 +1,6 @@
 [submodule "alacritty-theme"]
 	path = .config/alacritty/themes
 	url = https://github.com/alacritty/alacritty-theme
-[submodule ".agents/thirdparty/obsidian-skills"]
-	path = .agents/thirdparty/obsidian-skills
+[submodule ".copilot/thirdparty/obsidian-skills"]
+	path = .copilot/thirdparty/obsidian-skills
 	url = https://github.com/kepano/obsidian-skills.git

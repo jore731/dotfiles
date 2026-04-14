@@ -8,7 +8,7 @@
       "url": "https://mcp.figma.com/mcp",
       "headers": {},
       "source": "user",
-      "sourcePath": "/Users/jorgepulidolopez/.agents/mcp-config.json"
+      "sourcePath": "/Users/jorgepulidolopez/.copilot/mcp-config.json"
     },
     "azure-mcp": {
       "tools": [
@@ -23,7 +23,7 @@
         "start"
       ],
       "source": "user",
-      "sourcePath": "/Users/jorgepulidolopez/.agents/mcp-config.json"
+      "sourcePath": "/Users/jorgepulidolopez/.copilot/mcp-config.json"
     },
     "kubernetes": {
       "tools": [
@@ -36,7 +36,7 @@
         "kubernetes-mcp-server@latest"
       ],
       "source": "user",
-      "sourcePath": "/Users/jorgepulidolopez/.agents/mcp-config.json"
+      "sourcePath": "/Users/jorgepulidolopez/.copilot/mcp-config.json"
     },
     "drawio": {
       "tools": [
@@ -49,7 +49,7 @@
         "@drawio/mcp"
       ],
       "source": "user",
-      "sourcePath": "/Users/jorgepulidolopez/.agents/mcp-config.json"
+      "sourcePath": "/Users/jorgepulidolopez/.copilot/mcp-config.json"
     },
     "proxmox": {
       "type": "local",

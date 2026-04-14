@@ -34,7 +34,7 @@ Setup is driven by [`AGENTS.md`](AGENTS.md) — an AI agent reads those instruct
 
 ```
 dotfiles/
-├── .agents/              # Agent instructions, MCP servers, skills
+├── .copilot/              # Agent instructions, MCP servers, skills
 ├── .config/              # Alacritty, fastfetch, starship, 1Password SSH
 ├── .docker/              # Docker context and ACR registries
 ├── .gitconfig            # Git config with conditional includes
