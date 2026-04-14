@@ -1,4 +1,0 @@
-#! /bin/sh
-
-scripts/homebrew-config-dump.sh
-scripts/vscode-config-dump.sh
