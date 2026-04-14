@@ -12,3 +12,13 @@
 
 [includeIf "hasconfig:remote.*.url:**gitlab.roqs.basf.net/**"]
 	path = ./.gitconfig.d/basf.gitconfig
+[pull]
+	rebase = true
+[advice]
+	skippedCherryPicks = false
+[credential "https://github.com"]
+	helper = 
+	helper = !/Users/jorgepulidolopez/.local/share/devbox/global/default/.devbox/nix/profile/default/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/Users/jorgepulidolopez/.local/share/devbox/global/default/.devbox/nix/profile/default/bin/gh auth git-credential

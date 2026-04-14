@@ -1,12 +1,32 @@
 #!/bin/bash
 
-az account get-access-token > /dev/null
+# Azure CLI complaints about FutureWarnings, so we disable them.
+export PYTHONWARNINGS=ignore::FutureWarning
 
-if [ $? -eq 0 ]; then
-    echo 'Azure login is valid'
-    exit 0
-else
-    echo 'Please login to azure portal...'
-    az login --only-show-errors > /dev/null
-    az account set --subscription $AZURE_SUBSCRIPTION > /dev/null
-fi
+# Get credentials if needed.
+check_token() {
+  az account get-access-token > /dev/null
+  if [ $? -eq 0 ]; then
+    gum confirm "Azure credentials seem to be valid!\\n Would you like to login again anyway?" && az login --only-show-errors --output none || gum log "skipping re-login" && return
+  else
+    gum log "Azure credentials are invalid or expired. Please login again."
+    az login --only-show-errors
+  fi
+}
+
+# Choose the Azure subscription to use.
+select_subscription() {
+  subscription_name=$(az account list -o json | jq '.[] | (.name)' | gum choose --ordered --selected=$AZURE_SUBSCRIPTION_DEFAULT_NAME)
+  if [ -z $subscription_name ]; then
+    gum log "No subscription selected. Exiting."
+    exit 1
+  fi
+  echo "Setting Azure subscription to: $subscription_name"
+  az account set --name $subscription_name --only-show-errors
+}
+
+az config set core.login_experience_v2=off --only-show-errors
+az config set core.output=table --only-show-errors
+
+check_token
+select_subscription

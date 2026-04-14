@@ -89,3 +89,26 @@ plugins:
     args:
       - -c
       - "kubectl --kubeconfig=$KUBECONFIG debug -it --context $CONTEXT node/$NAME --image=ubuntu:latest --share-processes -- bash"
+
+  refresh-external-secrets:
+    shortCut: Shift-R
+    confirm: false
+    scopes:
+      - externalsecrets
+    description: Refresh the externalsecret
+    command: bash
+    background: true
+    args:
+      - -c
+      - "kubectl annotate externalsecrets.external-secrets.io --context $CONTEXT -n $NAMESPACE $NAME force-sync=$(date +%s) --overwrite"
+  refresh-push-secrets:
+    shortCut: Shift-R
+    confirm: false
+    scopes:
+      - pushsecrets
+    description: Refresh the pushsecret
+    command: bash
+    background: true
+    args:
+      - -c
+      - "kubectl annotate pushsecrets.external-secrets.io --context $CONTEXT -n $NAMESPACE $NAME force-sync=$(date +%s) --overwrite"

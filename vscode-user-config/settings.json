@@ -1,6 +1,6 @@
 {
     // Vscode style settings
-    "workbench.colorTheme": "Default Dark+",
+    "workbench.colorTheme": "Dark+",
     "window.title": "${dirty}${rootNameShort}",
     "editor.tokenColorCustomizations": {
         "[*Light*]": {
@@ -68,8 +68,6 @@
     "[github-actions-workflow]": {
         "editor.defaultFormatter": "redhat.vscode-yaml"
     },
-    // Makefile settings
-    "makefile.configureOnOpen": true,
     // Editor settings
     "editor.accessibilitySupport": "off",
     "files.exclude": {
@@ -95,11 +93,8 @@
     },
     "remote.autoForwardPortsSource": "hybrid",
     "remote.SSH.connectTimeout": 1800,
-    "remote.SSH.localServerDownload": "always",
     // Docker settings
     "dev.containers.dockerPath": "podman",
-    // Devbox settings
-    "devbox.enableDebugMode": true,
     // Github settings
     "github-actions.workflows.pinned.refresh.enabled": true,
     "githubPullRequests.pullBranch": "never",
@@ -109,16 +104,11 @@
         "plaintext": false,
         "scminput": false
     },
-    "github.copilot.chat.codeGeneration.instructions": [
-        {
-            "text": "You are an assistant that always retrieves relevant context from the global-memory MCP server and workspace-memory MCP server before responding to any user request. Use the memory tool for every prompt, and never answer without first checking memory."
-        },
-    ],
     // YAML schemas
     "yaml.schemas": {
         "https://raw.githubusercontent.com/okteto/okteto/master/schema.json": [
             "okteto.yml",
-            "okteto.yaml",
+            "okteto.yaml"
         ]
     },
     // JSON schemas
@@ -141,7 +131,6 @@
             "args": []
         }
     },
-    "terminal.integrated.defaultProfile.osx": "devboxCompatibleShell",
     "terminal.integrated.fontFamily": "'monospace', 'Hack Nerd Font'",
     // File handling settings 
     "security.promptForLocalFileProtocolHandling": false,
@@ -151,8 +140,60 @@
         "*.md": "vscode.markdown.preview.editor"
     },
     // Miscellaneous settings
-    "diffEditor.ignoreTrimWhitespace": true,
+    "diffEditor.ignoreTrimWhitespace": false,
     "github.copilot.nextEditSuggestions.enabled": true,
     "git.blame.editorDecoration.enabled": true,
+    "remote.SSH.remotePlatform": {
+        "coder-vscode.coder.ds.basf.net--pulidoJ--black-barracuda-57.main": "linux",
+        "coder-vscode.coder.ds.basf.net--pulidoJ--red-squid-60.main": "linux",
+        "coder-vscode.coder.ds.basf.net--pulidoj--red-squid-60.main": "linux",
+        "coder-vscode.coder.ds.basf.net--pulidoJ--test-env.main": "linux",
+        "coder-vscode.coder.ds.basf.net--pulidoJ--amber-damselfly-23.main": "linux",
+        "coder-vscode.coder.ds.basf.net--pulidoJ--rdcp-iac.main": "linux"
+    },
+    "[dockercompose]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": "advanced",
+        "editor.quickSuggestions": {
+            "other": true,
+            "comments": false,
+            "strings": true
+        },
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "vs-kubernetes": {
+        "vs-kubernetes.crd-code-completion": "enabled"
+    },
+    "chat.agent.maxRequests": 100,
+    "gitlens.ai.model": "vscode",
+    "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+    "terminal.integrated.suggest.cdPath": "off",
+    "terminal.integrated.suggest.enabled": false,
+    "okteto.upTimeout": 60,
+    "remote.SSH.serverInstallPath": {
+        "skqual-celery-ai.okteto": "/tmp/vscode-server",
+        "skprod-celery-ai.okteto": "/tmp/vscode-server"
+    },
+    "chat.viewSessions.orientation": "stacked",
+    "ruff.path": [
+        "uvx ruff"
+    ],
     "devbox.autoShellOnTerminal": false,
+    "github.copilot.chat.copilotMemory.enabled": true,
+    "github.copilot.selectedCompletionModel": "GPT-5.1-Codex-Max",
+    "azureResourceGroups.duplicateSubscriptionMode": true,
+    "@azure.argTenant": "ecaa386b-c8df-4ce0-ad01-740cbdb5ba55",
+    "devbox.enableDebugMode": true,
+    "json.schemaDownload.trustedDomains": {
+        "https://developer.microsoft.com/json-schemas/": true,
+        "https://json-schema.org/": true,
+        "https://json.schemastore.org/": true,
+        "https://raw.githubusercontent.com": true,
+        "https://raw.githubusercontent.com/devcontainers/spec/": true,
+        "https://raw.githubusercontent.com/microsoft/vscode/": true,
+        "https://schemastore.azurewebsites.net/": true,
+        "https://www.schemastore.org/": true
+    },
+    "hediet.vscode-drawio.resizeImages": null,
 }
