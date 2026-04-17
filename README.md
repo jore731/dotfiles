@@ -16,7 +16,7 @@ Setup is driven by [`AGENTS.md`](AGENTS.md) — an AI agent reads those instruct
 
 ## What's Managed
 
-**Shell & Terminal** — Zsh (Oh My Zsh), Starship prompt, Alacritty, fastfetch
+**Shell & Terminal** — Zsh (Oh My Zsh), Starship prompt, Ghostty, fastfetch
 
 **Dev Tools** — Git (multi-identity via conditional includes), SSH (1Password agent), Docker, Neovim
 
@@ -35,7 +35,7 @@ Setup is driven by [`AGENTS.md`](AGENTS.md) — an AI agent reads those instruct
 ```
 dotfiles/
 ├── .copilot/              # Agent instructions, MCP servers, skills
-├── .config/              # Alacritty, fastfetch, starship, 1Password SSH
+├── .config/              # Ghostty, fastfetch, starship, 1Password SSH
 ├── .docker/              # Docker context and ACR registries
 ├── .gitconfig            # Git config with conditional includes
 ├── .gitconfig.d/         # Per-identity git configs (personal / BASF)

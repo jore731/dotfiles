@@ -13,7 +13,7 @@ Platform engineer working with Kubernetes, Azure, and DevOps tooling. I work acr
 - **Python tooling**: uv for project management, Ruff for linting
 - **Package management**: Devbox (Nix-based) for CLI tools, Homebrew for GUI apps
 - **Editor**: VS Code with Copilot, GitLens, Docker/Kubernetes extensions
-- **Terminal**: Alacritty, Zsh with Oh My Zsh, Starship prompt
+- **Terminal**: Ghostty, Zsh with Oh My Zsh, Starship prompt
 - **Git**: Multiple identities via conditional includes, 1Password SSH agent
 - **Monitoring**: k9s, Grafana, Application Insights
 

@@ -1,0 +1,22 @@
+# Theme
+theme = vscode-dark
+
+# Font
+font-family = JetBrainsMono Nerd Font
+
+# Cursor
+cursor-style = block
+cursor-style-blink = false
+
+# Window
+window-padding-x = 4
+window-padding-y = 4
+window-decoration = true
+
+# macOS
+macos-option-as-alt = true
+
+# Keybindings (macOS-style line editing)
+keybind = super+left=text:\x01
+keybind = super+right=text:\x05
+keybind = super+backspace=text:\x15

@@ -20,7 +20,7 @@ Within `.copilot/skills/`, the Obsidian skills from `kepano/obsidian-skills` are
 
 Root stow links the following into `$HOME` (individual files are symlinked, not directories):
 - `.copilot/` — copilot-instructions.md, mcp-config.json, skills/
-- `.config/` — alacritty, fastfetch, starship, 1Password SSH agent
+- `.config/` — ghostty, fastfetch, starship, 1Password SSH agent
 - `.docker/config.json` — Docker context and ACR registries
 - `.gitconfig`, `.gitconfig.d/` — Git configuration with conditional includes
 - `.kube/color.yaml` — kubecolor theming
@@ -116,7 +116,7 @@ Install all packages from the Brewfile:
 brew bundle
 ```
 
-This installs CLI tools available only via Homebrew (kubecolor, bat, git-lfs), GUI apps (Alacritty, VS Code, Obsidian, Podman Desktop, Raycast, etc.), and VS Code extensions.
+This installs CLI tools available only via Homebrew (kubecolor, bat, git-lfs), GUI apps (Ghostty, VS Code, Obsidian, Podman Desktop, Raycast, etc.), and VS Code extensions.
 
 ### Phase 6 — Zsh Setup
 
@@ -250,7 +250,7 @@ devbox run "stow --dir=.copilot/thirdparty/obsidian-skills --target=.copilot/ski
 - **Agent config convention**: All agent configuration (instructions, skills, MCP servers) lives in `.copilot/` as required by Copilot CLI. Root stow links `.copilot/` contents into `~/.copilot/` alongside Copilot's runtime files.
 - **Git config** uses conditional includes: `.gitconfig.d/personal.gitconfig` is the default; `.gitconfig.d/basf.gitconfig` activates for remotes matching `github.com:basf-global` or `gitlab.roqs.basf.net`. Credentials use `gh auth git-credential`.
 - **SSH** uses the 1Password SSH agent (`~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock`). Keys are referenced by public key files in `.ssh/`.
-- **Alacritty themes** are a git submodule at `.config/alacritty/themes`. Run `git submodule update --init` if themes are missing.
+- **Ghostty** config is at `.config/ghostty/config` with a custom VSCode Dark theme at `.config/ghostty/themes/vscode-dark` — stowed via root stow.
 - **Starship prompt** config is at `.config/starship.toml` — it's stowed via root stow, not a separate package.
 - **Shell**: `.zshrc` (in `zsh/` stow package) uses Oh My Zsh with plugins: git, history-substring-search, macos, zsh-syntax-highlighting, zsh-autosuggestions, zsh-completions.
 - **MCP servers** are configured in `.copilot/mcp-config.json` (stowed to `~/.copilot/mcp-config.json`). Includes figma, azure, kubernetes, drawio, and proxmox servers.
