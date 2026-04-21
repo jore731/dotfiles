@@ -3,4 +3,6 @@ name = "python-global"
 version = "0.0.0"
 description = "Global Python packages managed via dotfiles"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "scrapling[all]>=0.4.7",
+]
