@@ -11,7 +11,16 @@ Platform engineer working with Kubernetes, Azure, and DevOps tooling. I work acr
 - **Containers**: Kubernetes, Helm, Istio, ArgoCD, Docker/Podman, Colima
 - **Languages**: Python (primary), shell scripting, Go
 - **Python tooling**: uv for project management, Ruff for linting
-- **Package management**: Devbox (Nix-based) for CLI tools, Homebrew for GUI apps
+- **Package management**: Devbox (Nix-based) for CLI tools, Homebrew for GUI apps, npm/uv for language-specific global packages
+
+## Global Package Management
+
+Dotfiles are managed at `~/dotfiles` (`jore731/dotfiles`). Global language-specific packages are stowed from there:
+
+- **CLI tools (Nix)**: Add to `~/dotfiles/devbox-global/devbox.json`, then `devbox global install`.
+- **npm packages**: Run `cd ~/.npm-global && npm install <package>`. Commit updated `package.json` and `package-lock.json` in `~/dotfiles/npm-global/`.
+- **Python packages**: Run `cd ~/.python-global && uv add <package>`. Commit updated `pyproject.toml` and `uv.lock` in `~/dotfiles/python-global/`.
+- **Homebrew (GUI apps)**: `brew install --cask <app>`, then `brew bundle dump --file=~/dotfiles/Brewfile --force` and commit.
 - **Editor**: VS Code with Copilot, GitLens, Docker/Kubernetes extensions
 - **Terminal**: Ghostty, Zsh with Oh My Zsh, Starship prompt
 - **Git**: Multiple identities via conditional includes, 1Password SSH agent
