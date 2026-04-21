@@ -249,7 +249,7 @@ Then commit the updated Brewfile. Never edit `Brewfile` by hand — it's auto-ge
 
 **Add a new npm global tool**: Add the package to `npm-global/package.json`, then run `cd ~/.npm-global && npm install`. Commit the updated `package.json` and `package-lock.json`.
 
-**Add a new Python global tool**: Add the package to `python-global/pyproject.toml` dependencies, then run `cd ~/.python-global && uv sync`. Commit the updated `pyproject.toml` and `uv.lock`.
+**Add a new Python global tool**: Run `cd ~/.python-global && uv add <package>` (this updates both `pyproject.toml` and `uv.lock` through the symlinks). Commit the updated `pyproject.toml` and `uv.lock` in the dotfiles repo.
 
 **Add a new app config**: Create a new top-level directory in this repo, place config files inside mirroring the target directory structure, add the directory name to `.stow-local-ignore`, then stow with the appropriate `--target`.
 
