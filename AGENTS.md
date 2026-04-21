@@ -14,6 +14,7 @@ This repository contains dotfiles and configuration for provisioning a developme
 | `k9s-config/` | `~/Library/Application Support/k9s` | `~/.config/k9s` |
 | `devbox-global/` | `~/.local/share/devbox/global/default` | `~/.local/share/devbox/global/default` |
 | `npm-global/` | `~/.npm-global` | `~/.npm-global` |
+| `python-global/` | `~/.python-global` | `~/.python-global` |
 | Root (`stow .`) | `$HOME` | `$HOME` |
 
 Within `.copilot/skills/`, the Obsidian skills from `kepano/obsidian-skills` are stowed from the submodule at `.copilot/thirdparty/obsidian-skills`.
@@ -83,6 +84,18 @@ cd "$HOME/.npm-global" && npm install
 ```
 
 After this, binaries are available at `~/.npm-global/node_modules/.bin/` (added to PATH by `.zshrc`).
+
+### Phase 3c — Python Global Packages
+
+Some CLI tools are distributed via PyPI and not available in Nix. These are managed via a stowed `pyproject.toml` at `~/.python-global/`, using `uv` for venv and dependency management.
+
+```sh
+mkdir -p "$HOME/.python-global"
+devbox run "stow --target=$HOME/.python-global python-global"
+cd "$HOME/.python-global" && uv sync
+```
+
+After this, binaries are available at `~/.python-global/.venv/bin/` (added to PATH by `.zshrc`).
 
 ### Phase 4 — macOS-Specific Setup
 
@@ -235,6 +248,8 @@ Then commit the updated Brewfile. Never edit `Brewfile` by hand — it's auto-ge
 **Add a new CLI tool**: Add the package to `devbox-global/devbox.json`, then run `devbox global install`.
 
 **Add a new npm global tool**: Add the package to `npm-global/package.json`, then run `cd ~/.npm-global && npm install`. Commit the updated `package.json` and `package-lock.json`.
+
+**Add a new Python global tool**: Add the package to `python-global/pyproject.toml` dependencies, then run `cd ~/.python-global && uv sync`. Commit the updated `pyproject.toml` and `uv.lock`.
 
 **Add a new app config**: Create a new top-level directory in this repo, place config files inside mirroring the target directory structure, add the directory name to `.stow-local-ignore`, then stow with the appropriate `--target`.
 
