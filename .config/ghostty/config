@@ -20,3 +20,6 @@ macos-option-as-alt = true
 keybind = super+left=text:\x01
 keybind = super+right=text:\x05
 keybind = super+backspace=text:\x15
+
+# Shell integration
+shell-integration-features = no-cursor,sudo
