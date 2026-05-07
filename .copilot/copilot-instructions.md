@@ -41,6 +41,12 @@ Dotfiles are managed at `~/dotfiles` (`jore731/dotfiles`). Global language-speci
 - When documenting learnings, meeting notes, research, troubleshooting runbooks, or architecture decisions, write them as notes in the vault using the `obsidian` skill.
 - **Obsidian is not the only documentation target** — keep project READMEs in their repos, code-level docs as inline comments/docstrings, and API docs in their standard formats. Use the vault for personal/cross-project knowledge.
 
+## GitHub Identity
+
+- For any GitHub interaction with `jore731/*` or `1010izer/skinalyse*` repos, always use the `jore731` account (`gh auth switch --user jore731`).
+- For any GitHub interaction with `basf-global/*` or `PulidoJ_basf/*` repos, always use the `PulidoJ_basf` account (`gh auth switch --user PulidoJ_basf`).
+- When in doubt, check repo ownership to pick the right account.
+
 ## Preferences
 
 - I prefer concise output — don't over-explain routine operations.

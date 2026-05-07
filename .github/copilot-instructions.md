@@ -97,6 +97,18 @@ cd "$HOME/.python-global" && uv sync
 
 After this, binaries are available at `~/.python-global/.venv/bin/` (added to PATH by `.zshrc`).
 
+### Phase 3d — Secrets Sync (macOS only)
+
+Secrets (API tokens, PATs) are stored in 1Password and synced to the macOS login Keychain so `.zshrc` can load them instantly without requiring 1Password authentication on every shell start.
+
+```sh
+devbox global run sync-secrets
+```
+
+This runs `devbox-global/scripts/sync-secrets.sh`, which reads secrets from 1Password and stores them in the login Keychain under the service name `dotfiles`. Run this once after setup and again whenever secrets rotate.
+
+After syncing, `.zshrc` reads secrets from Keychain via `security find-generic-password -s dotfiles -a <VAR_NAME> -w` and exports them as environment variables.
+
 ### Phase 4 — macOS-Specific Setup
 
 Skip this phase entirely on Linux/WSL.
@@ -253,6 +265,8 @@ Then commit the updated Brewfile. Never edit `Brewfile` by hand — it's auto-ge
 
 **Add a new app config**: Create a new top-level directory in this repo, place config files inside mirroring the target directory structure, add the directory name to `.stow-local-ignore`, then stow with the appropriate `--target`.
 
+**Re-sync secrets to Keychain**: Run `devbox global run sync-secrets` after rotating secrets in 1Password.
+
 **Update Obsidian skills**: Pull the latest from the submodule, then re-stow:
 
 ```sh
@@ -265,6 +279,7 @@ devbox run "stow --dir=.copilot/thirdparty/obsidian-skills --target=.copilot/ski
 - **Agent config convention**: All agent configuration (instructions, skills, MCP servers) lives in `.copilot/` as required by Copilot CLI. Root stow links `.copilot/` contents into `~/.copilot/` alongside Copilot's runtime files.
 - **Git config** uses conditional includes: `.gitconfig.d/personal.gitconfig` is the default; `.gitconfig.d/basf.gitconfig` activates for remotes matching `github.com:basf-global` or `gitlab.roqs.basf.net`. Credentials use `gh auth git-credential`.
 - **SSH** uses the 1Password SSH agent (`~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock`). Keys are referenced by public key files in `.ssh/`.
+- **Secrets** are synced from 1Password to macOS Keychain via `devbox global run sync-secrets`. The `.zshrc` reads them from Keychain (service `dotfiles`) on shell start — no 1Password auth needed. The script lives at `devbox-global/scripts/sync-secrets.sh`.
 - **Ghostty** config is at `.config/ghostty/config` with a custom VSCode Dark theme at `.config/ghostty/themes/vscode-dark` — stowed via root stow.
 - **Starship prompt** config is at `.config/starship.toml` — it's stowed via root stow, not a separate package.
 - **Shell**: `.zshrc` (in `zsh/` stow package) uses Oh My Zsh with plugins: git, history-substring-search, macos, zsh-syntax-highlighting, zsh-autosuggestions, zsh-completions.

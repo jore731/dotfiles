@@ -2,7 +2,6 @@
 .git
 .github
 .gitignore
-AGENTS.md
 Brewfile
 README.md
 devbox-global
