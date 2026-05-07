@@ -101,3 +101,8 @@ restart_gp() {
     sleep 5
     launchctl load /Library/LaunchAgents/com.paloaltonetworks.gp.pangp*
 }
+
+# Work Dashboard secrets (from Keychain, synced via `devbox global run sync-secrets`)
+export ROQS_GITLAB_TOKEN=$(security find-generic-password -s dotfiles -a ROQS_GITLAB_TOKEN -w 2>/dev/null)
+export RGQDS_AZURE_DEVOPS_PAT=$(security find-generic-password -s dotfiles -a RGQDS_AZURE_DEVOPS_PAT -w 2>/dev/null)
+export RGQDS_AZURE_DEVOPS_PAT_B64=$(security find-generic-password -s dotfiles -a RGQDS_AZURE_DEVOPS_PAT_B64 -w 2>/dev/null)
