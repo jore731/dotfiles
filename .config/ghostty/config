@@ -12,6 +12,7 @@ cursor-style-blink = false
 window-padding-x = 4
 window-padding-y = 4
 window-decoration = true
+window-save-state = default
 
 # macOS
 macos-option-as-alt = true
