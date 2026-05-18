@@ -3,6 +3,7 @@
   "private": true,
   "description": "Global npm packages managed via dotfiles",
   "dependencies": {
+    "@microsoft/workiq": "^0.4.1",
     "defuddle": "^0.16.0"
   }
 }
