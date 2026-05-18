@@ -2,4 +2,5 @@
 /kubeconfig.yaml
 /something.png
 /dotfiles
+.DS_Store
 npm-global/node_modules/

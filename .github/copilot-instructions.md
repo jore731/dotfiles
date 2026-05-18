@@ -126,6 +126,12 @@ softwareupdate --install-rosetta --agree-to-license
 echo "auth       sufficient     pam_tid.so" | sudo tee /etc/pam.d/sudo_local
 ```
 
+**Apply macOS defaults** (prevents .DS_Store on network/USB volumes):
+
+```sh
+devbox global run macos-defaults
+```
+
 ### Phase 5 — Homebrew Setup
 
 Install Homebrew if `brew` is not on PATH:
@@ -266,6 +272,8 @@ Then commit the updated Brewfile. Never edit `Brewfile` by hand — it's auto-ge
 **Add a new app config**: Create a new top-level directory in this repo, place config files inside mirroring the target directory structure, add the directory name to `.stow-local-ignore`, then stow with the appropriate `--target`.
 
 **Re-sync secrets to Keychain**: Run `devbox global run sync-secrets` after rotating secrets in 1Password.
+
+**Re-apply macOS defaults**: Run `devbox global run macos-defaults` to reapply macOS system preferences (e.g., after an OS update).
 
 **Update Obsidian skills**: Pull the latest from the submodule, then re-stow:
 
