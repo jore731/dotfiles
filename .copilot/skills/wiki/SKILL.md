@@ -2,9 +2,9 @@
 name: wiki
 description: >-
   Maintain the LLM wiki at ~/secondbrain. Use when the user says "ingest",
-  "query my wiki", "lint the wiki", "wiki search", "add to wiki", or asks
-  to read/write knowledge pages, update the index, or process raw sources.
-  Works from any working directory.
+  "query my wiki", "lint the wiki", "wiki search", "add to wiki",
+  "cross-link wiki", or asks to read/write knowledge pages, update the
+  index, or process raw sources. Works from any working directory.
 ---
 
 # Wiki Skill
@@ -17,7 +17,7 @@ Layer 2  Wiki      → wiki/ (LLM-maintained compiled knowledge)
 Layer 1  Raw       → _raw/ (immutable source material)
 ```
 
-Three core operations: **Ingest**, **Query**, **Lint**.
+Three core operations: **Ingest**, **Query**, **Lint**, **Cross-link**.
 
 ---
 
@@ -96,19 +96,37 @@ source: ""                                     # origin reference if applicable
    source: "URL or origin"
    ---
    ```
-   Once saved, **never modify** the raw file.
+   Once saved, **never modify** the raw file. If the source is a web page, use the `defuddle` skill to extract clean markdown first.
 
-2. **Create or update wiki pages:**
-   - Write a source summary in `wiki/sources/<name>.md`
-   - Create or update concept/entity pages in the appropriate directory
-   - Use `[[wikilinks]]` to cross-reference related pages
+2. **Discuss with the user** — summarize the key takeaways from the source and confirm which concepts/entities are most relevant before writing wiki pages.
 
-3. **Update `wiki/index.md`** — add entries under the correct section with wikilinks.
-
-4. **Append to `wiki/log.md`:**
+3. **Write source summary** → create `wiki/sources/<descriptive-name>.md`:
+   ```yaml
+   ---
+   created: "YYYY-MM-DD"
+   tags: [source/article, concept/relevant-topic]
+   source: "[[_raw/descriptive-name]]"
+   ---
    ```
-   ## [YYYY-MM-DD] ingest | <brief description>
+   Include: one-paragraph summary, key takeaways as bullet points, `[[wikilinks]]` to related wiki pages.
+
+4. **Update concept and entity pages** — identify 10–15 relevant pages across the wiki:
+   - **Existing pages:** append new information with a citation back to the source (`[[source-name]]`)
+   - **New pages needed:** create stub pages in the correct directory with proper frontmatter and tags. A stub has a title, one-sentence description, and links to the source that prompted creation.
+   - Use judgement — not every mention needs its own page. Create stubs for concepts/tools mentioned substantively.
+
+5. **Update `wiki/index.md`** — add entries for all new pages under the correct sections.
+
+6. **Append to `wiki/log.md`:**
    ```
+   ## [YYYY-MM-DD] ingest | <Source Title>
+   ```
+
+**Quality checks before finishing:**
+- Every new page has `created`, `tags`, and `source` frontmatter
+- All tags follow the hierarchical taxonomy
+- All new pages are listed in `wiki/index.md`
+- Cross-references use `[[wikilinks]]`, not plain text
 
 ---
 
@@ -120,19 +138,35 @@ source: ""                                     # origin reference if applicable
 
 1. **Read `wiki/index.md`** to find relevant pages.
 
-2. **Drill into pages** — read the relevant wiki pages, follow wikilinks for context.
+2. **Drill into pages** — read the relevant wiki pages, follow `[[wikilinks]]` for context. Read multiple pages in parallel when possible.
 
-3. **Synthesize answer** — combine information with `[[wikilink]]` citations to source pages.
+3. **Synthesize answer** — combine information with `[[wikilink]]` citations to real wiki pages. Every claim should trace back to a specific page.
 
-4. **File back substantive answers** — if the answer produced new insight or synthesis:
-   - Save to `wiki/summaries/<descriptive-name>.md`
+4. **Assess filing** — if the answer produced new insight (a comparison, analysis, synthesis, or new connection between concepts), ask the user whether to file it back into the wiki.
+
+5. **File back** (if approved):
+   - Save to `wiki/summaries/<descriptive-name>.md` (for cross-cutting answers) or the appropriate `wiki/concepts/` or `wiki/entities/` directory (for topic-specific answers)
+   - Frontmatter:
+     ```yaml
+     ---
+     created: "YYYY-MM-DD"
+     tags: [concept/relevant-topic]
+     source: "query"
+     ---
+     ```
    - Update `wiki/index.md` with the new entry
    - Append to `wiki/log.md`:
      ```
      ## [YYYY-MM-DD] query | <brief description>
      ```
 
-5. **If the wiki lacks information**, say so honestly. Don't fabricate wiki content.
+6. **If the wiki lacks information**, say so honestly. Don't fabricate wiki content. Suggest an ingest if external sources could fill the gap.
+
+**Output formats:** Depending on the question, answers may be:
+- Prose summary with citations
+- Comparison table
+- Bullet-point list of key findings
+- Marp slide deck (use `obsidian-markdown` skill for syntax)
 
 ---
 
@@ -142,25 +176,61 @@ source: ""                                     # origin reference if applicable
 
 **Workflow:**
 
-1. **Scan for issues:**
-   - Orphan pages (not in `wiki/index.md`)
-   - Broken wikilinks (target doesn't exist)
-   - Missing frontmatter or tags
-   - Non-hierarchical tags (violates taxonomy)
-   - Pages in wrong directories (e.g., a tool page in `concepts/`)
-   - Empty sections in `wiki/index.md`
+1. **Scan for issues** (read all wiki pages and index):
 
-2. **Auto-fix what's safe:**
-   - Add missing pages to `wiki/index.md`
-   - Fix missing frontmatter fields
-   - Correct tag hierarchy violations
-   - Move misplaced pages
+   **Auto-fixable (fix immediately):**
+   - Orphan pages — wiki pages not listed in `wiki/index.md`
+   - Missing frontmatter — pages lacking `created`, `tags`, or `source` fields
+   - Non-hierarchical tags — flat tags that violate the taxonomy
+   - Pages in wrong directories — e.g., a tool page in `concepts/` instead of `entities/tools/`
+   - Broken wikilinks — `[[target]]` where target doesn't exist (remove or create stub)
 
-3. **Report unfixable issues** to the user (e.g., contradictory content, ambiguous categorization).
+   **Report to user (don't auto-fix):**
+   - Contradictions — conflicting claims across pages (LLM-judged)
+   - Stale claims — information likely superseded by newer sources
+   - Data gaps — topics where a web search would fill missing context
+   - Ambiguous categorization — pages that could belong in multiple categories
 
-4. **Append to `wiki/log.md`:**
+2. **Entity stub detection** — scan for concepts/tools/orgs mentioned ≥3 times across pages that lack their own wiki page. Create stubs with:
+   ```yaml
+   ---
+   created: "YYYY-MM-DD"
+   tags: [entity/tool/name]
+   source: "lint-stub"
+   ---
    ```
-   ## [YYYY-MM-DD] lint | <summary of fixes and remaining issues>
+   Stubs contain: title, one-sentence description, backlinks to pages that mention the entity.
+
+3. **Apply auto-fixes** — fix all safe issues, add new stubs to `wiki/index.md`.
+
+4. **Report** — present unfixable issues to the user as a checklist.
+
+5. **Append to `wiki/log.md`:**
+   ```
+   ## [YYYY-MM-DD] lint | <N> fixed, <M> reported for review
+   ```
+
+---
+
+## Operation 4: Cross-link
+
+**Trigger:** "cross-link wiki", "link wiki pages", "add wikilinks".
+
+**Workflow:**
+
+1. **Scan wiki pages** for plain-text mentions of other wiki page titles or known aliases.
+
+2. **Insert `[[wikilinks]]`** where plain text references exist — e.g., if a page mentions "ArgoCD" and `wiki/entities/tools/argocd.md` exists, replace with `[[argocd|ArgoCD]]`.
+
+3. **Link to references** — connect wiki concept/entity pages to relevant `wiki/references/dscs-wiki/` pages where the same topic is covered.
+
+4. **Skip already-linked mentions** — don't double-wrap existing wikilinks.
+
+5. **Update `wiki/index.md`** if any new pages were created during the process.
+
+6. **Append to `wiki/log.md`:**
+   ```
+   ## [YYYY-MM-DD] cross-link | <N> links added across <M> pages
    ```
 
 ---
