@@ -40,6 +40,7 @@ Dotfiles are managed at `~/dotfiles` (`jore731/dotfiles`). Global language-speci
 - I maintain a personal knowledge base in an Obsidian vault at `~/secondbrain` (git-synced to `jore731/secondbrain`).
 - When documenting learnings, meeting notes, research, troubleshooting runbooks, or architecture decisions, write them as notes in the vault using the `obsidian` skill.
 - **Obsidian is not the only documentation target** — keep project READMEs in their repos, code-level docs as inline comments/docstrings, and API docs in their standard formats. Use the vault for personal/cross-project knowledge.
+- **Research reports** — after completing a deep research task, move the final report from the session state directory to `~/secondbrain/research/` so it is persisted in the vault. Use a descriptive kebab-case filename (e.g., `llm-wiki-pattern-karpathy.md`).
 
 ## GitHub Identity
 

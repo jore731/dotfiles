@@ -28,7 +28,6 @@
     "workbench.tree.renderIndentGuides": "always",
     // VSCode saving behavior
     "files.autoSave": "onFocusChange",
-    "editor.formatOnSave": true,
     // Jupyter
     "jupyter.askForKernelRestart": false,
     "jupyter.widgetScriptSources": [
@@ -135,14 +134,10 @@
     // File handling settings 
     "security.promptForLocalFileProtocolHandling": false,
     "files.eol": "\n",
-    // Markdown settings
-    "workbench.editorAssociations": {
-        "*.md": "vscode.markdown.preview.editor"
-    },
     // Miscellaneous settings
     "diffEditor.ignoreTrimWhitespace": false,
     "github.copilot.nextEditSuggestions.enabled": true,
-    "git.blame.editorDecoration.enabled": true,
+    "git.blame.editorDecoration.enabled": false,
     "remote.SSH.remotePlatform": {
         "coder-vscode.coder.ds.basf.net--pulidoJ--black-barracuda-57.main": "linux",
         "coder-vscode.coder.ds.basf.net--pulidoJ--red-squid-60.main": "linux",
@@ -196,4 +191,8 @@
         "https://www.schemastore.org/": true
     },
     "hediet.vscode-drawio.resizeImages": null,
+    "claudeCode.preferredLocation": "panel",
+    "markdown.preview.openMarkdownLinks": "inEditor",
+    "workbench.editor.enablePreview": false,
+    "editor.formatOnSave": true,
 }

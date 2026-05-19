@@ -41,7 +41,8 @@
     "postgresql":           "latest",
     "uv":                   "latest",
     "glab":                 "latest",
-    "azure-cli":            "latest"
+    "azure-cli":            "latest",
+    "github-copilot-cli":   "latest"
   },
   "shell": {
     "init_hook": [],

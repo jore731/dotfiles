@@ -51,20 +51,71 @@
       "source": "user",
       "sourcePath": "/Users/jorgepulidolopez/.copilot/mcp-config.json"
     },
-    "proxmox": {
+    "gitlab": {
+      "tools": [
+        "*"
+      ],
       "type": "local",
-      "command": "${workspaceFolder}/thirdparty/ProxmoxMCP/.venv/bin/python",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@zereight/mcp-gitlab",
+        "--token=${ROQS_GITLAB_TOKEN}",
+        "--api-url=https://gitlab.roqs.basf.net/api/v4"
+      ],
+      "source": "user",
+      "sourcePath": "/Users/jorgepulidolopez/.copilot/mcp-config.json"
+    },
+    "azure-devops": {
+      "tools": [
+        "*"
+      ],
+      "type": "local",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@azure-devops/mcp",
+        "rgqds",
+        "--authentication",
+        "pat"
+      ],
+      "env": {
+        "PERSONAL_ACCESS_TOKEN": "${RGQDS_AZURE_DEVOPS_PAT_B64}"
+      },
+      "source": "user",
+      "sourcePath": "/Users/jorgepulidolopez/.copilot/mcp-config.json"
+    },
+    "obsidian": {
+      "tools": [
+        "*"
+      ],
+      "type": "http",
+      "url": "https://127.0.0.1:27124/mcp/",
+      "headers": {
+        "Authorization": "Bearer ${OBSIDIAN_REST_API_KEY}"
+      },
+      "source": "user",
+      "sourcePath": "/Users/jorgepulidolopez/.copilot/mcp-config.json"
+    },
+    "confluence": {
+      "type": "local",
+      "command": "uvx",
       "tools": [
         "*"
       ],
       "args": [
-        "-m",
-        "proxmox_mcp.server"
-      ],
-      "env": {
-        "PYTHONPATH": "${workspaceFolder}/thirdparty/ProxmoxMCP/src",
-        "PROXMOX_MCP_CONFIG": "${workspaceFolder}/.vscode/proxmox-config.json"
-      }
+        "mcp-atlassian",
+        "-v",
+        "--confluence-url",
+        "https://confluence.basf.net",
+        "--confluence-username",
+        "${CONFLUENCE_USERNAME}",
+        "--confluence-token",
+        "${CONFLUENCE_TOKEN}",
+        "--no-confluence-ssl-verify",
+        "--toolsets",
+        "default"
+      ]
     }
   }
 }
