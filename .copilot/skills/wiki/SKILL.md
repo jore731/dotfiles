@@ -191,3 +191,13 @@ The file `~/secondbrain/_profile.md` contains user context with managed sections
 - **Tags follow the hierarchy** — see taxonomy table above
 - **Start lean** — don't over-engineer pages; add detail as knowledge compounds
 - **This skill works from any directory** — always use absolute paths (`~/secondbrain/...`)
+
+---
+
+## Related Skills
+
+| Skill | Use for |
+|-------|---------|
+| `obsidian-markdown` | Syntax reference for wikilinks, callouts, embeds, and frontmatter when writing wiki pages |
+| `obsidian-cli` | Searching and reading vault content via the Obsidian REST API (requires Obsidian running) |
+| `defuddle` | Cleaning web page content into markdown before ingesting into `_raw/` |
