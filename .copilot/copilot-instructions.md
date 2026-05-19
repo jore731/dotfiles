@@ -7,7 +7,7 @@ Platform engineer working with Kubernetes, Azure, and DevOps tooling. I work acr
 ## Stack
 
 - **Cloud**: Azure (AKS, Container Apps, Key Vault, PostgreSQL, Storage)
-- **Infrastructure**: Pulumi (Python), Terraform/OpenTofu, Bicep
+- **Infrastructure**: Terraform/OpenTofu, Bicep
 - **Containers**: Kubernetes, Helm, Istio, ArgoCD, Docker/Podman, Colima
 - **Languages**: Python (primary), shell scripting, Go
 - **Python tooling**: uv for project management, Ruff for linting
