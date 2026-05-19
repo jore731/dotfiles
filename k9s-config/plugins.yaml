@@ -5,13 +5,10 @@ plugins:
     description: Sync ArgoCD Application
     scopes:
       - application
-    command: argocd
+    command: bash
     args:
-      - app
-      - sync
-      - $NAME
-      - --app-namespace
-      - $NAMESPACE
+      - -c
+      - "kubectl annotate applications --context $CONTEXT -n $NAMESPACE $NAME argocd.argoproj.io/sync=true --overwrite"
     background: true
     confirm: true
 
@@ -30,7 +27,7 @@ plugins:
 
   disable-auto-sync:
     # https://github.com/derailed/k9s/blob/master/plugins/argocd.yaml
-    shortCut: Shift-J
+    shortCut: Shift-P
     confirm: false
     scopes:
       - apps
@@ -73,22 +70,83 @@ plugins:
     command: bash
     background: false
     confirm: true
+    inputs:
+      - name: image
+        label: Debug image
+        type: dropdown
+        required: true
+        default: nicolaka/netshoot:v0.15
+        options:
+          - nicolaka/netshoot:v0.15
+          - busybox:1.37
+          - alpine:3.23
+          - ubuntu:26.04
+      - name: profile
+        label: Debug profile
+        type: dropdown
+        required: true
+        default: sysadmin
+        options:
+          - general
+          - baseline
+          - restricted
+          - netadmin
+          - sysadmin
+          - legacy
+      - name: share_processes
+        label: Share processes
+        type: bool
+        required: true
+        default: true
     args:
       - -c
-      - "kubectl --kubeconfig=$KUBECONFIG debug -it --context $CONTEXT -n=$NAMESPACE $POD --target=$NAME --image=ubuntu:latest --share-processes -- bash"
+      - >-
+        kubectl debug -it --context $CONTEXT -n=$NAMESPACE $POD
+        --target=$NAME
+        --image=$INPUT_IMAGE
+        --profile=$INPUT_PROFILE
+        $([ "$INPUT_SHARE_PROCESSES" = "true" ] && echo "--share-processes")
+        -- sh
   debug-node:
     # https://github.com/derailed/k9s/blob/master/plugins/debug-container.yaml
     shortCut: Shift-D
-    description: Debug
+    description: Debug node
     dangerous: true
     scopes:
       - nodes
     command: bash
     background: false
     confirm: true
+    inputs:
+      - name: image
+        label: Debug image
+        type: dropdown
+        required: true
+        default: nicolaka/netshoot:v0.15
+        options:
+          - nicolaka/netshoot:v0.15
+          - busybox:1.37
+          - alpine:3.23
+          - ubuntu:26.04
+      - name: profile
+        label: Debug profile
+        type: dropdown
+        required: true
+        default: sysadmin
+        options:
+          - general
+          - baseline
+          - restricted
+          - netadmin
+          - sysadmin
+          - legacy
     args:
       - -c
-      - "kubectl --kubeconfig=$KUBECONFIG debug -it --context $CONTEXT node/$NAME --image=ubuntu:latest --share-processes -- bash"
+      - >-
+        kubectl debug -it --context $CONTEXT node/$NAME
+        --image=$INPUT_IMAGE
+        --profile=$INPUT_PROFILE
+        -- sh
 
   refresh-external-secrets:
     shortCut: Shift-R
@@ -112,3 +170,81 @@ plugins:
     args:
       - -c
       - "kubectl annotate pushsecrets.external-secrets.io --context $CONTEXT -n $NAMESPACE $NAME force-sync=$(date +%s) --overwrite"
+
+  # https://github.com/derailed/k9s/blob/master/plugins/cert-manager.yaml
+  cert-status:
+    shortCut: Shift-S
+    confirm: false
+    description: Certificate status
+    scopes:
+      - certificates
+    command: bash
+    background: false
+    args:
+      - -c
+      - "cmctl status certificate --context $CONTEXT -n $NAMESPACE $NAME |& less"
+  cert-renew:
+    shortCut: Shift-R
+    confirm: false
+    description: Certificate renew
+    scopes:
+      - certificates
+    command: bash
+    background: false
+    args:
+      - -c
+      - "cmctl renew --context $CONTEXT -n $NAMESPACE $NAME |& less"
+  secret-inspect:
+    shortCut: Shift-I
+    confirm: false
+    description: Inspect secret
+    scopes:
+      - secrets
+    command: bash
+    background: false
+    args:
+      - -c
+      - "cmctl inspect secret --context $CONTEXT -n $NAMESPACE $NAME |& less"
+
+  # https://github.com/derailed/k9s/blob/master/plugins/get-all.yaml
+  get-all-namespace:
+    shortCut: g
+    confirm: false
+    description: get-all
+    scopes:
+      - namespaces
+    command: sh
+    background: false
+    args:
+      - -c
+      - "kubectl get-all --context $CONTEXT -n $NAME | less -K"
+  get-all-other:
+    shortCut: g
+    confirm: false
+    description: get-all
+    scopes:
+      - all
+    command: sh
+    background: false
+    args:
+      - -c
+      - "kubectl get-all --context $CONTEXT -n $NAMESPACE | less -K"
+
+  # https://github.com/derailed/k9s/blob/master/plugins/kube-metrics.yaml
+  kube-metrics-pod:
+    shortCut: m
+    confirm: false
+    description: "Metrics"
+    scopes:
+      - pods
+      - nodes
+    command: sh
+    background: false
+    args:
+      - -c
+      - |
+        if [ -n "$NAMESPACE" ]; then
+          kube-metrics pod --namespace=$NAMESPACE $NAME
+        else
+          kube-metrics node $NAME
+        fi
