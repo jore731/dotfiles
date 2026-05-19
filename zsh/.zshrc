@@ -106,3 +106,4 @@ restart_gp() {
 export ROQS_GITLAB_TOKEN=$(security find-generic-password -s dotfiles -a ROQS_GITLAB_TOKEN -w 2>/dev/null)
 export RGQDS_AZURE_DEVOPS_PAT=$(security find-generic-password -s dotfiles -a RGQDS_AZURE_DEVOPS_PAT -w 2>/dev/null)
 export RGQDS_AZURE_DEVOPS_PAT_B64=$(security find-generic-password -s dotfiles -a RGQDS_AZURE_DEVOPS_PAT_B64 -w 2>/dev/null)
+export OBSIDIAN_REST_API_KEY=$(security find-generic-password -s dotfiles -a OBSIDIAN_REST_API_KEY -w 2>/dev/null)
