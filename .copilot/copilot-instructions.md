@@ -38,7 +38,11 @@ Dotfiles are managed at `~/dotfiles` (`jore731/dotfiles`). Global language-speci
 ## Second Brain (Obsidian)
 
 - I maintain a personal knowledge base in an Obsidian vault at `~/secondbrain` (git-synced to `jore731/secondbrain`).
-- When documenting learnings, meeting notes, research, troubleshooting runbooks, or architecture decisions, write them as notes in the vault using the `obsidian` skill.
+- **Wiki layer** lives at `~/secondbrain/wiki/` — LLM-maintained compiled knowledge. Always read `wiki/index.md` first. Use the `wiki` skill for ingest/query/lint operations.
+- **Raw sources** in `_raw/` are immutable — read but never modify after creation.
+- **Tag taxonomy:** `concept/X`, `entity/tool/X`, `entity/org/X`, `entity/person/X`, `project/X`, `source/TYPE`, `daily`. No flat tags.
+- **Profile** at `_profile.md` has managed sections (identity, tooling, goals, vetoes) — only edit inside `<!-- managed:TYPE:start/end -->` delimiters.
+- When documenting learnings, meeting notes, research, troubleshooting runbooks, or architecture decisions, write them as notes in the vault using the `wiki` or `obsidian` skill.
 - **Obsidian is not the only documentation target** — keep project READMEs in their repos, code-level docs as inline comments/docstrings, and API docs in their standard formats. Use the vault for personal/cross-project knowledge.
 - **Research reports** — after completing a deep research task, move the final report from the session state directory to `~/secondbrain/research/` so it is persisted in the vault. Use a descriptive kebab-case filename (e.g., `llm-wiki-pattern-karpathy.md`).
 

@@ -17,25 +17,28 @@ Interact with the user's Obsidian vault at `~/secondbrain` — a git-synced know
 
 | Folder | Purpose |
 |---|---|
+| `wiki/` | LLM-maintained knowledge base — concepts, entities, sources, summaries, projects, references. See the `wiki` skill for full conventions |
+| `_raw/` | Immutable source material — never modify after creation |
 | `inbox/` | Quick captures — unprocessed thoughts, ideas, raw notes |
-| `notes/` | Permanent notes — refined, processed knowledge. Use backlinks to connect concepts |
-| `projects/` | One subfolder per active project. Archive completed projects under `_archive/` |
 | `daily/` | Daily journal entries. Format: `YYYY-MM-DD.md` |
+| `research/` | Deep research reports |
 | `templates/` | Note and daily templates |
+| `_profile.md` | User profile with managed sections (identity, tooling, goals, vetoes) |
 
 ## How to Create Notes
 
 1. **Determine the right folder** based on the note type:
+   - Knowledge, runbooks, reference → `wiki/` (use the `wiki` skill for placement and conventions)
+   - Raw source material → `_raw/` (immutable after creation)
    - Quick capture or unprocessed → `inbox/`
-   - Refined knowledge or reference → `notes/`
-   - Tied to a specific project → `projects/<project-name>/`
    - Daily log → `daily/YYYY-MM-DD.md`
 
 2. **Use frontmatter** for metadata:
    ```markdown
    ---
    created: "2025-01-15"
-   tags: [kubernetes, troubleshooting]
+   tags: [concept/kubernetes]
+   source: ""
    ---
    ```
 
@@ -57,8 +60,8 @@ Interact with the user's Obsidian vault at `~/secondbrain` — a git-synced know
 ## Guidelines
 
 - **Don't duplicate** — if a project has its own docs, link to them rather than copying content into the vault.
-- **Tag consistently** — use lowercase, hyphenated tags (e.g., `azure`, `kubernetes`, `troubleshooting`).
-- **Keep notes atomic** — one concept per note in `notes/`. Use backlinks to connect.
+- **Tag consistently** — use hierarchical tags from the taxonomy (`concept/X`, `entity/tool/X`, `project/X`, etc.). See `wiki/concepts/tag-taxonomy.md`.
+- **Keep notes atomic** — one concept per note in `wiki/`. Use backlinks to connect.
 - **Process the inbox** — notes in `inbox/` are temporary. Move them to the right folder once processed.
 - **The vault is git-synced** — changes are auto-committed and pushed via the Obsidian Git plugin when Obsidian is running.
 
