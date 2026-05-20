@@ -4,5 +4,6 @@ version = "0.0.0"
 description = "Global Python packages managed via dotfiles"
 requires-python = ">=3.12"
 dependencies = [
+    "git-filter-repo>=2.47.0",
     "scrapling[all]>=0.4.7",
 ]
