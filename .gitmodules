@@ -1,3 +1,6 @@
 [submodule ".copilot/thirdparty/obsidian-skills"]
 	path = .copilot/thirdparty/obsidian-skills
 	url = https://github.com/kepano/obsidian-skills.git
+[submodule ".copilot/thirdparty/AI-Engineering-Coach"]
+	path = .copilot/thirdparty/AI-Engineering-Coach
+	url = https://github.com/microsoft/AI-Engineering-Coach.git
