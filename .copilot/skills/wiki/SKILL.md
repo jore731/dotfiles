@@ -115,6 +115,7 @@ The file `~/secondbrain/_profile.md` contains user context with managed sections
 - **Always update both `wiki/index.md` and `wiki/log.md`** after mutations — no exceptions
 - **Use `[[wikilinks]]`** for cross-references between pages
 - **`_raw/` is immutable** — read but never modify after creation
+- **Never run git in `~/secondbrain`** — the vault is git-synced automatically by Obsidian (Obsidian Git plugin). Do not `git add`, `git commit`, or `git push` there; just write files and let Obsidian handle syncing.
 - **Frontmatter is mandatory** — `created`, `tags`, `source` on every wiki page
 - **Tags follow the hierarchy** — see taxonomy table above
 - **Start lean** — don't over-engineer pages; add detail as knowledge compounds
