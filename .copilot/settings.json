@@ -59,7 +59,8 @@
     "/Users/jorgepulidolopez/.copilot/skills/drawio",
     "/Users/jorgepulidolopez/Desktop/GitHub/dscs-cdk/.copilot/skills/dscs-cdk",
     "/Users/jorgepulidolopez/Desktop/GitHub/dscs-agentic-development/skills/setup-skills",
-    "/Users/jorgepulidolopez/.copilot/skills"
+    "/Users/jorgepulidolopez/.copilot/skills",
+    "/Users/jorgepulidolopez/.agents/skills"
   ],
   "ide": {},
   "enabledPlugins": {
