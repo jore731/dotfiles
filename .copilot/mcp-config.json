@@ -5,23 +5,8 @@
         "*"
       ],
       "type": "http",
-      "url": "https://mcp.figma.com/mcp",
+      "url": "http://127.0.0.1:3845/mcp",
       "headers": {},
-      "source": "user",
-      "sourcePath": "/Users/jorgepulidolopez/.copilot/mcp-config.json"
-    },
-    "azure-mcp": {
-      "tools": [
-        "*"
-      ],
-      "type": "local",
-      "command": "npx",
-      "args": [
-        "-y",
-        "@azure/mcp@latest",
-        "server",
-        "start"
-      ],
       "source": "user",
       "sourcePath": "/Users/jorgepulidolopez/.copilot/mcp-config.json"
     },
@@ -90,7 +75,7 @@
         "*"
       ],
       "type": "http",
-      "url": "https://127.0.0.1:27124/mcp/",
+      "url": "https://127.0.0.1:27124/mcp",
       "headers": {
         "Authorization": "Bearer ${OBSIDIAN_REST_API_KEY}"
       },
@@ -98,11 +83,11 @@
       "sourcePath": "/Users/jorgepulidolopez/.copilot/mcp-config.json"
     },
     "confluence": {
-      "type": "local",
-      "command": "uvx",
       "tools": [
         "*"
       ],
+      "type": "local",
+      "command": "uvx",
       "args": [
         "mcp-atlassian",
         "-v",
@@ -115,6 +100,34 @@
         "--no-confluence-ssl-verify",
         "--toolsets",
         "default"
+      ],
+      "source": "user",
+      "sourcePath": "/Users/jorgepulidolopez/.copilot/mcp-config.json"
+    },
+    "blender": {
+      "type": "local",
+      "command": "uv",
+      "tools": [
+        "*"
+      ],
+      "args": [
+        "--directory",
+        "$HOME/blender_mcp/mcp",
+        "run",
+        "blender-mcp"
+      ],
+      "env": {
+        "BLENDER_PATH": "/Applications/Blender.app/Contents/MacOS/Blender"
+      }
+    },
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "tools": [
+        "*"
+      ],
+      "args": [
+        "@playwright/mcp@latest"
       ]
     }
   }

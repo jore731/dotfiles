@@ -1,0 +1,146 @@
+{
+  "remoteExport": false,
+  "allowedUrls": [
+    "https://registry.terraform.io",
+    "https://raw.githubusercontent.com",
+    "https://medium.com",
+    "https://docs.github.com",
+    "https://kserve.github.io",
+    "https://backstage.io",
+    "https://gateway.envoyproxy.io",
+    "https://github.com",
+    "https://api.github.com",
+    "https://learn.microsoft.com",
+    "https://tailscale.com",
+    "https://cdk8s.io",
+    "https://marketplace.upbound.io",
+    "https://docs.crossplane.io",
+    "https://marketplace.crossplane.io",
+    "https://artifacthub.io",
+    "https://docs.cloudreve.org",
+    "https://cloudreve.org",
+    "https://kubernetes.io",
+    "https://cloudnative-pg.io",
+    "https://cloudreve.quokka-polaris.ts.net",
+    "https://immich.quokka-polaris.ts.net",
+    "https://wiki.ds.basf.net",
+    "https://confluence.basf.net",
+    "https://docs.cloudreference.basf.com",
+    "https://docs.anthropic.com",
+    "https://docs.databricks.com",
+    "https://community.databricks.com",
+    "https://www.hashicorp.com",
+    "https://kyverno.github.io",
+    "https://kyverno.io",
+    "https://cloudrevev4.apifox.cn",
+    "https://www.gnu.org",
+    "https://registry.npmjs.org",
+    "https://pulidoshouse.quokka-polaris.ts.net",
+    "https://models.inference.ai.azure.com",
+    "https://models.github.ai",
+    "https://immich.app",
+    "https://127.0.0.1:27124",
+    "https://projen.io",
+    "https://brandportal.basf.com",
+    "https://docs.openclaw.ai",
+    "https://www.figma.com",
+    "https://mcp.figma.com",
+    "https://aps.autodesk.com",
+    "https://help.autodesk.com",
+    "https://zoo.dev",
+    "https://autodeskfusion360.github.io",
+    "https://www.devspace.sh",
+    "https://clawhub.ai",
+    "https://smithery.ai",
+    "https://www.google.com",
+    "https://factory.talos.dev"
+  ],
+  "skillDirectories": [
+    "/Users/jorgepulidolopez/.copilot/skills/drawio",
+    "/Users/jorgepulidolopez/Desktop/GitHub/dscs-cdk/.copilot/skills/dscs-cdk",
+    "/Users/jorgepulidolopez/Desktop/GitHub/dscs-agentic-development/skills/setup-skills",
+    "/Users/jorgepulidolopez/.copilot/skills"
+  ],
+  "ide": {},
+  "enabledPlugins": {
+    "document-skills@anthropic-agent-skills": true,
+    "taskmaster@taskmaster": true,
+    "crossplane-import@dscs-skills": true,
+    "scrapling@dscs-skills": true,
+    "dscs-wiki@dscs-skills": true,
+    "okteto@okteto-plugins": true,
+    "devspace@skills": true,
+    "work-dashboard@skills": true,
+    "write-a-skill@skills": true,
+    "thirdparty-skills@skills": true,
+    "to-prd@skills": true,
+    "grill-me@skills": true,
+    "grill-with-docs@skills": true,
+    "to-issues@skills": true,
+    "renta@skills": true,
+    "workiq@copilot-plugins": true,
+    "basf-knowledge@dscs-skills": true,
+    "azure@azure-skills": true,
+    "visual-builders@dscs-skills": true,
+    "dscs-cdk@dscs-skills": true,
+    "basf-brand-guidelines@dscs-skills": true,
+    "figma@skills": true,
+    "blender-mcp-assembly@skills": true,
+    "openclaw@skills": true,
+    "cad-skill@skills": true,
+    "use-devbox@skills": true
+  },
+  "extraKnownMarketplaces": {
+    "dscs-skills": {
+      "source": {
+        "source": "github",
+        "repo": "basf-global/dscs-skills"
+      }
+    },
+    "anthropic-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/skills"
+      }
+    },
+    "claude-code-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-code"
+      }
+    },
+    "devsforge-marketplace": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/devsforge/marketplace.git"
+      }
+    },
+    "skills": {
+      "source": {
+        "source": "github",
+        "repo": "jore731/skills"
+      }
+    },
+    "azure-skills": {
+      "source": {
+        "source": "github",
+        "repo": "microsoft/azure-skills"
+      }
+    }
+  },
+  "footer": {
+    "showModelEffort": true,
+    "showDirectory": true,
+    "showBranch": true,
+    "showContextWindow": true,
+    "showQuota": true,
+    "showAgent": true,
+    "showCodeChanges": true,
+    "showUsername": true,
+    "showCustom": false
+  },
+  "voice": {
+    "enabled": true,
+    "selectedModel": "nemotron-speech-streaming-en-0.6b-generic-cpu:3"
+  }
+}
