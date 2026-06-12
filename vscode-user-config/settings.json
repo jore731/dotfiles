@@ -195,4 +195,5 @@
     "markdown.preview.openMarkdownLinks": "inEditor",
     "workbench.editor.enablePreview": false,
     "editor.formatOnSave": true,
+    "workbench.startupEditor": "none",
 }

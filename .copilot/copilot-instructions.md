@@ -28,7 +28,7 @@ Dotfiles are managed at `~/dotfiles` (`jore731/dotfiles`). Global language-speci
 
 ## Conventions
 
-- **Agent configuration goes in `.copilot/`** — use `.copilot/` for custom instructions (`copilot-instructions.md`), skills, and MCP servers as required by Copilot CLI. Do not scatter agent config across `.claude/`, `.codex/`, or other tool-specific directories.
+- **Agent configuration goes in `.github/`** — use `.github/copilot-instructions.md` for repo-level custom instructions, `.github/skills/` for skills, and `.copilot/` only for MCP servers. Do not scatter agent config across `.claude/`, `.codex/`, or other tool-specific directories.
 - **Always use `devbox run`** to execute commands in projects that have a `devbox.json`. Use the pattern `devbox run "cd target_directory && command"` because devbox opens in the project root.
 - **Python projects**: Initialize with `devbox init`, `devbox add uv`, then `uv init` — prompt me for project name, type (app/lib), and options step by step.
 - **Keep setup minimal**: Don't add VS Code extension recommendations, extra configs, or boilerplate unless I ask for it. Start with the bare minimum.

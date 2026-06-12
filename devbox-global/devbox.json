@@ -42,17 +42,16 @@
     "uv":                   "latest",
     "glab":                 "latest",
     "azure-cli":            "latest",
-    "github-copilot-cli":   "latest"
+    "libreoffice-bin":      "latest",
+    "poppler_utils":        "latest"
   },
   "shell": {
     "init_hook": [],
     "scripts": {
-      "colima-start-linux":            "colima start --disk 100",
-      "colima-start-mac":              "colima start --vm-type=vz --vz-rosetta --disk 100 --cpu 4 --memory 8",
-      "colima-start-linux-with-certs": "colima start --disk 100 --mount /etc/ssl/certs:ro",
-      "colima-start-mac-with-certs":   "colima start --vm-type=vz --vz-rosetta --disk 100 --mount /etc/ssl/certs:ro --cpu 4 --memory 8",
-      "sync-secrets":                  "./scripts/sync-secrets.sh",
-      "macos-defaults":                "./scripts/macos-defaults.sh"
+      "colima-start-arm": "colima start --profile arm",
+      "colima-start-amd": "colima start --profile amd",
+      "sync-secrets":     "./scripts/sync-secrets.sh",
+      "macos-defaults":   "./scripts/macos-defaults.sh"
     }
   }
 }

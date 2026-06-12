@@ -1,12 +1,13 @@
 // Place your tool sets here...
 // Example:
 // {
-// 	"toolSetName": {
-// 		"tools": [
-// 			"someTool",
-// 			"anotherTool"
-// 		],
-// 		"description": "description",
-// 		"icon": "tools"
-// 	}
+// "toolSetName": {
+// "tools": [
+// "someTool",
+// "anotherTool"
+// ],
+// "description": "description",
+// "icon": "tools"
 // }
+// }
+{}
