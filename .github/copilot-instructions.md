@@ -11,7 +11,6 @@ This repository contains dotfiles and configuration for provisioning a developme
 |---|---|---|
 | `zsh/` | `$HOME` | `$HOME` |
 | `vscode-user-config/` | `~/Library/Application Support/Code/User` | `~/.config/Code/User` |
-| `k9s-config/` | `~/Library/Application Support/k9s` | `~/.config/k9s` |
 | `devbox-global/` | `~/.local/share/devbox/global/default` | `~/.local/share/devbox/global/default` |
 | `npm-global/` | `~/.npm-global` | `~/.npm-global` |
 | `python-global/` | `~/.python-global` | `~/.python-global` |
@@ -21,7 +20,7 @@ Within `.copilot/skills/`, the Obsidian skills from `kepano/obsidian-skills` are
 
 Root stow links the following into `$HOME` (individual files are symlinked, not directories):
 - `.copilot/` — copilot-instructions.md, mcp-config.json, skills/
-- `.config/` — ghostty, fastfetch, starship, 1Password SSH agent
+- `.config/` — ghostty, fastfetch, starship, 1Password SSH agent, k9s
 - `.docker/config.json` — Docker context and ACR registries
 - `.gitconfig`, `.gitconfig.d/` — Git configuration with conditional includes
 - `.kube/color.yaml` — kubecolor theming
@@ -202,15 +201,7 @@ devbox run "stow --target='$HOME/Library/Application Support/Code/User' vscode-u
 devbox run "stow --target=$HOME/.config/Code/User vscode-user-config"
 ```
 
-**k9s**:
-
-```sh
-# macOS
-devbox run "stow --target='$HOME/Library/Application Support/k9s' k9s-config"
-
-# Linux
-devbox run "stow --target=$HOME/.config/k9s k9s-config"
-```
+**k9s**: Included in root stow via `.config/k9s/`. No separate stow step needed.
 
 ### Phase 7b — Obsidian Second Brain Setup
 

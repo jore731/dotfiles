@@ -72,12 +72,7 @@
     "okteto@okteto-plugins": true,
     "devspace@skills": true,
     "work-dashboard@skills": true,
-    "write-a-skill@skills": true,
     "thirdparty-skills@skills": true,
-    "to-prd@skills": true,
-    "grill-me@skills": true,
-    "grill-with-docs@skills": true,
-    "to-issues@skills": true,
     "renta@skills": true,
     "workiq@copilot-plugins": true,
     "basf-knowledge@dscs-skills": true,
@@ -85,10 +80,7 @@
     "visual-builders@dscs-skills": true,
     "dscs-cdk@dscs-skills": true,
     "basf-brand-guidelines@dscs-skills": true,
-    "figma@skills": true,
-    "blender-mcp-assembly@skills": true,
     "openclaw@skills": true,
-    "cad-skill@skills": true,
     "use-devbox@skills": true
   },
   "extraKnownMarketplaces": {
@@ -143,5 +135,6 @@
   "voice": {
     "enabled": true,
     "selectedModel": "nemotron-speech-streaming-en-0.6b-generic-cpu:3"
-  }
+  },
+  "disabledSkills": []
 }
