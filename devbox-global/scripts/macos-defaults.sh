@@ -13,4 +13,8 @@ echo "Applying macOS defaults..."
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
+# Bind Cmd+V to "Paste and Match Style" in all applications.
+# @ = Cmd, so "@v" maps Cmd+V to any menu item named "Paste and Match Style".
+defaults write -g NSUserKeyEquivalents -dict-add "Paste and Match Style" '@^v'
+
 echo "Done. Some changes may require a logout/restart to take effect."
