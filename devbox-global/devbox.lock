@@ -1291,34 +1291,6 @@
         }
       }
     },
-    "libreoffice-bin@latest": {
-      "last_modified": "2026-04-23T13:07:47Z",
-      "resolved": "github:NixOS/nixpkgs/01fbdeef22b76df85ea168fbfe1bfd9e63681b30#libreoffice-bin",
-      "source": "devbox-search",
-      "version": "25.2.1",
-      "systems": {
-        "aarch64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/lkgwdn698k2n4zy4s4j8nlk450vdw110-libreoffice-25.2.1",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/lkgwdn698k2n4zy4s4j8nlk450vdw110-libreoffice-25.2.1"
-        },
-        "x86_64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/q7rkfnficr4cspi8k5w2qj76y7pg33x9-libreoffice-25.2.1",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/q7rkfnficr4cspi8k5w2qj76y7pg33x9-libreoffice-25.2.1"
-        }
-      }
-    },
     "neovim@latest": {
       "last_modified": "2026-05-07T03:23:16Z",
       "resolved": "github:NixOS/nixpkgs/68a8af93ff4297686cb68880845e61e5e2e41d92#neovim",
@@ -1364,104 +1336,6 @@
             }
           ],
           "store_path": "/nix/store/14phl1n07zll0pg902h240kfxikl9bwy-neovim-0.12.2"
-        }
-      }
-    },
-    "nodejs@22": {
-      "last_modified": "2026-04-23T13:07:47Z",
-      "plugin_version": "0.0.3",
-      "resolved": "github:NixOS/nixpkgs/01fbdeef22b76df85ea168fbfe1bfd9e63681b30#nodejs_22",
-      "source": "devbox-search",
-      "version": "22.22.2",
-      "systems": {
-        "aarch64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/0zb2cr3b9xlancr6s938s73pxfcbzji2-nodejs-22.22.2",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/0zb2cr3b9xlancr6s938s73pxfcbzji2-nodejs-22.22.2"
-        },
-        "aarch64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/2axvilfkmlz8wfa9zimidv5l1cydi4kc-nodejs-22.22.2",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/2axvilfkmlz8wfa9zimidv5l1cydi4kc-nodejs-22.22.2"
-        },
-        "x86_64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/5b95ias241mw7bp4bindlc5xxn66phjy-nodejs-22.22.2",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/5b95ias241mw7bp4bindlc5xxn66phjy-nodejs-22.22.2"
-        },
-        "x86_64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/6x6v11xjf0psckgqmyhfyhw9bdma0rn6-nodejs-22.22.2",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/6x6v11xjf0psckgqmyhfyhw9bdma0rn6-nodejs-22.22.2"
-        }
-      }
-    },
-    "nodejs_22@latest": {
-      "last_modified": "2026-04-23T13:07:47Z",
-      "plugin_version": "0.0.3",
-      "resolved": "github:NixOS/nixpkgs/01fbdeef22b76df85ea168fbfe1bfd9e63681b30#nodejs_22",
-      "source": "devbox-search",
-      "version": "22.22.2",
-      "systems": {
-        "aarch64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/0zb2cr3b9xlancr6s938s73pxfcbzji2-nodejs-22.22.2",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/0zb2cr3b9xlancr6s938s73pxfcbzji2-nodejs-22.22.2"
-        },
-        "aarch64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/2axvilfkmlz8wfa9zimidv5l1cydi4kc-nodejs-22.22.2",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/2axvilfkmlz8wfa9zimidv5l1cydi4kc-nodejs-22.22.2"
-        },
-        "x86_64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/5b95ias241mw7bp4bindlc5xxn66phjy-nodejs-22.22.2",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/5b95ias241mw7bp4bindlc5xxn66phjy-nodejs-22.22.2"
-        },
-        "x86_64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/6x6v11xjf0psckgqmyhfyhw9bdma0rn6-nodejs-22.22.2",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/6x6v11xjf0psckgqmyhfyhw9bdma0rn6-nodejs-22.22.2"
         }
       }
     },

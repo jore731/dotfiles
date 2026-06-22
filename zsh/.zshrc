@@ -1,25 +1,23 @@
 # Oh My Zsh setup
 export ZSH="$HOME/.oh-my-zsh"
-skip_global_compinit=1
+export ZSH_COMPDUMP="${ZDOTDIR:-$HOME}/.zcompdump"
+ZSH_DISABLE_COMPFIX=true
 plugins=(git history-substring-search macos zsh-syntax-highlighting zsh-autosuggestions zsh-completions)
 
 # Completions — fpath must be set before compinit
 fpath=("$HOME/.zsh/completions" "$HOME/.local/share/devbox/global/default/.devbox/nix/profile/default/share/zsh/site-functions" $fpath)
 
-# Cache compinit — only regenerate dump once per day
+# Intercept OMZ's compinit: use cached dump (-C) when less than 24h old
 autoload -Uz compinit
-if [[ -n "$HOME/.zcompdump(#qN.mh+24)" ]]; then
-  compinit
-else
-  compinit -C
-fi
-
-# Cache devbox completions to file instead of subshell every startup
-_devbox_comp_cache="$HOME/.zsh/completions/_devbox_cached"
-if [[ ! -f "$_devbox_comp_cache" || "$_devbox_comp_cache" -ot "$(command -v devbox)" ]]; then
-  devbox completion zsh > "$_devbox_comp_cache" 2>/dev/null
-fi
-source "$_devbox_comp_cache"
+compinit() {
+  unfunction compinit
+  autoload -Uz compinit
+  if [[ -n "$ZSH_COMPDUMP"(N.mh-24) ]]; then
+    compinit -C -d "$ZSH_COMPDUMP"
+  else
+    compinit -d "$ZSH_COMPDUMP"
+  fi
+}
 
 setopt HIST_IGNORE_ALL_DUPS
 
@@ -37,6 +35,11 @@ export NIX_SSL_CERT_FILE=$SSL_CERT_FILE
 # Devbox
 DEVBOX_NO_PROMPT=true
 eval "$(devbox global shellenv --init-hook)"
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[[ -s "$(brew --prefix nvm)/nvm.sh" ]] && . "$(brew --prefix nvm)/nvm.sh"
+[[ -s "$(brew --prefix nvm)/etc/bash_completion.d/nvm" ]] && . "$(brew --prefix nvm)/etc/bash_completion.d/nvm"
 
 LANG=en_US.UTF-8
 
@@ -68,12 +71,13 @@ alias kls="k config get-contexts"
 alias kns="k config set-context --current --namespace $1"
 alias kuse="k config use-context $1"
 alias de="devbox"
+alias npm="pnpm"
 alias amd64="env /usr/bin/arch -x86_64 /bin/zsh --login"
 alias tm='task-master'
 alias taskmaster='task-master'
 
 # PATH
-export PATH="$HOME/.npm-global/node_modules/.bin:$PATH"
+export PATH="$HOME/.node-global/node_modules/.bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"

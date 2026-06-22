@@ -12,7 +12,7 @@ This repository contains dotfiles and configuration for provisioning a developme
 | `zsh/` | `$HOME` | `$HOME` |
 | `vscode-user-config/` | `~/Library/Application Support/Code/User` | `~/.config/Code/User` |
 | `devbox-global/` | `~/.local/share/devbox/global/default` | `~/.local/share/devbox/global/default` |
-| `npm-global/` | `~/.npm-global` | `~/.npm-global` |
+| `node-global/` | `~/.node-global` | `~/.node-global` |
 | `python-global/` | `~/.python-global` | `~/.python-global` |
 | Root (`stow .`) | `$HOME` | `$HOME` |
 
@@ -72,17 +72,17 @@ devbox global install
 
 After this phase, all tools defined in `devbox-global/devbox.json` are available in the shell (once `eval "$(devbox global shellenv)"` is sourced, which `.zshrc` handles).
 
-### Phase 3b — npm Global Packages
+### Phase 3b — Node Global Packages
 
-Some CLI tools (like `defuddle`) are distributed via npm and not available in Nix. These are managed via a stowed `package.json` at `~/.npm-global/`.
+Some CLI tools (like `defuddle`) are distributed via pnpm-managed Node packages and not available in Nix. These are managed via a stowed `package.json` at `~/.node-global/`.
 
 ```sh
-mkdir -p "$HOME/.npm-global"
-devbox run "stow --target=$HOME/.npm-global npm-global"
-cd "$HOME/.npm-global" && npm install
+mkdir -p "$HOME/.node-global"
+devbox run "stow --target=$HOME/.node-global node-global"
+cd "$HOME/.node-global" && pnpm install
 ```
 
-After this, binaries are available at `~/.npm-global/node_modules/.bin/` (added to PATH by `.zshrc`).
+After this, binaries are available at `~/.node-global/node_modules/.bin/` (added to PATH by `.zshrc`).
 
 ### Phase 3c — Python Global Packages
 
@@ -256,7 +256,7 @@ Then commit the updated Brewfile. Never edit `Brewfile` by hand — it's auto-ge
 
 **Add a new CLI tool**: Add the package to `devbox-global/devbox.json`, then run `devbox global install`.
 
-**Add a new npm global tool**: Add the package to `npm-global/package.json`, then run `cd ~/.npm-global && npm install`. Commit the updated `package.json` and `package-lock.json`.
+**Add a new Node global tool**: Add the package to `node-global/package.json`, then run `cd ~/.node-global && pnpm install`. Commit the updated `package.json` and `pnpm-lock.yaml`.
 
 **Add a new Python global tool**: Run `cd ~/.python-global && uv add <package>` (this updates both `pyproject.toml` and `uv.lock` through the symlinks). Commit the updated `pyproject.toml` and `uv.lock` in the dotfiles repo.
 

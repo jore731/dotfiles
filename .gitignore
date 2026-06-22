@@ -3,4 +3,4 @@
 /something.png
 /dotfiles
 .DS_Store
-npm-global/node_modules/
+node-global/node_modules/

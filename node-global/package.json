@@ -1,7 +1,8 @@
 {
-  "name": "npm-global",
+  "name": "node-global",
   "private": true,
-  "description": "Global npm packages managed via dotfiles",
+  "packageManager": "pnpm@11.1.3",
+  "description": "Global Node packages managed via dotfiles",
   "dependencies": {
     "@microsoft/workiq": "^0.4.1",
     "defuddle": "^0.16.0",

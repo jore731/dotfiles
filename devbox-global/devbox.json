@@ -20,7 +20,6 @@
     "gum":             "latest",
     "wget":            "latest",
     "watch":           "latest",
-    "nodejs":          "22",
     "fastfetch":       "latest",
     "oh-my-zsh":       "latest",
     "neovim":          "latest",
@@ -37,12 +36,10 @@
     "darktable":            "latest",
     "gh":                   "latest",
     "azure-storage-azcopy": "latest",
-    "nodejs_22":            "latest",
     "postgresql":           "latest",
     "uv":                   "latest",
     "glab":                 "latest",
     "azure-cli":            "latest",
-    "libreoffice-bin":      "latest",
     "poppler_utils":        "latest"
   },
   "shell": {

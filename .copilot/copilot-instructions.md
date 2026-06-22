@@ -18,7 +18,7 @@ Platform engineer working with Kubernetes, Azure, and DevOps tooling. I work acr
 Dotfiles are managed at `~/dotfiles` (`jore731/dotfiles`). Global language-specific packages are stowed from there:
 
 - **CLI tools (Nix)**: Add to `~/dotfiles/devbox-global/devbox.json`, then `devbox global install`.
-- **npm packages**: Run `cd ~/.npm-global && npm install <package>`. Commit updated `package.json` and `package-lock.json` in `~/dotfiles/npm-global/`.
+- **Node packages**: Run `cd ~/.node-global && pnpm add <package>`. Commit updated `package.json` and `pnpm-lock.yaml` in `~/dotfiles/node-global/`.
 - **Python packages**: Run `cd ~/.python-global && uv add <package>`. Commit updated `pyproject.toml` and `uv.lock` in `~/dotfiles/python-global/`.
 - **Homebrew (GUI apps)**: `brew install --cask <app>`, then `brew bundle dump --file=~/dotfiles/Brewfile --force` and commit.
 - **Editor**: VS Code with Copilot, GitLens, Docker/Kubernetes extensions
