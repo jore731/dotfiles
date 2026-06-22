@@ -31,6 +31,8 @@ export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/
 export SSL_CERT_DIR="/etc/ssl/certs"
 export SSL_CERT_FILE="$SSL_CERT_DIR/BASF_internal_and_public_ca_bundle.crt"
 export NIX_SSL_CERT_FILE=$SSL_CERT_FILE
+# Node.js ignores SSL_CERT_FILE; it only honors NODE_EXTRA_CA_CERTS
+export NODE_EXTRA_CA_CERTS=$SSL_CERT_FILE
 
 # Devbox
 DEVBOX_NO_PROMPT=true
@@ -39,7 +41,6 @@ eval "$(devbox global shellenv --init-hook)"
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [[ -s "$(brew --prefix nvm)/nvm.sh" ]] && . "$(brew --prefix nvm)/nvm.sh"
-[[ -s "$(brew --prefix nvm)/etc/bash_completion.d/nvm" ]] && . "$(brew --prefix nvm)/etc/bash_completion.d/nvm"
 
 LANG=en_US.UTF-8
 
@@ -71,7 +72,6 @@ alias kls="k config get-contexts"
 alias kns="k config set-context --current --namespace $1"
 alias kuse="k config use-context $1"
 alias de="devbox"
-alias npm="pnpm"
 alias amd64="env /usr/bin/arch -x86_64 /bin/zsh --login"
 alias tm='task-master'
 alias taskmaster='task-master'
