@@ -8,9 +8,9 @@ Reproducible development machine provisioning — designed to be run by an AI ag
 
 | Tool | Role |
 |------|------|
-| [Devbox](https://www.jetify.com/devbox) (Nix) | Installs ~30 CLI tools globally and provides `stow` for setup tasks |
+| [Homebrew](https://brew.sh) | Default global package manager — installs CLI tools, GUI apps, fonts, and VS Code extensions |
+| [Devbox](https://www.jetify.com/devbox) (Nix) | Project-scoped version overrides + a frozen legacy set of global CLI tools; also provides `stow` for setup tasks |
 | [GNU Stow](https://www.gnu.org/software/stow/) | Symlinks config files from this repo into their OS-specific target paths |
-| [Homebrew](https://brew.sh) | Installs GUI apps, fonts, and VS Code extensions (macOS) |
 
 Setup is driven by [`AGENTS.md`](AGENTS.md) — an AI agent reads those instructions and executes each phase interactively, asking before proceeding.
 
@@ -44,8 +44,8 @@ dotfiles/
 ├── .profile              # POSIX shell profile
 ├── .ssh/                 # SSH config and public keys (1Password agent)
 ├── .vscode/              # Workspace-level VS Code settings
-├── Brewfile              # Auto-generated — GUI apps, fonts, extensions
-├── devbox-global/        # ~30 global CLI tools (→ ~/.local/share/devbox/global)
+├── Brewfile              # Auto-generated — default global packages: CLI tools, GUI apps, fonts, extensions
+├── devbox-global/        # Frozen legacy global CLI tools (→ ~/.local/share/devbox/global); new globals go to Homebrew
 ├── devbox.json           # Project-local: stow only
 ├── k9s-config/           # k9s views (→ ~/Library/Application Support/k9s)
 ├── vscode-user-config/   # VS Code settings & keybindings (→ Code/User)
@@ -63,20 +63,24 @@ Items at the root are symlinked into `$HOME` via `stow .`. Named packages (e.g. 
 git clone git@github.com:jore731/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 
-# 2. Install Devbox
+# 2. Install Homebrew, then all global packages (primary package manager)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew bundle
+
+# 3. Install Devbox (used for `stow`, the frozen global shell scripts, and project-scoped overrides)
 curl -fsSL https://get.jetify.com/devbox | bash
 
-# 3. Install global CLI tools
+# 4. Stow the devbox-global config (shell scripts only — package set is now empty)
 mkdir -p "$HOME/.local/share/devbox/global/default"
 devbox run "stow --target=$HOME/.local/share/devbox/global/default devbox-global"
 devbox global install
 
-# 4. Install Homebrew + apps (macOS)
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew bundle
-
-# 5. Set up Zsh + Oh My Zsh, then link configs
-# (see AGENTS.md Phases 6–8 for full details)
+# 5. Install Oh My Zsh (curl, unattended) + the custom plugins referenced in .zshrc
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
+git clone https://github.com/zsh-users/zsh-autosuggestions   "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
+git clone https://github.com/zsh-users/zsh-completions        "$ZSH_CUSTOM/plugins/zsh-completions"
 
 # 6. Link all dotfiles
 devbox run "stow ."
@@ -88,12 +92,14 @@ devbox run "stow ."
 # Re-sync configs after editing files in this repo
 devbox run "stow ."
 
-# Add a new CLI tool
-# Edit devbox-global/devbox.json, then:
-devbox global install
+# Add a new global package (default path — Homebrew)
+brew install <formula>          # CLI tool
+brew install --cask <app>       # GUI app
+brew bundle dump --file=Brewfile --force   # snapshot (never edit Brewfile by hand)
 
-# Snapshot current Homebrew state (never edit Brewfile by hand)
-brew bundle dump --file=Brewfile --force
+# Override a version per-project (Devbox)
+# Add a project-local devbox.json pinning the version you need.
+# Do NOT add new globals to devbox-global/ — that set is frozen.
 
 # Add a new app config
 # Create a directory, mirror the target structure inside it,

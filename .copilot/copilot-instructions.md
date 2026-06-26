@@ -11,16 +11,19 @@ Platform engineer working with Kubernetes, Azure, and DevOps tooling. I work acr
 - **Containers**: Kubernetes, Helm, Istio, ArgoCD, Docker/Podman, Colima
 - **Languages**: Python (primary), shell scripting, Go
 - **Python tooling**: uv for project management, Ruff for linting
-- **Package management**: Devbox (Nix-based) for CLI tools, Homebrew for GUI apps, npm/uv for language-specific global packages
+- **Package management**: Homebrew is the default for all global packages (CLI tools + GUI apps); Devbox (Nix-based) is reserved for project-scoped overrides — pinning a specific version or installing a tool I deliberately don't want globally. npm/uv handle language-specific global packages.
 
 ## Global Package Management
 
-Dotfiles are managed at `~/dotfiles` (`jore731/dotfiles`). Global language-specific packages are stowed from there:
+Dotfiles are managed at `~/dotfiles` (`jore731/dotfiles`). Global language-specific packages are stowed from there.
 
-- **CLI tools (Nix)**: Add to `~/dotfiles/devbox-global/devbox.json`, then `devbox global install`.
+**Strategy:** Homebrew is the global baseline for everything I want available system-wide (CLI tools *and* GUI apps). Devbox is **only** for project-scoped overrides — pinning a different version than the global one, or installing a tool I deliberately don't want globally. The existing `devbox-global` set is legacy/frozen: don't add new globals there.
+
+- **Homebrew (all globals — CLI tools, GUI apps, fonts)**: `brew install <formula>` (CLI) or `brew install --cask <app>` (GUI), then `brew bundle dump --file=~/dotfiles/Brewfile --force` and commit. This is the default for anything that should be globally available.
+- **Devbox (project-scoped overrides only)**: Add a project-local `devbox.json` to pin a specific version or install a tool I don't want globally. Do **not** add new packages to `~/dotfiles/devbox-global/devbox.json` — that global set is frozen and kept only for tools not yet migrated to Homebrew.
 - **Node packages**: Run `cd ~/.node-global && pnpm add <package>`. Commit updated `package.json` and `pnpm-lock.yaml` in `~/dotfiles/node-global/`.
 - **Python packages**: Run `cd ~/.python-global && uv add <package>`. Commit updated `pyproject.toml` and `uv.lock` in `~/dotfiles/python-global/`.
-- **Homebrew (GUI apps)**: `brew install --cask <app>`, then `brew bundle dump --file=~/dotfiles/Brewfile --force` and commit.
+- **Oh My Zsh**: not a package-manager install — set up via the official curl script (`tools/install.sh --unattended`) into `~/.oh-my-zsh`, plus the custom plugins (`zsh-syntax-highlighting`, `zsh-autosuggestions`, `zsh-completions`) git-cloned into `$ZSH_CUSTOM/plugins`. See the dotfiles README Quick Start.
 - **Editor**: VS Code with Copilot, GitLens, Docker/Kubernetes extensions
 - **Terminal**: Ghostty, Zsh with Oh My Zsh, Starship prompt
 - **Git**: Multiple identities via conditional includes, 1Password SSH agent

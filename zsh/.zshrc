@@ -48,13 +48,6 @@ LANG=en_US.UTF-8
 eval "$(starship init zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
-# The Fuck — lazy-load to avoid slow init on every shell
-fuck() {
-  unset -f fuck
-  eval $(thefuck --alias)
-  fuck "$@"
-}
-
 # Source Oh My Zsh (after compinit and integrations)
 source $ZSH/oh-my-zsh.sh
 
@@ -114,3 +107,8 @@ export ROQS_GITLAB_TOKEN=$(security find-generic-password -s dotfiles -a ROQS_GI
 export RGQDS_AZURE_DEVOPS_PAT=$(security find-generic-password -s dotfiles -a RGQDS_AZURE_DEVOPS_PAT -w 2>/dev/null)
 export RGQDS_AZURE_DEVOPS_PAT_B64=$(security find-generic-password -s dotfiles -a RGQDS_AZURE_DEVOPS_PAT_B64 -w 2>/dev/null)
 export OBSIDIAN_REST_API_KEY=$(security find-generic-password -s dotfiles -a OBSIDIAN_REST_API_KEY -w 2>/dev/null)
+
+# fastfetch — system info banner on interactive shell start
+if [[ -o interactive ]] && command -v fastfetch >/dev/null 2>&1; then
+  fastfetch
+fi
