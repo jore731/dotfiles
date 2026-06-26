@@ -2,7 +2,10 @@
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_COMPDUMP="${ZDOTDIR:-$HOME}/.zcompdump"
 ZSH_DISABLE_COMPFIX=true
-plugins=(git history-substring-search macos zsh-syntax-highlighting zsh-autosuggestions zsh-completions)
+plugins=(git history-substring-search macos nvm zsh-syntax-highlighting zsh-autosuggestions zsh-completions)
+
+# Lazy-load nvm: real nvm.sh (~0.5s) is sourced only on first nvm/node/npm/npx use
+zstyle ':omz:plugins:nvm' lazy yes
 
 # Completions — fpath must be set before compinit
 fpath=("$HOME/.zsh/completions" "$HOME/.local/share/devbox/global/default/.devbox/nix/profile/default/share/zsh/site-functions" $fpath)
@@ -38,9 +41,8 @@ export NODE_EXTRA_CA_CERTS=$SSL_CERT_FILE
 DEVBOX_NO_PROMPT=true
 eval "$(devbox global shellenv --init-hook)"
 
-# nvm
+# nvm — NVM_DIR points at the data dir (nvm.sh symlinks to brew's); loaded lazily by the OMZ nvm plugin
 export NVM_DIR="$HOME/.nvm"
-[[ -s "$(brew --prefix nvm)/nvm.sh" ]] && . "$(brew --prefix nvm)/nvm.sh"
 
 LANG=en_US.UTF-8
 
