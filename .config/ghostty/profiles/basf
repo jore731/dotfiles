@@ -1,0 +1,4 @@
+# Ghostty launcher profile: basf
+# Layered on top of the base config via: open -na Ghostty --args --config-file=<this>
+# Sets DOTFILES_PROFILE so .zshrc sources ~/.zshrc.basf (az/kube/gh isolation).
+command = env DOTFILES_PROFILE=basf /opt/homebrew/bin/zsh --login

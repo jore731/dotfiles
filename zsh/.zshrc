@@ -27,6 +27,33 @@ setopt HIST_IGNORE_ALL_DUPS
 # XDG Base Directory
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 
+# Terminal profiles — each profile is defined by a ~/.zshrc.<name> file that sets its
+# own Azure / Kubernetes / GitHub CLI isolation. $DOTFILES_PROFILE (lowercase) picks the
+# active one; it's sourced near the end of this file and shown by the starship badge.
+# Switch with: `switch basf` (case-insensitive) or `switch -n basf` (new window).
+typeset -ga _DOTFILES_PROFILES=(personal basf sk sadpe)
+export DOTFILES_PROFILE="${(L)DOTFILES_PROFILE:-personal}"
+(( ${_DOTFILES_PROFILES[(Ie)$DOTFILES_PROFILE]} )) || DOTFILES_PROFILE=personal
+
+switch() {
+  local open_new=0
+  [[ "$1" == "-n" ]] && { open_new=1; shift; }
+  if [[ -z "$1" ]]; then
+    echo "current profile: $DOTFILES_PROFILE"
+    return 0
+  fi
+  local name="${(L)1}"
+  if (( ! ${_DOTFILES_PROFILES[(Ie)$name]} )); then
+    echo "switch: unknown profile '$1' (valid: $_DOTFILES_PROFILES)" >&2
+    return 1
+  fi
+  if (( open_new )); then
+    open -na Ghostty --args --config-file="$XDG_CONFIG_HOME/ghostty/profiles/$name"
+    return $?
+  fi
+  DOTFILES_PROFILE="$name" exec zsh -l
+}
+
 # 1Password SSH Agent
 export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 
@@ -109,6 +136,10 @@ export ROQS_GITLAB_TOKEN=$(security find-generic-password -s dotfiles -a ROQS_GI
 export RGQDS_AZURE_DEVOPS_PAT=$(security find-generic-password -s dotfiles -a RGQDS_AZURE_DEVOPS_PAT -w 2>/dev/null)
 export RGQDS_AZURE_DEVOPS_PAT_B64=$(security find-generic-password -s dotfiles -a RGQDS_AZURE_DEVOPS_PAT_B64 -w 2>/dev/null)
 export OBSIDIAN_REST_API_KEY=$(security find-generic-password -s dotfiles -a OBSIDIAN_REST_API_KEY -w 2>/dev/null)
+
+# Per-profile config — sourced last so a profile can override globals.
+# Lives in ~/.zshrc.<profile> (e.g. ~/.zshrc.basf); see $DOTFILES_PROFILE above.
+[[ -r "$HOME/.zshrc.$DOTFILES_PROFILE" ]] && source "$HOME/.zshrc.$DOTFILES_PROFILE"
 
 # fastfetch — system info banner on interactive shell start
 if [[ -o interactive ]] && command -v fastfetch >/dev/null 2>&1; then

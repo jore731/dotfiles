@@ -1,0 +1,7 @@
+# sadpe profile — isolated Azure / Kubernetes / GitHub CLI state.
+export AZURE_CONFIG_DIR="$XDG_CONFIG_HOME/azure-profiles/sadpe"
+export KUBECONFIG="$HOME/.kube/profiles/sadpe/config"
+export GH_CONFIG_DIR="$XDG_CONFIG_HOME/gh-profiles/sadpe"
+mkdir -p "$AZURE_CONFIG_DIR" "${KUBECONFIG:h}" "$GH_CONFIG_DIR"
+
+# Add sadpe-only aliases, env vars, or tweaks below.

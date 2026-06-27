@@ -1,0 +1,4 @@
+# Ghostty launcher profile: sadpe
+# Layered on top of the base config via: open -na Ghostty --args --config-file=<this>
+# Sets DOTFILES_PROFILE so .zshrc sources ~/.zshrc.sadpe (az/kube/gh isolation).
+command = env DOTFILES_PROFILE=sadpe /opt/homebrew/bin/zsh --login

@@ -1,0 +1,4 @@
+# Ghostty launcher profile: personal
+# Layered on top of the base config via: open -na Ghostty --args --config-file=<this>
+# Sets DOTFILES_PROFILE so .zshrc sources ~/.zshrc.personal (az/kube/gh isolation).
+command = env DOTFILES_PROFILE=personal /opt/homebrew/bin/zsh --login

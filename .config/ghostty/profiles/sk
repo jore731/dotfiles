@@ -1,0 +1,4 @@
+# Ghostty launcher profile: sk
+# Layered on top of the base config via: open -na Ghostty --args --config-file=<this>
+# Sets DOTFILES_PROFILE so .zshrc sources ~/.zshrc.sk (az/kube/gh isolation).
+command = env DOTFILES_PROFILE=sk /opt/homebrew/bin/zsh --login

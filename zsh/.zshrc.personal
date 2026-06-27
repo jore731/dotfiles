@@ -1,0 +1,3 @@
+# Personal profile — baseline. Uses the standard az/kube/gh locations (no isolation),
+# so your existing logins keep working untouched.
+# Add personal-only aliases, env vars, or tweaks below.

@@ -1,0 +1,7 @@
+# basf profile — isolated Azure / Kubernetes / GitHub CLI state.
+export AZURE_CONFIG_DIR="$XDG_CONFIG_HOME/azure-profiles/basf"
+export KUBECONFIG="$HOME/.kube/profiles/basf/config"
+export GH_CONFIG_DIR="$XDG_CONFIG_HOME/gh-profiles/basf"
+mkdir -p "$AZURE_CONFIG_DIR" "${KUBECONFIG:h}" "$GH_CONFIG_DIR"
+
+# Add basf-only aliases, env vars, or tweaks below.

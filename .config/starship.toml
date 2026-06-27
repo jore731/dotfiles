@@ -3,7 +3,8 @@
 add_newline = true
 continuation_prompt = "[▸▹ ](dimmed white)"
 
-format = """$directory\
+format = """$custom\
+$directory\
 $nix_shell\
 $container\
 $git_metrics\
@@ -175,3 +176,32 @@ disabled = true
 
 [python]
 symbol = "󰌠 "
+
+# Terminal profile badge (driven by $DOTFILES_PROFILE; see ~/.zshrc `switch`)
+[custom.profile_personal]
+when = '[ "$DOTFILES_PROFILE" = "personal" ]'
+command = 'echo Personal'
+shell = ['sh']
+format = '[ 󰋜 $output ]($style)'
+style = 'bold fg:#1a1a1a bg:green'
+
+[custom.profile_basf]
+when = '[ "$DOTFILES_PROFILE" = "basf" ]'
+command = 'echo BASF'
+shell = ['sh']
+format = '[ 󰒋 $output ]($style)'
+style = 'bold fg:#ffffff bg:blue'
+
+[custom.profile_sk]
+when = '[ "$DOTFILES_PROFILE" = "sk" ]'
+command = 'echo SK'
+shell = ['sh']
+format = '[ 󰒋 $output ]($style)'
+style = 'bold fg:#1a1a1a bg:purple'
+
+[custom.profile_sadpe]
+when = '[ "$DOTFILES_PROFILE" = "sadpe" ]'
+command = 'echo SaDPe'
+shell = ['sh']
+format = '[ 󰒋 $output ]($style)'
+style = 'bold fg:#1a1a1a bg:#e08a00'
