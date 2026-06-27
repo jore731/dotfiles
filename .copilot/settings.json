@@ -53,7 +53,12 @@
     "https://clawhub.ai",
     "https://smithery.ai",
     "https://www.google.com",
-    "https://factory.talos.dev"
+    "https://factory.talos.dev",
+    "http://localhost:5173",
+    "https://tamagui.dev",
+    "https://api.expo.dev",
+    "https://expo.dev",
+    "https://docs.expo.dev"
   ],
   "skillDirectories": [
     "/Users/jorgepulidolopez/.copilot/skills/drawio",
@@ -74,7 +79,6 @@
     "work-dashboard@skills": true,
     "thirdparty-skills@skills": true,
     "renta@skills": true,
-    "workiq@copilot-plugins": true,
     "basf-knowledge@dscs-skills": true,
     "azure@azure-skills": true,
     "visual-builders@dscs-skills": true,
@@ -134,7 +138,9 @@
   },
   "voice": {
     "enabled": true,
-    "selectedModel": "nemotron-speech-streaming-en-0.6b-generic-cpu:3"
+    "selectedModel": "nemotron-speech-streaming-es-0.6b-ft-generic-cpu:1"
   },
-  "disabledSkills": []
+  "disabledSkills": [],
+  "model": "claude-opus-4.8",
+  "colorMode": "default"
 }
