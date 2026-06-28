@@ -1,0 +1,31 @@
+{
+  "inferenceGatewayBaseUrl": "https://adb-7405618375456864.4.azuredatabricks.net/serving-endpoints/anthropic/",
+  "inferenceCredentialHelper": "/Users/jorgepulidolopez/.local/hooks/databricks-anthropic-token",
+  "inferenceCredentialKind": "helper-script",
+  "inferenceProvider": "gateway",
+  "modelDiscoveryEnabled": false,
+  "coworkEgressAllowedHosts": ["*"],
+  "inferenceModels": [
+    {
+      "name": "databricks-claude-opus-4-8",
+      "labelOverride": "Claude Opus 4.8",
+      "supports1m": true,
+      "anthropicFamilyTier": "opus",
+      "isFamilyDefault": true
+    },
+    {
+      "name": "databricks-claude-sonnet-4-6",
+      "labelOverride": "Claude Sonnet 4.6",
+      "supports1m": true,
+      "anthropicFamilyTier": "sonnet",
+      "isFamilyDefault": true
+    },
+    {
+      "name": "databricks-claude-haiku-4-5",
+      "labelOverride": "Claude Haiku 4.5",
+      "supports1m": true,
+      "anthropicFamilyTier": "haiku",
+      "isFamilyDefault": true
+    }
+  ]
+}

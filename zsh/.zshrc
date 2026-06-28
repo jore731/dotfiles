@@ -97,6 +97,7 @@ alias de="devbox"
 alias amd64="env /usr/bin/arch -x86_64 /bin/zsh --login"
 alias tm='task-master'
 alias taskmaster='task-master'
+alias sw="switch"
 
 # PATH
 export PATH="$HOME/.node-global/node_modules/.bin:$PATH"
@@ -136,6 +137,7 @@ export ROQS_GITLAB_TOKEN=$(security find-generic-password -s dotfiles -a ROQS_GI
 export RGQDS_AZURE_DEVOPS_PAT=$(security find-generic-password -s dotfiles -a RGQDS_AZURE_DEVOPS_PAT -w 2>/dev/null)
 export RGQDS_AZURE_DEVOPS_PAT_B64=$(security find-generic-password -s dotfiles -a RGQDS_AZURE_DEVOPS_PAT_B64 -w 2>/dev/null)
 export OBSIDIAN_REST_API_KEY=$(security find-generic-password -s dotfiles -a OBSIDIAN_REST_API_KEY -w 2>/dev/null)
+export DATABRICKS_ANTHROPIC_TOKEN=$(security find-generic-password -s dotfiles -a DATABRICKS_ANTHROPIC_TOKEN -w 2>/dev/null)
 
 # Per-profile config — sourced last so a profile can override globals.
 # Lives in ~/.zshrc.<profile> (e.g. ~/.zshrc.basf); see $DOTFILES_PROFILE above.

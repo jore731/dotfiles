@@ -3,6 +3,7 @@
 .github
 .gitignore
 Brewfile
+claude-desktop
 README.md
 devbox-global
 devbox.json

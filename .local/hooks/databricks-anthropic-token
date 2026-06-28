@@ -1,0 +1,6 @@
+#!/bin/sh
+# Credential helper for Claude Desktop third-party inference (BASF Databricks).
+# Prints the Databricks PAT (synced from 1Password to the login Keychain via
+# `devbox global run sync-secrets`) to stdout, with no trailing newline so
+# Claude Desktop consumes it verbatim as the bearer token.
+printf '%s' "$(/usr/bin/security find-generic-password -s dotfiles -a DATABRICKS_ANTHROPIC_TOKEN -w 2>/dev/null)"
