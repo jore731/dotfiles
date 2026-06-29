@@ -5,6 +5,9 @@
   "inferenceProvider": "gateway",
   "modelDiscoveryEnabled": false,
   "coworkEgressAllowedHosts": ["*"],
+  "allowedPluginMarketplaces": [
+    { "source": "github", "repo": "anthropics/claude-plugins-official" }
+  ],
   "inferenceModels": [
     {
       "name": "databricks-claude-opus-4-8",
