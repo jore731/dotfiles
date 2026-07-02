@@ -6,9 +6,7 @@
       ],
       "type": "http",
       "url": "http://127.0.0.1:3845/mcp",
-      "headers": {},
-      "source": "user",
-      "sourcePath": "/Users/jorgepulidolopez/.copilot/mcp-config.json"
+      "headers": {}
     },
     "kubernetes": {
       "tools": [
@@ -19,9 +17,7 @@
       "args": [
         "-y",
         "kubernetes-mcp-server@latest"
-      ],
-      "source": "user",
-      "sourcePath": "/Users/jorgepulidolopez/.copilot/mcp-config.json"
+      ]
     },
     "drawio": {
       "tools": [
@@ -32,9 +28,7 @@
       "args": [
         "-y",
         "@drawio/mcp"
-      ],
-      "source": "user",
-      "sourcePath": "/Users/jorgepulidolopez/.copilot/mcp-config.json"
+      ]
     },
     "gitlab": {
       "tools": [
@@ -47,9 +41,7 @@
         "@zereight/mcp-gitlab",
         "--token=${ROQS_GITLAB_TOKEN}",
         "--api-url=https://gitlab.roqs.basf.net/api/v4"
-      ],
-      "source": "user",
-      "sourcePath": "/Users/jorgepulidolopez/.copilot/mcp-config.json"
+      ]
     },
     "azure-devops": {
       "tools": [
@@ -66,9 +58,7 @@
       ],
       "env": {
         "PERSONAL_ACCESS_TOKEN": "${RGQDS_AZURE_DEVOPS_PAT_B64}"
-      },
-      "source": "user",
-      "sourcePath": "/Users/jorgepulidolopez/.copilot/mcp-config.json"
+      }
     },
     "obsidian": {
       "tools": [
@@ -78,9 +68,7 @@
       "url": "https://127.0.0.1:27124/mcp",
       "headers": {
         "Authorization": "Bearer ${OBSIDIAN_REST_API_KEY}"
-      },
-      "source": "user",
-      "sourcePath": "/Users/jorgepulidolopez/.copilot/mcp-config.json"
+      }
     },
     "confluence": {
       "tools": [
@@ -100,16 +88,14 @@
         "--no-confluence-ssl-verify",
         "--toolsets",
         "default"
-      ],
-      "source": "user",
-      "sourcePath": "/Users/jorgepulidolopez/.copilot/mcp-config.json"
+      ]
     },
     "blender": {
-      "type": "local",
-      "command": "uv",
       "tools": [
         "*"
       ],
+      "type": "local",
+      "command": "uv",
       "args": [
         "--directory",
         "$HOME/blender_mcp/mcp",
@@ -121,13 +107,14 @@
       }
     },
     "playwright": {
-      "type": "stdio",
-      "command": "npx",
       "tools": [
         "*"
       ],
+      "type": "stdio",
+      "command": "npx",
       "args": [
-        "@playwright/mcp@latest"
+        "@playwright/mcp@latest",
+        "--isolated"
       ]
     },
     "homeassistant": {

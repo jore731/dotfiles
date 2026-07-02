@@ -58,7 +58,14 @@
     "https://tamagui.dev",
     "https://api.expo.dev",
     "https://expo.dev",
-    "https://docs.expo.dev"
+    "https://docs.expo.dev",
+    "http://localhost:8533",
+    "https://sede.agenciatributaria.gob.es",
+    "https://www.comunidad.madrid",
+    "https://www.declarando.es",
+    "https://www.boe.es",
+    "https://www.home-assistant.io",
+    "https://community.home-assistant.io"
   ],
   "skillDirectories": [
     "/Users/jorgepulidolopez/.copilot/skills/drawio",
@@ -67,7 +74,10 @@
     "/Users/jorgepulidolopez/.copilot/skills",
     "/Users/jorgepulidolopez/.agents/skills"
   ],
-  "ide": {},
+  "ide": {
+    "autoConnect": true,
+    "openDiffOnEdit": true
+  },
   "enabledPlugins": {
     "document-skills@anthropic-agent-skills": true,
     "taskmaster@taskmaster": true,
@@ -138,9 +148,37 @@
   },
   "voice": {
     "enabled": true,
-    "selectedModel": "nemotron-speech-streaming-es-0.6b-ft-generic-cpu:1"
+    "selectedModel": "nemotron-speech-streaming-en-0.6b-generic-cpu:3"
   },
   "disabledSkills": [],
-  "model": "claude-opus-4.8",
-  "colorMode": "default"
+  "colorMode": "default",
+  "theme": "default",
+  "tabs": {
+    "enabled": true
+  },
+  "sandbox": {
+    "enabled": true,
+    "sandboxMcpServers": true,
+    "sandboxLspServers": true,
+    "allowBypass": true,
+    "addCurrentWorkingDirectory": true,
+    "userPolicy": {
+      "filesystem": {
+        "readwritePaths": [],
+        "readonlyPaths": [],
+        "deniedPaths": [],
+        "clearPolicyOnExit": true
+      },
+      "network": {
+        "allowOutbound": true,
+        "allowLocalNetwork": false,
+        "allowedHosts": [],
+        "blockedHosts": []
+      },
+      "seatbelt": {
+        "keychainAccess": true
+      }
+    }
+  },
+  "experimental": true
 }
