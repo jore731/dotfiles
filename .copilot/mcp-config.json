@@ -129,6 +129,16 @@
       "args": [
         "@playwright/mcp@latest"
       ]
+    },
+    "homeassistant": {
+      "tools": [
+        "*"
+      ],
+      "type": "http",
+      "url": "https://homeassistant.quokka-polaris.ts.net/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${HOMEASSISTANT_TOKEN}"
+      }
     }
   }
 }
