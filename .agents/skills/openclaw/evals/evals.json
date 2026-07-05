@@ -1,0 +1,23 @@
+{
+  "skill_name": "openclaw",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I just installed openclaw on my mac and I want to connect it to my Telegram bot. I already created a bot with BotFather and have the token. Walk me through the rest of the setup — I want it so only I can message the bot (my telegram user id is 987654321).",
+      "expected_output": "Step-by-step guide covering: setting the token securely via env/SecretRef, configuring channels.telegram with dmPolicy allowlist and allowFrom with the user's ID, restarting/hot-reloading the gateway, and verifying with openclaw channels status --probe. Should reference the live Telegram docs page for full details.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "My openclaw gateway keeps crashing on startup with some error about discord token. I set DISCORD_BOT_TOKEN in my shell but it doesn't seem to pick it up. I'm running it as a systemd service on my ubuntu server. How do I fix this?",
+      "expected_output": "Diagnoses that systemd services don't inherit shell environment variables. Suggests adding the env var to ~/.openclaw/.env or the systemd unit file's Environment/EnvironmentFile directive. Recommends openclaw doctor to validate, and checking logs. Should reference the secrets management or environment docs.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "I want to set up two different agents on my openclaw — one for coding help that uses claude sonnet and has full tool access, and another read-only research agent that uses gpt-4o. Discord channel #coding should go to the coder, and #research should go to the researcher. How do I configure this?",
+      "expected_output": "Provides a multi-agent config with agents.list[] containing both agents (different workspaces, models, tool policies), plus bindings[] that route Discord channel IDs to the correct agent. Mentions need for Discord channel IDs (not names), guild allowlist setup, and openclaw doctor to verify.",
+      "files": []
+    }
+  ]
+}
