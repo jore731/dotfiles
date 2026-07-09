@@ -3,9 +3,9 @@ vault = "Private"
 item = "SSH Jorge"
 
 [[ssh-keys]]
-vault = "Employee"
+vault = "BASF"
 item = "BASF SSH Key"
 
 [[ssh-keys]]
-vault = "Employee"
+vault = "BASF"
 item = "BASF SSH Key GH"
