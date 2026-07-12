@@ -2,6 +2,7 @@
 .git
 .github
 .gitignore
+docs
 Brewfile
 claude-desktop
 README.md
@@ -10,5 +11,6 @@ devbox.json
 devbox.lock
 node-global
 python-global
+scripts
 vscode-user-config
 zsh

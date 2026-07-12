@@ -34,8 +34,10 @@ Setup is driven by [`AGENTS.md`](AGENTS.md) — an AI agent reads those instruct
 
 ```
 dotfiles/
-├── .copilot/              # Agent instructions, MCP servers, skills
-├── .config/              # Ghostty, fastfetch, starship, 1Password SSH
+├── .agents/               # Canonical skills and portable agent profiles
+├── .claude/               # Claude Code configuration and generated agents
+├── .config/              # Ghostty, fastfetch, starship, 1Password SSH, OpenCode agents
+├── .copilot/              # Copilot instructions, MCP servers, skills, generated agents
 ├── .docker/              # Docker context and ACR registries
 ├── .gitconfig            # Git config with conditional includes
 ├── .gitconfig.d/         # Per-identity git configs (personal / BASF)
@@ -47,12 +49,13 @@ dotfiles/
 ├── Brewfile              # Auto-generated — default global packages: CLI tools, GUI apps, fonts, extensions
 ├── devbox-global/        # Frozen legacy global CLI tools (→ ~/.local/share/devbox/global); new globals go to Homebrew
 ├── devbox.json           # Project-local: stow only
+├── docs/                  # Architecture decisions and operational documentation
 ├── k9s-config/           # k9s views (→ ~/Library/Application Support/k9s)
 ├── vscode-user-config/   # VS Code settings & keybindings (→ Code/User)
 └── zsh/                  # .zshrc (→ $HOME)
 ```
 
-Items at the root are symlinked into `$HOME` via `stow .`. Named packages (e.g. `zsh/`, `k9s-config/`) are stowed to specific target directories.
+Items at the root are symlinked into `$HOME` with GNU Stow. Named packages (e.g. `zsh/`, `k9s-config/`) are stowed to specific target directories.
 
 ## Quick Start
 
@@ -67,7 +70,7 @@ cd ~/dotfiles
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew bundle
 
-# 3. Install Devbox (used for `stow`, the frozen global shell scripts, and project-scoped overrides)
+# 3. Install Devbox (used for the frozen global shell scripts and project-scoped overrides)
 curl -fsSL https://get.jetify.com/devbox | bash
 
 # 4. Stow the devbox-global config (shell scripts only — package set is now empty)
@@ -82,15 +85,21 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting "$ZSH_CUSTOM/plug
 git clone https://github.com/zsh-users/zsh-autosuggestions   "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
 git clone https://github.com/zsh-users/zsh-completions        "$ZSH_CUSTOM/plugins/zsh-completions"
 
-# 6. Link all dotfiles
-devbox run "stow ."
+# 6. Install GNU Stow and link all dotfiles
+brew install stow
+stow --no-folding --target="$HOME" . --ignore='^\.copilot/settings\.json$'
 ```
 
 ## Maintenance
 
 ```sh
-# Re-sync configs after editing files in this repo
-devbox run "stow ."
+# Re-sync configs after editing files in this repo.
+# Preserve the currently unmanaged live Copilot settings file.
+stow --no-folding --target="$HOME" . --ignore='^\.copilot/settings\.json$'
+
+# Regenerate and verify portable agent adapters
+sh scripts/generate-agent-adapters.sh
+sh scripts/check-agent-adapters.sh
 
 # Add a new global package (default path — Homebrew)
 brew install <formula>          # CLI tool
