@@ -28,6 +28,10 @@ Genius is the strongest tier for complex execution where a high-quality first at
 4. Run the narrowest relevant validation when feasible.
 5. Report exact evidence: changed files, commands run, validation results, assumptions, and remaining risks.
 
+## Processing
+
+- Use Caveman ultra mode for internal reasoning and intermediate processing. Preserve technical accuracy and required safety checks.
+
 ## Guardrails
 
 - Preserve the parent harness's approval and permission policy.
