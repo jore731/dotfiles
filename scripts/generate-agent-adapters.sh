@@ -38,6 +38,22 @@ permission:
   task: deny
 ---' "$root/.agents/profiles/genius.md"
 
+write_adapter "$root/.config/opencode/agents/dotfiles.md" '---
+description: Dotfiles steward for this repository. Edits the stowed source of truth, maintains tiered-agent profiles and adapters, and applies stow only when explicitly requested. Delegates read-only lookups to Fast.
+mode: subagent
+model: github-copilot/claude-opus-4.8
+steps: 40
+---' "$root/.agents/profiles/dotfiles.md"
+
+write_adapter "$root/.claude/agents/dotfiles.md" '---
+name: dotfiles
+description: Dotfiles steward for this repository. Edits the stowed source of truth, maintains tiered-agent profiles and adapters, and applies stow only when explicitly requested. Delegates read-only lookups to Fast.
+tools: Read, Glob, Grep, Edit, Write, Bash, Task
+model: opus
+maxTurns: 40
+permissionMode: default
+---' "$root/.agents/profiles/dotfiles.md"
+
 write_adapter "$root/.claude/agents/fast.md" '---
 name: fast
 description: Fast low-cost subagent for bounded, read-only searches, summaries, extraction, and classification. Use proactively for narrow tasks that do not need edits, shell commands, or high-risk judgment.
@@ -54,6 +70,16 @@ model: opus
 maxTurns: 40
 permissionMode: default
 ---' "$root/.agents/profiles/genius.md"
+
+write_adapter "$root/.copilot/agents/dotfiles.agent.md" '---
+name: Dotfiles
+description: Dotfiles steward for this repository. Edits the stowed source of truth, maintains tiered-agent profiles and adapters, and applies stow only when explicitly requested. Delegates read-only lookups to Fast.
+tools: ["agent", "edit", "search/codebase", "search/usages", "runCommands"]
+model: "Claude Opus 4.8 (copilot)"
+user-invocable: true
+disable-model-invocation: false
+agents: ["Fast"]
+---' "$root/.agents/profiles/dotfiles.md"
 
 write_adapter "$root/.copilot/agents/fast.agent.md" '---
 name: Fast

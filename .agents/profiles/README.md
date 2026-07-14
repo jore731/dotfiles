@@ -6,6 +6,7 @@ This directory is the behavioral source of truth for tiered agents. Profiles int
 |---|---|---|
 | `fast` | Lowest-cost, bounded, read-only work | Search, summaries, extraction, classification |
 | `genius` | Strongest tier for complex execution | Multi-file changes, difficult debugging, migrations |
+| `dotfiles` | Repository-specific configuration stewardship | Dotfiles, Stow, profiles, adapters, and validation |
 
 Harness adapters are generated from these profiles. Do not edit generated files directly:
 

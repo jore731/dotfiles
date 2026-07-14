@@ -11,6 +11,7 @@ The tiered-agent setup controls model cost without treating every task as equal.
 | Fast | Lowest-cost tier | Search, summaries, extraction, classification, narrow read-only investigation |
 | Default parent | Mid-tier or harness Auto | Normal implementation, debugging, validation, and coordination |
 | Genius | Strongest tier | Complex execution, difficult debugging, migrations, security, and high-risk infrastructure |
+| Dotfiles steward | Genius model with Fast delegation | Safe dotfiles, Stow, profile, adapter, and configuration maintenance |
 
 Do not alternate models by turn. Delegate by task shape, keep parent context coherent, and escalate when a higher-quality first attempt costs less than retries.
 
@@ -37,6 +38,8 @@ When OpenCode exposes `github-copilot/gpt-5.6-sol`, replace the Genius OpenCode 
 | `.config/opencode/agents/` | Generated OpenCode adapters |
 | `.claude/agents/` | Generated Claude Code adapters |
 | `.copilot/agents/` | Generated VS Code Copilot user-level adapters |
+
+The `dotfiles` steward is a repository-specific Genius-model specialist. It may delegate focused read-only lookups to Fast but does not create a new cost tier.
 
 Never edit generated adapters directly. The consistency checker fails if their body diverges from the canonical profile or if a safety-critical frontmatter field changes.
 

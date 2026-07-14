@@ -34,6 +34,9 @@ check_body "$root/.claude/agents/fast.md" "$root/.agents/profiles/fast.md"
 check_body "$root/.claude/agents/genius.md" "$root/.agents/profiles/genius.md"
 check_body "$root/.copilot/agents/fast.agent.md" "$root/.agents/profiles/fast.md"
 check_body "$root/.copilot/agents/genius.agent.md" "$root/.agents/profiles/genius.md"
+check_body "$root/.config/opencode/agents/dotfiles.md" "$root/.agents/profiles/dotfiles.md"
+check_body "$root/.claude/agents/dotfiles.md" "$root/.agents/profiles/dotfiles.md"
+check_body "$root/.copilot/agents/dotfiles.agent.md" "$root/.agents/profiles/dotfiles.md"
 
 check_field "$root/.config/opencode/agents/fast.md" 'model: github-copilot/gpt-5.6-luna'
 check_field "$root/.config/opencode/agents/fast.md" 'mode: subagent'
@@ -64,5 +67,14 @@ check_field "$root/.copilot/agents/genius.agent.md" 'tools: ["agent", "edit", "s
 check_field "$root/.copilot/agents/genius.agent.md" 'user-invocable: true'
 check_field "$root/.copilot/agents/genius.agent.md" 'disable-model-invocation: false'
 check_field "$root/.copilot/agents/genius.agent.md" 'agents: ["Fast"]'
+check_field "$root/.config/opencode/agents/dotfiles.md" 'model: github-copilot/claude-opus-4.8'
+check_field "$root/.config/opencode/agents/dotfiles.md" 'mode: subagent'
+check_field "$root/.config/opencode/agents/dotfiles.md" 'steps: 40'
+check_field "$root/.claude/agents/dotfiles.md" 'model: opus'
+check_field "$root/.claude/agents/dotfiles.md" 'tools: Read, Glob, Grep, Edit, Write, Bash, Task'
+check_field "$root/.claude/agents/dotfiles.md" 'maxTurns: 40'
+check_field "$root/.claude/agents/dotfiles.md" 'permissionMode: default'
+check_field "$root/.copilot/agents/dotfiles.agent.md" 'model: "Claude Opus 4.8 (copilot)"'
+check_field "$root/.copilot/agents/dotfiles.agent.md" 'agents: ["Fast"]'
 
 exit "$failed"
