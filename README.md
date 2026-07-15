@@ -34,7 +34,7 @@ Setup is driven by [`AGENTS.md`](AGENTS.md) — an AI agent reads those instruct
 
 ```
 dotfiles/
-├── .agents/               # Canonical skills and portable agent profiles
+├── .agents/               # Canonical external skills and agent tooling
 ├── .claude/               # Claude Code configuration and generated agents
 ├── .config/              # Ghostty, fastfetch, starship, 1Password SSH, OpenCode agents
 ├── .copilot/              # Copilot instructions, MCP servers, skills, generated agents
@@ -97,9 +97,8 @@ stow --no-folding --target="$HOME" . --ignore='^\.copilot/settings\.json$'
 # Preserve the currently unmanaged live Copilot settings file.
 stow --no-folding --target="$HOME" . --ignore='^\.copilot/settings\.json$'
 
-# Regenerate and verify portable agent adapters
-sh scripts/generate-agent-adapters.sh
-sh scripts/check-agent-adapters.sh
+# Sync OpenCode configuration to Claude Code, Copilot CLI, and Copilot app
+# Run `/sync-harness-config` in OpenCode and review its proposed mappings.
 
 # Add a new global package (default path — Homebrew)
 brew install <formula>          # CLI tool
