@@ -1,5 +1,28 @@
 {
   "remoteExport": false,
+  "theme": "github",
+  "extraKnownMarketplaces": {
+    "ecc": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/affaan-m/ECC"
+      }
+    },
+    "obsidian-second-brain": {
+      "source": {
+        "source": "github",
+        "repo": "eugeniughelbur/obsidian-second-brain"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "ecc@ecc": true,
+    "obsidian-second-brain@obsidian-second-brain": true
+  },
+  "model": "gpt-5.6-luna",
+  "planModel": "gpt-5.6-luna",
+  "planEffortLevel": "max",
+  "planContextTier": "long_context",
   "allowedUrls": [
     "https://registry.terraform.io",
     "https://raw.githubusercontent.com",
@@ -65,75 +88,37 @@
     "https://www.declarando.es",
     "https://www.boe.es",
     "https://www.home-assistant.io",
-    "https://community.home-assistant.io"
+    "https://community.home-assistant.io",
+    "https://learn.microsoft.com",
+    "https://azure.github.io",
+    "https://gateway.envoyproxy.io",
+    "https://registry.terraform.io",
+    "https://raw.githubusercontent.com",
+    "https://github.com",
+    "https://oauth2-proxy.github.io",
+    "https://www.pgadmin.org",
+    "https://docs.aws.amazon.com",
+    "https://api.github.com",
+    "http://127.0.0.1:9222",
+    "https://docs.openclaw.ai",
+    "https://www.revenuecat.com",
+    "https://developer.apple.com",
+    "https://developer.android.com",
+    "https://support.google.com",
+    "https://docs.kargo.akuity.io",
+    "http://localhost:8888",
+    "https://www.home-assistant.io",
+    "https://www.music-assistant.io"
   ],
   "skillDirectories": [
-    "/Users/jorgepulidolopez/.copilot/skills/drawio",
-    "/Users/jorgepulidolopez/Desktop/GitHub/dscs-cdk/.copilot/skills/dscs-cdk",
-    "/Users/jorgepulidolopez/Desktop/GitHub/dscs-agentic-development/skills/setup-skills",
-    "/Users/jorgepulidolopez/.copilot/skills",
     "/Users/jorgepulidolopez/.agents/skills"
   ],
+  "voice": {
+    "enabled": true
+  },
   "ide": {
     "autoConnect": true,
     "openDiffOnEdit": true
-  },
-  "enabledPlugins": {
-    "document-skills@anthropic-agent-skills": true,
-    "taskmaster@taskmaster": true,
-    "crossplane-import@dscs-skills": true,
-    "scrapling@dscs-skills": true,
-    "dscs-wiki@dscs-skills": true,
-    "okteto@okteto-plugins": true,
-    "devspace@skills": true,
-    "work-dashboard@skills": true,
-    "thirdparty-skills@skills": true,
-    "renta@skills": true,
-    "basf-knowledge@dscs-skills": true,
-    "azure@azure-skills": true,
-    "visual-builders@dscs-skills": true,
-    "dscs-cdk@dscs-skills": true,
-    "basf-brand-guidelines@dscs-skills": true,
-    "openclaw@skills": true,
-    "use-devbox@skills": true
-  },
-  "extraKnownMarketplaces": {
-    "dscs-skills": {
-      "source": {
-        "source": "github",
-        "repo": "basf-global/dscs-skills"
-      }
-    },
-    "anthropic-agent-skills": {
-      "source": {
-        "source": "github",
-        "repo": "anthropics/skills"
-      }
-    },
-    "claude-code-plugins": {
-      "source": {
-        "source": "github",
-        "repo": "anthropics/claude-code"
-      }
-    },
-    "devsforge-marketplace": {
-      "source": {
-        "source": "git",
-        "url": "https://github.com/devsforge/marketplace.git"
-      }
-    },
-    "skills": {
-      "source": {
-        "source": "github",
-        "repo": "jore731/skills"
-      }
-    },
-    "azure-skills": {
-      "source": {
-        "source": "github",
-        "repo": "microsoft/azure-skills"
-      }
-    }
   },
   "footer": {
     "showModelEffort": true,
@@ -144,15 +129,15 @@
     "showAgent": true,
     "showCodeChanges": true,
     "showUsername": true,
+    "showSandbox": true,
+    "showYolo": true,
+    "showCiStatus": true,
+    "showSchedules": true,
+    "showPullRequest": true,
     "showCustom": false
-  },
-  "voice": {
-    "enabled": true,
-    "selectedModel": "nemotron-speech-streaming-en-0.6b-generic-cpu:3"
   },
   "disabledSkills": [],
   "colorMode": "default",
-  "theme": "default",
   "tabs": {
     "enabled": true
   },
@@ -178,7 +163,9 @@
       "seatbelt": {
         "keychainAccess": true
       }
+    },
+    "auth": {
+      "git": true
     }
-  },
-  "experimental": true
+  }
 }

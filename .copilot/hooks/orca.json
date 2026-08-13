@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "hooks": {
+    "SessionStart": [
+      {
+        "type": "command",
+        "bash": "if [ -f '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -r '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -x '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ]; then ORCA_COPILOT_HOOK_EVENT='SessionStart' /bin/sh '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+        "timeoutSec": 5
+      }
+    ],
+    "SessionEnd": [
+      {
+        "type": "command",
+        "bash": "if [ -f '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -r '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -x '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ]; then ORCA_COPILOT_HOOK_EVENT='SessionEnd' /bin/sh '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+        "timeoutSec": 5
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "type": "command",
+        "bash": "if [ -f '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -r '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -x '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ]; then ORCA_COPILOT_HOOK_EVENT='UserPromptSubmit' /bin/sh '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+        "timeoutSec": 5
+      }
+    ],
+    "PreToolUse": [
+      {
+        "type": "command",
+        "bash": "if [ -f '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -r '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -x '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ]; then ORCA_COPILOT_HOOK_EVENT='PreToolUse' /bin/sh '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+        "timeoutSec": 5
+      }
+    ],
+    "PostToolUse": [
+      {
+        "type": "command",
+        "bash": "if [ -f '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -r '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -x '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ]; then ORCA_COPILOT_HOOK_EVENT='PostToolUse' /bin/sh '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+        "timeoutSec": 5
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "type": "command",
+        "bash": "if [ -f '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -r '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -x '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ]; then ORCA_COPILOT_HOOK_EVENT='PostToolUseFailure' /bin/sh '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+        "timeoutSec": 5
+      }
+    ],
+    "subagentStart": [
+      {
+        "type": "command",
+        "bash": "if [ -f '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -r '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -x '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ]; then ORCA_COPILOT_HOOK_EVENT='subagentStart' /bin/sh '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+        "timeoutSec": 5
+      }
+    ],
+    "SubagentStop": [
+      {
+        "type": "command",
+        "bash": "if [ -f '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -r '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -x '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ]; then ORCA_COPILOT_HOOK_EVENT='SubagentStop' /bin/sh '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+        "timeoutSec": 5
+      }
+    ],
+    "PreCompact": [
+      {
+        "type": "command",
+        "bash": "if [ -f '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -r '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -x '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ]; then ORCA_COPILOT_HOOK_EVENT='PreCompact' /bin/sh '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+        "timeoutSec": 5
+      }
+    ],
+    "Stop": [
+      {
+        "type": "command",
+        "bash": "if [ -f '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -r '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -x '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ]; then ORCA_COPILOT_HOOK_EVENT='Stop' /bin/sh '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+        "timeoutSec": 5
+      }
+    ],
+    "ErrorOccurred": [
+      {
+        "type": "command",
+        "bash": "if [ -f '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -r '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -x '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ]; then ORCA_COPILOT_HOOK_EVENT='ErrorOccurred' /bin/sh '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+        "timeoutSec": 5
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "type": "command",
+        "bash": "if [ -f '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -r '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -x '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ]; then ORCA_COPILOT_HOOK_EVENT='PermissionRequest' /bin/sh '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+        "timeoutSec": 5
+      }
+    ],
+    "Notification": [
+      {
+        "type": "command",
+        "bash": "if [ -f '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -r '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ] && [ -x '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh' ]; then ORCA_COPILOT_HOOK_EVENT='Notification' /bin/sh '/Users/jorgepulidolopez/.orca/agent-hooks/copilot-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+        "timeoutSec": 5
+      }
+    ]
+  }
+}

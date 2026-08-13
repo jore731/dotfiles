@@ -37,6 +37,8 @@ Dotfiles are managed at `~/dotfiles` (`jore731/dotfiles`). Global language-speci
 - **Keep setup minimal**: Don't add VS Code extension recommendations, extra configs, or boilerplate unless I ask for it. Start with the bare minimum.
 - **Shell scripts**: Use `#!/bin/sh` and stay POSIX-compatible where possible.
 - **Brewfile is auto-generated**: Never edit it by hand. Use `brew bundle dump --file=Brewfile --force`.
+- **JSON parsing/validation/querying**: Always use `jq` (invoke the `jq-json` skill), never `python -c "import json..."` or similar one-off scripts.
+- **YAML parsing/validation/querying**: Always use `yq` (invoke the `yq-yaml` skill), never `python -c "import yaml..."` or similar one-off scripts.
 
 ## Second Brain (Obsidian)
 

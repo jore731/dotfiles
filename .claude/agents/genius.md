@@ -1,0 +1,1 @@
+../../dotfiles/.claude/agents/genius.md

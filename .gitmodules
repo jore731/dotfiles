@@ -1,3 +1,9 @@
-[submodule ".copilot/thirdparty/AI-Engineering-Coach"]
-	path = .copilot/thirdparty/AI-Engineering-Coach
-	url = https://github.com/microsoft/AI-Engineering-Coach.git
+[submodule ".agents/thirdparty/obsidian-second-brain"]
+	path = .agents/thirdparty/obsidian-second-brain
+	url = git@github.com:eugeniughelbur/obsidian-second-brain.git
+[submodule ".agents/thirdparty/AI-Engineering-Coach"]
+	path = .agents/thirdparty/AI-Engineering-Coach
+	url = git@github.com:microsoft/AI-Engineering-Coach.git
+[submodule ".agents/thirdparty/ECC"]
+	path = .agents/thirdparty/ECC
+	url = git@github.com:affaan-m/ECC.git

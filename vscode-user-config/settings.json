@@ -1,6 +1,4 @@
 {
-    // Vscode style settings
-    "workbench.colorTheme": "Dark+",
     "window.title": "${dirty}${rootNameShort}",
     "editor.tokenColorCustomizations": {
         "[*Light*]": {
@@ -161,8 +159,6 @@
         "vs-kubernetes.crd-code-completion": "enabled"
     },
     "chat.agent.maxRequests": 100,
-    "gitlens.ai.model": "vscode",
-    "gitlens.ai.vscode.model": "copilot:gpt-4.1",
     "terminal.integrated.suggest.cdPath": "off",
     "terminal.integrated.suggest.enabled": false,
     "okteto.upTimeout": 60,
@@ -184,6 +180,8 @@
         "https://developer.microsoft.com/json-schemas/": true,
         "https://json-schema.org/": true,
         "https://json.schemastore.org/": true,
+        "https://models.dev": true,
+        "https://opencode.ai": true,
         "https://raw.githubusercontent.com": true,
         "https://raw.githubusercontent.com/devcontainers/spec/": true,
         "https://raw.githubusercontent.com/microsoft/vscode/": true,
@@ -204,4 +202,5 @@
         "**/.forgejo/workflows/*.yml",
         "**/.forgejo/workflows/*.yaml"
     ],
+    "python.languageServer": "Default",
 }

@@ -98,6 +98,7 @@ alias amd64="env /usr/bin/arch -x86_64 /bin/zsh --login"
 alias tm='task-master'
 alias taskmaster='task-master'
 alias sw="switch"
+alias dig-basf='dig @172.23.247.24'
 
 # PATH
 export PATH="$HOME/.node-global/node_modules/.bin:$PATH"
@@ -118,13 +119,6 @@ docker-ca() {
     fi
 }
 
-# Defer GITHUB_TOKEN — evaluated on first use
-github_token() {
-  if [[ -z "$GITHUB_TOKEN" ]]; then
-    export GITHUB_TOKEN=$(gh auth token --user PulidoJ_basf)
-  fi
-  echo "$GITHUB_TOKEN"
-}
 
 restart_gp() {
     launchctl unload /Library/LaunchAgents/com.paloaltonetworks.gp.pangp*
@@ -133,11 +127,17 @@ restart_gp() {
 }
 
 # Work Dashboard secrets (from Keychain, synced via `devbox global run sync-secrets`)
-export ROQS_GITLAB_TOKEN=$(security find-generic-password -s dotfiles -a ROQS_GITLAB_TOKEN -w 2>/dev/null)
-export RGQDS_AZURE_DEVOPS_PAT=$(security find-generic-password -s dotfiles -a RGQDS_AZURE_DEVOPS_PAT -w 2>/dev/null)
-export RGQDS_AZURE_DEVOPS_PAT_B64=$(security find-generic-password -s dotfiles -a RGQDS_AZURE_DEVOPS_PAT_B64 -w 2>/dev/null)
-export OBSIDIAN_REST_API_KEY=$(security find-generic-password -s dotfiles -a OBSIDIAN_REST_API_KEY -w 2>/dev/null)
-export DATABRICKS_ANTHROPIC_TOKEN=$(security find-generic-password -s dotfiles -a DATABRICKS_ANTHROPIC_TOKEN -w 2>/dev/null)
+# ponytail: interactive-only — VS Code's resolveShellEnv runs a login *non-interactive*
+# shell, so gating here removes 6 blocking Keychain calls (~150ms) from editor startup.
+# Interactive terminals (where MCP tools inherit these) still get them eagerly.
+if [[ -o interactive ]]; then
+  export ROQS_GITLAB_TOKEN=$(security find-generic-password -s dotfiles -a ROQS_GITLAB_TOKEN -w 2>/dev/null)
+  export RGQDS_AZURE_DEVOPS_PAT=$(security find-generic-password -s dotfiles -a RGQDS_AZURE_DEVOPS_PAT -w 2>/dev/null)
+  export RGQDS_AZURE_DEVOPS_PAT_B64=$(security find-generic-password -s dotfiles -a RGQDS_AZURE_DEVOPS_PAT_B64 -w 2>/dev/null)
+  export OBSIDIAN_REST_API_KEY=$(security find-generic-password -s dotfiles -a OBSIDIAN_REST_API_KEY -w 2>/dev/null)
+  export DATABRICKS_ANTHROPIC_TOKEN=$(security find-generic-password -s dotfiles -a DATABRICKS_ANTHROPIC_TOKEN -w 2>/dev/null)
+  export HOMEASSISTANT_TOKEN=$(security find-generic-password -s dotfiles -a HOMEASSISTANT_TOKEN -w 2>/dev/null)
+fi
 
 # Per-profile config — sourced last so a profile can override globals.
 # Lives in ~/.zshrc.<profile> (e.g. ~/.zshrc.basf); see $DOTFILES_PROFILE above.
@@ -145,5 +145,15 @@ export DATABRICKS_ANTHROPIC_TOKEN=$(security find-generic-password -s dotfiles -
 
 # fastfetch — system info banner on interactive shell start
 if [[ -o interactive ]] && command -v fastfetch >/dev/null 2>&1; then
-  fastfetch
+  fastfetch --logo-color-1 999999 --logo-color-2 999999 --logo-color-3 999999 --logo-color-4 999999 --logo-color-5 999999 --logo-color-6 999999
 fi
+# pnpm
+export PNPM_HOME="/Users/jorgepulidolopez/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end
+
+export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+export ARM_USE_AZUREAD=True

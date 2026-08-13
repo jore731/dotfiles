@@ -16,7 +16,7 @@ This repository contains dotfiles and configuration for provisioning a developme
 | `python-global/` | `~/.python-global` | `~/.python-global` |
 | Root (`stow .`) | `$HOME` | `$HOME` |
 
-Within `.copilot/skills/`, the Obsidian skills from `kepano/obsidian-skills` are stowed from the submodule at `.copilot/thirdparty/obsidian-skills`.
+Obsidian workflows are provided exclusively by the `obsidian-second-brain@obsidian-second-brain` Copilot plugin. Do not install or stow additional Obsidian skills.
 
 Root stow links the following into `$HOME` (individual files are symlinked, not directories):
 - `.copilot/` — copilot-instructions.md, mcp-config.json, skills/
@@ -211,11 +211,11 @@ devbox run "stow --target=$HOME/.config/Code/User vscode-user-config"
 git clone git@github.com:jore731/secondbrain.git ~/secondbrain
 ```
 
-**Stow the Obsidian skills** from the submodule into `.copilot/skills/`:
+**Enable the Obsidian Second Brain plugin**:
 
 ```sh
-git submodule update --init
-devbox run "stow --dir=.copilot/thirdparty/obsidian-skills --target=.copilot/skills skills"
+# Install or update through the Copilot plugin marketplace:
+# obsidian-second-brain@obsidian-second-brain
 ```
 
 The Obsidian Git plugin config is committed in the vault at `.obsidian/plugins/obsidian-git/data.json` (auto-save/push/pull every 5 minutes, rebase sync). On first launch, open the vault in Obsidian and install the "Obsidian Git" community plugin — the settings will be picked up automatically.
@@ -266,12 +266,8 @@ Then commit the updated Brewfile. Never edit `Brewfile` by hand — it's auto-ge
 
 **Re-apply macOS defaults**: Run `devbox global run macos-defaults` to reapply macOS system preferences (e.g., after an OS update).
 
-**Update Obsidian skills**: Pull the latest from the submodule, then re-stow:
+**Update Obsidian Second Brain**: Update the `obsidian-second-brain@obsidian-second-brain` Copilot plugin through the plugin marketplace. Do not pull or stow unrelated Obsidian skill repositories.
 
-```sh
-cd .copilot/thirdparty/obsidian-skills && git pull origin main && cd ../../..
-devbox run "stow --dir=.copilot/thirdparty/obsidian-skills --target=.copilot/skills skills"
-```
 
 ## Important Notes
 
@@ -284,5 +280,5 @@ devbox run "stow --dir=.copilot/thirdparty/obsidian-skills --target=.copilot/ski
 - **Shell**: `.zshrc` (in `zsh/` stow package) uses Oh My Zsh with plugins: git, history-substring-search, macos, zsh-syntax-highlighting, zsh-autosuggestions, zsh-completions.
 - **MCP servers** are configured in `.copilot/mcp-config.json` (stowed to `~/.copilot/mcp-config.json`). Includes figma, azure, kubernetes, drawio, and proxmox servers.
 - **Docker** config at `.docker/config.json` stores ACR registry names and context settings. Credentials are in macOS Keychain via `credsStore: osxkeychain` — no secrets in the file.
-- **Obsidian second brain**: The vault at `~/secondbrain` is a private git repo (`jore731/secondbrain`). The Obsidian Git plugin handles auto-sync. Obsidian skills from `kepano/obsidian-skills` are stowed as a submodule at `.copilot/thirdparty/obsidian-skills`. A custom `obsidian` skill at `.copilot/skills/obsidian/SKILL.md` guides agents on vault structure and when to use it.
+- **Obsidian second brain**: The vault at `~/secondbrain` is a private git repo (`jore731/secondbrain`). The Obsidian Git plugin handles auto-sync. The `obsidian-second-brain@obsidian-second-brain` Copilot plugin is the sole source of Obsidian skills and commands.
 - **Devbox project vs global**: The project `devbox.json` only contains `stow` (for setup tasks). All other CLI tools come from `devbox-global/devbox.json` which is stowed to the global devbox path.
