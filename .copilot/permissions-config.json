@@ -1,0 +1,14 @@
+{
+  "locations": {
+    "/Users/jorgepulidolopez/Desktop/Personal/raspi-cluster": {
+      "tool_approvals": [
+        {
+          "kind": "commands",
+          "commandIdentifiers": [
+            "printf"
+          ]
+        }
+      ]
+    }
+  }
+}

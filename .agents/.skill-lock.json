@@ -144,6 +144,429 @@
       "skillFolderHash": "2fe8ae9a20f9594bf3ae99708b82d58b00ff7bae",
       "installedAt": "2026-08-13T06:29:45.027Z",
       "updatedAt": "2026-08-13T06:29:45.027Z"
+    },
+    "azure-rbac": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-rbac/SKILL.md",
+      "skillFolderHash": "1482f32b79014f13c1914148dd83665a263d551bcb47a78effae2a63042293cc",
+      "installedAt": "2026-08-17T11:45:40.403Z",
+      "updatedAt": "2026-08-17T11:45:40.403Z"
+    },
+    "azure-kubernetes-service": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-kubernetes-service/SKILL.md",
+      "skillFolderHash": "425a1f9778224dfb724b14589b8d045c94f13a86aac8f48683a4433126477c66",
+      "installedAt": "2026-08-17T11:45:40.424Z",
+      "updatedAt": "2026-08-17T11:45:40.424Z"
+    },
+    "azure-key-vault": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-key-vault/SKILL.md",
+      "skillFolderHash": "49bbb54ba8d0d5fd79dec86c1ff53d5c687f365f7ff62727f37dff7cc42fc16b",
+      "installedAt": "2026-08-17T11:45:40.574Z",
+      "updatedAt": "2026-08-17T11:45:40.574Z"
+    },
+    "azure-copilot": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-copilot/SKILL.md",
+      "skillFolderHash": "544f2d400e96d2637211dcfd888ecb7a53c30fdbd96e1349d3e7a18c17106330",
+      "installedAt": "2026-08-17T11:45:40.607Z",
+      "updatedAt": "2026-08-17T11:45:40.607Z"
+    },
+    "azure-cosmos-db": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-cosmos-db/SKILL.md",
+      "skillFolderHash": "38530133209117084713676f56160c25083860c7610736657d663a9793f55f0d",
+      "installedAt": "2026-08-17T11:45:40.650Z",
+      "updatedAt": "2026-08-17T11:45:40.650Z"
+    },
+    "azure-architecture": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-architecture/SKILL.md",
+      "skillFolderHash": "e1d7bef8928a3ea0420a0a24e10a3060473bdf68ba7a698e642265ee5749446e",
+      "installedAt": "2026-08-17T11:45:40.663Z",
+      "updatedAt": "2026-08-17T11:45:40.663Z"
+    },
+    "azure-automation": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-automation/SKILL.md",
+      "skillFolderHash": "38a58c3d43e414061d92612c29cfeeab1a501bded7829120204276d5e92a1442",
+      "installedAt": "2026-08-17T11:45:40.675Z",
+      "updatedAt": "2026-08-17T11:45:40.675Z"
+    },
+    "azure-backup": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-backup/SKILL.md",
+      "skillFolderHash": "0271e8d224b90bdf06b195c5ff1fcc2eb7ad0031273acb1390246d9e08ccc139",
+      "installedAt": "2026-08-17T11:45:40.685Z",
+      "updatedAt": "2026-08-17T11:45:40.685Z"
+    },
+    "azure-active-directory-b2c": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-active-directory-b2c/SKILL.md",
+      "skillFolderHash": "c24e140e8cfec339c26a7d6073a3a476056d7b9b549716bf2d5bf33b1207eb22",
+      "installedAt": "2026-08-17T11:45:40.722Z",
+      "updatedAt": "2026-08-17T11:45:40.722Z"
+    },
+    "azure-application-gateway": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-application-gateway/SKILL.md",
+      "skillFolderHash": "736418f8ef534df79ec4ea46c749da7441a535a0d29794a1e2b1d344ee2bbcf2",
+      "installedAt": "2026-08-17T11:45:40.771Z",
+      "updatedAt": "2026-08-17T11:45:40.771Z"
+    },
+    "azure-blob-storage": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-blob-storage/SKILL.md",
+      "skillFolderHash": "9d600668690299fd7091669478cff0d3c202d608eda04b74596e7d9043345931",
+      "installedAt": "2026-08-17T11:45:40.788Z",
+      "updatedAt": "2026-08-17T11:45:40.788Z"
+    },
+    "azure-cache-redis": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-cache-redis/SKILL.md",
+      "skillFolderHash": "261b190f55642dcca444494017de15f04afb8c078ed08098e9e32ea9e82c0353",
+      "installedAt": "2026-08-17T11:45:40.824Z",
+      "updatedAt": "2026-08-17T11:45:40.824Z"
+    },
+    "azure-cloud-adoption-framework": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-cloud-adoption-framework/SKILL.md",
+      "skillFolderHash": "79e2f6d6234f9156de4702328d8d1ad0124cb4de785be5542c7e2ac312e200ab",
+      "installedAt": "2026-08-17T11:45:40.846Z",
+      "updatedAt": "2026-08-17T11:45:40.846Z"
+    },
+    "azure-confidential-computing": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-confidential-computing/SKILL.md",
+      "skillFolderHash": "742212926da832b8c6ffc92b9f07984d0392302530523eb5dfd650a521ebcc51",
+      "installedAt": "2026-08-17T11:45:40.862Z",
+      "updatedAt": "2026-08-17T11:45:40.862Z"
+    },
+    "azure-container-registry": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-container-registry/SKILL.md",
+      "skillFolderHash": "bdd80c82ef9f1ed61a8198e06ba0a3dd0e15e8d18e09a125df8572b172b4c656",
+      "installedAt": "2026-08-17T11:45:40.874Z",
+      "updatedAt": "2026-08-17T11:45:40.874Z"
+    },
+    "azure-container-storage": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-container-storage/SKILL.md",
+      "skillFolderHash": "804666e85cbfc50f7602a8b2bb46796c541ff8fa962684dcf66eecffe9261f6f",
+      "installedAt": "2026-08-17T11:45:40.887Z",
+      "updatedAt": "2026-08-17T11:45:40.887Z"
+    },
+    "azure-cost-management": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-cost-management/SKILL.md",
+      "skillFolderHash": "2812d552703aa2c301468bc675aa48d712db9079bee07aeb0895a1e18a9ef88a",
+      "installedAt": "2026-08-17T11:45:40.895Z",
+      "updatedAt": "2026-08-17T11:45:40.895Z"
+    },
+    "azure-data-share": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-data-share/SKILL.md",
+      "skillFolderHash": "19f5201c0c118f05b736f3fe25bdb8237444fec845e99748a65fd23494fbebdf",
+      "installedAt": "2026-08-17T11:45:40.904Z",
+      "updatedAt": "2026-08-17T11:45:40.904Z"
+    },
+    "azure-database-postgresql": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-database-postgresql/SKILL.md",
+      "skillFolderHash": "0208963ebaf8b832d44cb4cd2119f79e92fa9c7624ed7168567b1a0bbda4bf4b",
+      "installedAt": "2026-08-17T11:45:40.914Z",
+      "updatedAt": "2026-08-17T11:45:40.914Z"
+    },
+    "azure-databricks": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-databricks/SKILL.md",
+      "skillFolderHash": "9e58902a36ce0c791e0dd36d5bdc0738faf9451163fd5a5092236d0e50b56f07",
+      "installedAt": "2026-08-17T11:45:40.925Z",
+      "updatedAt": "2026-08-17T11:45:40.925Z"
+    },
+    "azure-devops": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-devops/SKILL.md",
+      "skillFolderHash": "281b8c9ca189629d03d97cda2418dc17f6aa40b52437a476b5f73bf832b1ac28",
+      "installedAt": "2026-08-17T11:45:40.944Z",
+      "updatedAt": "2026-08-17T11:45:40.944Z"
+    },
+    "azure-dns": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-dns/SKILL.md",
+      "skillFolderHash": "921ee9af400aa2669b727f4ac4af15757448dc1a9a4a1c1e54fb19e0a0c41cfe",
+      "installedAt": "2026-08-17T11:45:40.958Z",
+      "updatedAt": "2026-08-17T11:45:40.958Z"
+    },
+    "azure-expressroute": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-expressroute/SKILL.md",
+      "skillFolderHash": "d98f09cbf70bd92e6fd1794e12ae1e0d9a127270f3b47095c1630ca634ba9052",
+      "installedAt": "2026-08-17T11:45:40.977Z",
+      "updatedAt": "2026-08-17T11:45:40.977Z"
+    },
+    "azure-files": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-files/SKILL.md",
+      "skillFolderHash": "5f07e35ee5982ca0b0da1fce6086f280f7ff053455dab881b1b430a39b2287ff",
+      "installedAt": "2026-08-17T11:45:41.007Z",
+      "updatedAt": "2026-08-17T11:45:41.007Z"
+    },
+    "azure-front-door": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-front-door/SKILL.md",
+      "skillFolderHash": "7880ac1e3ec081268458b341bd0a59d48140d5088fb497bf9b53bf273aa9561e",
+      "installedAt": "2026-08-17T11:45:41.023Z",
+      "updatedAt": "2026-08-17T11:45:41.023Z"
+    },
+    "azure-load-balancer": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-load-balancer/SKILL.md",
+      "skillFolderHash": "7d3f7168d2dde602566be1e684d27601c3c7c2449cc34f3b4ee90bff27955439",
+      "installedAt": "2026-08-17T11:45:41.047Z",
+      "updatedAt": "2026-08-17T11:45:41.047Z"
+    },
+    "azure-local": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-local/SKILL.md",
+      "skillFolderHash": "ba4ecd7f63feaac8867baef0257535ebbf02e63a7aa8c44d141b78e1a771bfdc",
+      "installedAt": "2026-08-17T11:45:41.071Z",
+      "updatedAt": "2026-08-17T11:45:41.071Z"
+    },
+    "azure-managed-redis": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-managed-redis/SKILL.md",
+      "skillFolderHash": "22712d2e5eaa35b98e2d0323374d42cf26ca01b13684b15c27b24d03431b16c7",
+      "installedAt": "2026-08-17T11:45:41.079Z",
+      "updatedAt": "2026-08-17T11:45:41.079Z"
+    },
+    "azure-managed-grafana": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-managed-grafana/SKILL.md",
+      "skillFolderHash": "040917f6875f1ca1a688ee100a98786a6d69351799dfdd03ee37db4f4040668d",
+      "installedAt": "2026-08-17T11:45:41.091Z",
+      "updatedAt": "2026-08-17T11:45:41.091Z"
+    },
+    "azure-microsoft-opentelemetry": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-microsoft-opentelemetry/SKILL.md",
+      "skillFolderHash": "157744d6753f4a85551793cbfa48116eab26816ebe058e8b4caca1acc05b0259",
+      "installedAt": "2026-08-17T11:45:41.100Z",
+      "updatedAt": "2026-08-17T11:45:41.100Z"
+    },
+    "azure-networking": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-networking/SKILL.md",
+      "skillFolderHash": "d053798349fd78b59a70de62b2fbe1830245e74376f9d439bb359a4c9ab73319",
+      "installedAt": "2026-08-17T11:45:41.118Z",
+      "updatedAt": "2026-08-17T11:45:41.118Z"
+    },
+    "azure-pipelines": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-pipelines/SKILL.md",
+      "skillFolderHash": "edfccbfc76cd653e8e59aacc0e314bd24e2f05472b414bb5309a389155110ada",
+      "installedAt": "2026-08-17T11:45:41.279Z",
+      "updatedAt": "2026-08-17T11:45:41.279Z"
+    },
+    "azure-policy": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-policy/SKILL.md",
+      "skillFolderHash": "4bb1f9b658684287f8d2e7e958f47e38e0c41154a68d8ffa2d86cdf7dcc92763",
+      "installedAt": "2026-08-17T11:45:41.340Z",
+      "updatedAt": "2026-08-17T11:45:41.340Z"
+    },
+    "azure-portal": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-portal/SKILL.md",
+      "skillFolderHash": "4466aa3efe1d7689b3c89199cece475393cc3faab5da95044cb4f0eceede6334",
+      "installedAt": "2026-08-17T11:45:41.385Z",
+      "updatedAt": "2026-08-17T11:45:41.385Z"
+    },
+    "azure-private-link": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-private-link/SKILL.md",
+      "skillFolderHash": "1f33e6645a7bb3e093a5dd1c60130894f8e94e739289d4bb982c67248295ce3a",
+      "installedAt": "2026-08-17T11:45:41.400Z",
+      "updatedAt": "2026-08-17T11:45:41.400Z"
+    },
+    "azure-quotas": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-quotas/SKILL.md",
+      "skillFolderHash": "59b7c88411e84f91513305262f2acce742eff189d897c7883cf6f56faca7469a",
+      "installedAt": "2026-08-17T11:45:41.417Z",
+      "updatedAt": "2026-08-17T11:45:41.417Z"
+    },
+    "azure-repos": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-repos/SKILL.md",
+      "skillFolderHash": "2c271d824128c1c7e7eb38bbc77c661de416d3a3f658583ef8158d419fce692e",
+      "installedAt": "2026-08-17T11:45:41.438Z",
+      "updatedAt": "2026-08-17T11:45:41.438Z"
+    },
+    "azure-resource-graph": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-resource-graph/SKILL.md",
+      "skillFolderHash": "2deb0b3618650dff518d2c50d87995114366e72c45544217903e966ed4c12371",
+      "installedAt": "2026-08-17T11:45:41.459Z",
+      "updatedAt": "2026-08-17T11:45:41.459Z"
+    },
+    "azure-resource-manager": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-resource-manager/SKILL.md",
+      "skillFolderHash": "e036967a20afd2255d3b16147be94ca87dec41133614a24196360c4927186dd9",
+      "installedAt": "2026-08-17T11:45:41.476Z",
+      "updatedAt": "2026-08-17T11:45:41.476Z"
+    },
+    "azure-security": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-security/SKILL.md",
+      "skillFolderHash": "387d75a24d1e24b3bb81b61bdf94b3037be59e7b7a8e1fe019129e44a1cb0c90",
+      "installedAt": "2026-08-17T11:45:41.495Z",
+      "updatedAt": "2026-08-17T11:45:41.495Z"
+    },
+    "azure-service-bus": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-service-bus/SKILL.md",
+      "skillFolderHash": "3634983d8f7c2ca077193d61c9a11c337633a442b038c7f3035cd1476fbc7e16",
+      "installedAt": "2026-08-17T11:45:41.502Z",
+      "updatedAt": "2026-08-17T11:45:41.502Z"
+    },
+    "azure-service-connector": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-service-connector/SKILL.md",
+      "skillFolderHash": "9e2730244214a773302df0736517dc524bfdba33c54d39e677fbb913ffd831a6",
+      "installedAt": "2026-08-17T11:45:41.522Z",
+      "updatedAt": "2026-08-17T11:45:41.522Z"
+    },
+    "azure-sre-agent": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-sre-agent/SKILL.md",
+      "skillFolderHash": "5ba85b004382db4c44ffb29a1a3d3e6799e1932002b26eb613c2a3026a986846",
+      "installedAt": "2026-08-17T11:45:41.534Z",
+      "updatedAt": "2026-08-17T11:45:41.534Z"
+    },
+    "azure-vm-scalesets": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-vm-scalesets/SKILL.md",
+      "skillFolderHash": "647add5d10ea2fbf9a5c0aeb5adf5cc9095fe2e2ef794531dc137825410b091d",
+      "installedAt": "2026-08-17T11:45:41.555Z",
+      "updatedAt": "2026-08-17T11:45:41.555Z"
+    },
+    "microsoft-foundry": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/microsoft-foundry/SKILL.md",
+      "skillFolderHash": "affe8cbbebd92e5ad62b41824702968a0556c19eb60d9d1f6af383ef1411e5c4",
+      "installedAt": "2026-08-17T11:45:41.563Z",
+      "updatedAt": "2026-08-17T11:45:41.563Z"
+    },
+    "azure-well-architected": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-well-architected/SKILL.md",
+      "skillFolderHash": "63044524562ef782f695c66b0e6e3241d43b43d081973cea7f1b733481ff7571",
+      "installedAt": "2026-08-17T11:45:41.570Z",
+      "updatedAt": "2026-08-17T11:45:41.570Z"
+    },
+    "azure-web-application-firewall": {
+      "source": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:MicrosoftDocs/Agent-Skills.git",
+      "skillPath": "skills/azure-web-application-firewall/SKILL.md",
+      "skillFolderHash": "0648a26a46b9af06d61f40c39a40682f61d151460007f46efac34ecb146a3503",
+      "installedAt": "2026-08-17T11:45:41.584Z",
+      "updatedAt": "2026-08-17T11:45:41.584Z"
     }
   },
   "dismissed": {

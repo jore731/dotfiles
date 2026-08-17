@@ -35,3 +35,7 @@ node-global/node_modules/
 .copilot/updater
 .claude/stats-cache.json
 .copilot/vscode.session.metadata.cache.json
+.claude/backups
+.claude/.last-cleanup
+.claude/mcp-needs-auth-cache.json
+.claude/settings.json.bak
