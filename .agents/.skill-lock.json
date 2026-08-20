@@ -567,6 +567,60 @@
       "skillFolderHash": "0648a26a46b9af06d61f40c39a40682f61d151460007f46efac34ecb146a3503",
       "installedAt": "2026-08-17T11:45:41.584Z",
       "updatedAt": "2026-08-17T11:45:41.584Z"
+    },
+    "ruff": {
+      "source": "astral-sh/claude-code-plugins",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/astral-sh/claude-code-plugins.git",
+      "skillPath": "plugins/astral/skills/ruff/SKILL.md",
+      "skillFolderHash": "46e64350889df1af25113df450999101f48fd744",
+      "installedAt": "2026-08-18T09:53:16.396Z",
+      "updatedAt": "2026-08-18T09:53:16.396Z"
+    },
+    "ty": {
+      "source": "astral-sh/claude-code-plugins",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/astral-sh/claude-code-plugins.git",
+      "skillPath": "plugins/astral/skills/ty/SKILL.md",
+      "skillFolderHash": "723536a590532587a37768a7227cf8ce52399542",
+      "installedAt": "2026-08-18T09:53:16.444Z",
+      "updatedAt": "2026-08-18T09:53:16.444Z"
+    },
+    "uv": {
+      "source": "astral-sh/claude-code-plugins",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/astral-sh/claude-code-plugins.git",
+      "skillPath": "plugins/astral/skills/uv/SKILL.md",
+      "skillFolderHash": "bca0368b210d4b3ce04b4895829afe0dbc6949a8",
+      "installedAt": "2026-08-18T09:53:16.470Z",
+      "updatedAt": "2026-08-18T09:53:16.470Z"
+    },
+    "building-pydantic-ai-agents": {
+      "source": "pydantic/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/pydantic/skills.git",
+      "skillPath": "skills/building-pydantic-ai-agents/SKILL.md",
+      "skillFolderHash": "d8ce9c2688e7df4650e2163725b09b1cda4740af",
+      "installedAt": "2026-08-18T09:56:03.298Z",
+      "updatedAt": "2026-08-18T09:56:03.298Z"
+    },
+    "pydantic": {
+      "source": "pydantic/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/pydantic/skills.git",
+      "skillPath": "skills/pydantic/SKILL.md",
+      "skillFolderHash": "f1f37134a952494dab6049c4174ff6875ce8989f",
+      "installedAt": "2026-08-18T09:56:03.333Z",
+      "updatedAt": "2026-08-18T09:56:03.333Z"
+    },
+    "pydantic-ai-harness": {
+      "source": "pydantic/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/pydantic/skills.git",
+      "skillPath": "skills/pydantic-ai-harness/SKILL.md",
+      "skillFolderHash": "04f5129ae630a0d7921421cc673aa3621f7ff0c2",
+      "installedAt": "2026-08-18T09:56:03.348Z",
+      "updatedAt": "2026-08-18T09:56:03.348Z"
     }
   },
   "dismissed": {
