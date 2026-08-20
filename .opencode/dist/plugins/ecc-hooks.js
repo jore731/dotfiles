@@ -14,7 +14,6 @@
  */
 import * as fs from "fs";
 import * as path from "path";
-import { initStore, recordChange, clearChanges, } from "./lib/changed-files-store.js";
 import changedFilesTool from "../tools/changed-files.js";
 import dependencyAnalyzerTool from "../tools/dependency-analyzer.js";
 /**
@@ -33,7 +32,6 @@ function getECCVersion() {
 }
 export const ECCHooksPlugin = async ({ client, $, directory, worktree, }) => {
     const worktreePath = worktree || directory;
-    initStore(worktreePath);
     const editedFiles = new Set();
     function resolvePath(p) {
         if (path.isAbsolute(p))
@@ -58,6 +56,32 @@ export const ECCHooksPlugin = async ({ client, $, directory, worktree, }) => {
     }
     // Helper to call the SDK's log API with correct signature
     const log = (level, message) => client.app.log({ body: { service: "ecc", level, message } });
+    // Loaded lazily (instead of via a top-level import) so that a missing or
+    // partially-installed `~/.opencode/plugins/lib` directory (e.g. an
+    // interrupted or partial ECC install on Termux/Android) only disables
+    // changed-files tracking, rather than throwing during module evaluation.
+    // This plugin is OpenCode's startup entry point, so a static import
+    // failure here previously crashed the whole plugin -- and with it, the
+    // entire OpenCode session -- before any hooks could load (see #2530).
+    let changedFilesStore;
+    try {
+        const store = await import("./lib/changed-files-store.js");
+        store.initStore(worktreePath);
+        changedFilesStore = store;
+    }
+    catch {
+        // Best-effort diagnostic only: deferred via .then() (rather than
+        // Promise.resolve(log(...))) so that even a *synchronous* throw inside
+        // log() -- not just an async rejection -- is caught here instead of
+        // escaping this catch block. The raw loader error is intentionally not
+        // included in the message since it can contain absolute filesystem
+        // paths; this whole block exists to guarantee startup resilience even
+        // when things go wrong.
+        Promise.resolve()
+            .then(() => log("warn", "[ECC] changed-files tracking disabled: could not load the changed-files store. " +
+            "Run `ecc repair --target opencode` to restore the missing files. Other ECC hooks are unaffected."))
+            .catch(() => { });
+    }
     const normalizeProfile = (value) => {
         if (value === "minimal" || value === "strict")
             return value;
@@ -94,7 +118,7 @@ export const ECCHooksPlugin = async ({ client, $, directory, worktree, }) => {
          */
         "file.edited": async (event) => {
             editedFiles.add(event.path);
-            recordChange(event.path, "modified");
+            changedFilesStore?.recordChange(event.path, "modified");
             // Auto-format JS/TS files
             if (hookEnabled("post:edit:format", ["strict"]) && event.path.match(/\.(ts|tsx|js|jsx)$/)) {
                 try {
@@ -131,17 +155,17 @@ export const ECCHooksPlugin = async ({ client, $, directory, worktree, }) => {
         "tool.execute.after": async (input, output) => {
             const filePath = getFilePath(input.args);
             if (input.tool === "edit" && filePath) {
-                recordChange(filePath, "modified");
+                changedFilesStore?.recordChange(filePath, "modified");
             }
             if (input.tool === "write" && filePath) {
                 const key = input.callID ?? `write-${++writeCounter}-${filePath}`;
                 const pending = pendingToolChanges.get(key);
                 if (pending) {
-                    recordChange(pending.path, pending.type);
+                    changedFilesStore?.recordChange(pending.path, pending.type);
                     pendingToolChanges.delete(key);
                 }
                 else {
-                    recordChange(filePath, "modified");
+                    changedFilesStore?.recordChange(filePath, "modified");
                 }
             }
             // Check if a TypeScript file was edited
@@ -313,7 +337,7 @@ export const ECCHooksPlugin = async ({ client, $, directory, worktree, }) => {
                 return;
             log("info", "[ECC] Session ended - cleaning up");
             editedFiles.clear();
-            clearChanges();
+            changedFilesStore?.clearChanges();
             pendingToolChanges.clear();
         },
         /**
@@ -329,7 +353,7 @@ export const ECCHooksPlugin = async ({ client, $, directory, worktree, }) => {
                 changeType = "added";
             else if (event.type === "delete" || event.type === "remove")
                 changeType = "deleted";
-            recordChange(event.path, changeType);
+            changedFilesStore?.recordChange(event.path, changeType);
             if (event.type === "change" && event.path.match(/\.(ts|tsx|js|jsx)$/)) {
                 editedFiles.add(event.path);
             }
@@ -407,7 +431,7 @@ export const ECCHooksPlugin = async ({ client, $, directory, worktree, }) => {
             const contextBlock = [
                 "# ECC Context (preserve across compaction)",
                 "",
-                "## Active Plugin: ECC v2.1.0",
+                "## Active Plugin: ECC v2.2.0",
                 "- Hooks: file.edited, tool.execute.before/after, session.created/idle/deleted, shell.env, compacting, permission.ask",
                 "- Tools: run-tests, check-coverage, security-audit, format-code, lint-check, git-summary, changed-files",
                 "- Agents: 13 specialized (planner, architect, tdd-guide, code-reviewer, security-reviewer, build-error-resolver, e2e-runner, refactor-cleaner, doc-updater, go-reviewer, go-build-resolver, database-reviewer, python-reviewer)",

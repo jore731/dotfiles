@@ -1,5 +1,4 @@
 import { tool } from "@opencode-ai/plugin/tool";
-import { buildTree, getChangedPaths, hasChanges, } from "../plugins/lib/changed-files-store.js";
 const INDICATORS = {
     added: "+",
     modified: "~",
@@ -17,6 +16,20 @@ function renderTree(nodes, indent) {
     }
     return lines.join("\n");
 }
+let changedFilesStorePromise;
+async function loadChangedFilesStore() {
+    if (!changedFilesStorePromise) {
+        changedFilesStorePromise = import("../plugins/lib/changed-files-store.js").catch(() => {
+            changedFilesStorePromise = undefined;
+            throw new Error("changed-files tool: could not load the changed-files store. " +
+                "This usually means the ~/.opencode/plugins directory is missing or incomplete " +
+                "(an interrupted or partial ECC install can leave tools/ populated without plugins/). " +
+                "Run `node scripts/repair.js --target opencode` (or `ecc repair --target opencode`) " +
+                "from the ECC repo to restore the missing files.");
+        });
+    }
+    return changedFilesStorePromise;
+}
 const changedFilesTool = tool({
     description: "List files changed by agents in this session as a navigable tree. Shows added (+), modified (~), and deleted (-) indicators. Use filter to show only specific change types. Returns paths for git diff.",
     args: {
@@ -30,6 +43,7 @@ const changedFilesTool = tool({
             .describe("Output format: tree for terminal display, json for structured data (default: tree)"),
     },
     async execute(args, context) {
+        const { buildTree, getChangedPaths, hasChanges } = await loadChangedFilesStore();
         const filter = args.filter === "all" || !args.filter ? undefined : args.filter;
         const format = args.format ?? "tree";
         if (!hasChanges()) {
