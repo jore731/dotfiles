@@ -213,7 +213,7 @@ def test_agent_skills_build_generates_spec_compliant_tree():
     assert "$OBSIDIAN_VAULT_PATH" in save_text
     assert "Use the obsidian-second-brain skill. Execute `/obsidian-save`:" in save_text
     assert "## AI-first vault rule (embedded)" in save_text
-    assert "## For future Claude" in save_text
+    assert "## For future agent" in save_text
 
     # Non-capture commands get the explicit-only policy, not the proactive one.
     research = (skills_dir / "research/SKILL.md").read_text(encoding="utf-8")
@@ -238,6 +238,82 @@ def test_agent_skills_build_generates_spec_compliant_tree():
     assert "npx skills add" in install_text
     assert "cp -R dist/agent-skills/skills/." in install_text
     assert (REPO_ROOT / "dist/agent-skills/global-rule-snippet.md").is_file()
+
+
+def test_grok_bot_build_generates_mcp_backed_skills():
+    """The grok-bot adapter must emit skills/<name>/SKILL.md per command plus
+    the shared obsidian-core engine skill, designed for Grok Bot / Sand with
+    the user-obsidian-second-brain MCP server providing vault I/O."""
+    result = subprocess.run(
+        ["bash", "scripts/build.sh", "--platform", "grok-bot"],
+        cwd=REPO_ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+    )
+
+    assert result.returncode == 0, result.stderr
+
+    skills_dir = REPO_ROOT / "dist/grok-bot/skills"
+    assert skills_dir.is_dir()
+
+    # A command skill: frontmatter with name + description, MCP preamble, the
+    # full command body, and the embedded write spec.
+    save = skills_dir / "obsidian-save/SKILL.md"
+    assert save.is_file()
+    save_text = save.read_text(encoding="utf-8")
+    head = save_text[:1000]
+    assert "name: obsidian-save" in head
+    assert "description:" in head
+    assert "Triggers: save this" in head
+    assert "Use proactively" in head
+    # MCP instructions must be present
+    assert "user-obsidian-second-brain" in save_text
+    assert "obsidian_search" in save_text
+    assert "obsidian_save_note" in save_text
+    assert "obsidian_validate_note" in save_text
+    # Command body must be present, not just preamble
+    assert "Run obsidian-save" in save_text or "obsidian-save:" in save_text
+    assert "Scan the entire conversation" in save_text
+    assert "Group items by type" in save_text
+    assert "call obsidian_read_note" in save_text or "obsidian_read_note(" in save_text
+    # No Claude-specific language
+    assert "Execute `/obsidian-save`" not in save_text
+    assert "Spawn parallel subagents" not in save_text
+    # No filesystem Read/Write language (should be MCP calls)
+    assert "Read `" not in save_text[:2000] or "call obsidian_read_note" in save_text
+    assert "## AI-first vault rule (embedded)" in save_text
+
+    # Non-capture commands get the explicit-only policy.
+    research = (skills_dir / "research/SKILL.md").read_text(encoding="utf-8")
+    assert "Use only when the user explicitly asks" in research
+    assert "Use proactively" not in research
+    # Command body must be present
+    assert "research" in research.lower()
+    assert len(research) > 2000, "research skill body is suspiciously short"
+
+    # The shared engine skill ships references, scripts, and its uv project.
+    core = skills_dir / "obsidian-core"
+    assert (core / "SKILL.md").is_file()
+    assert (core / "pyproject.toml").is_file()
+    assert (core / "references/ai-first-rules.md").is_file()
+    assert (core / "scripts").is_dir()
+
+    # Calendar depends on a Claude-only MCP and is excluded from this build.
+    assert not (skills_dir / "obsidian-calendar").exists()
+
+    # Install docs explain the MCP + skills model.
+    install_text = (REPO_ROOT / "dist/grok-bot/INSTALL.md").read_text(encoding="utf-8")
+    assert "user-obsidian-second-brain" in install_text
+    assert "MCP server" in install_text or "MCP is the I/O layer" in install_text
+    # Should NOT hardcode .agents/skills/ as the install path
+    assert "Grok Bot and Sand load skills from the workspace `.agents/skills/` directory" not in install_text
+    # Should explain workflows are invoked with / or @
+    assert "invoked with `/` or `@`" in install_text or "invoke by name" in install_text
+    # Grok Bot has no hooks.
+    assert "no hook runtime" in install_text.lower() or "no hooks" in install_text.lower()
 
 
 def test_vault_health_json_reports_clean_linked_vault(tmp_path):
@@ -403,7 +479,7 @@ def test_health_excludes_codex_support_directories(tmp_path):
     )
     (tmp_path / "Home.md").write_text(
         "---\ndate: 2026-07-10\ntype: home\ntags: [home]\nai-first: true\n---\n"
-        "## For future Claude\nThis is the test vault home.\n\n"
+        "## For future agent\nThis is the test vault home.\n\n"
         "# Home\n\nUse [[Templates/Daily Note]].\n",
         encoding="utf-8",
     )
@@ -490,13 +566,40 @@ def test_mcp_vault_ops_save_read_search_roundtrip(tmp_path, monkeypatch):
     note = (vault / rel).read_text(encoding="utf-8")
     assert "ai-first: true" in note
     assert "source: mcp" in note
-    assert "## For future Claude" in note
+    assert "## For future agent" in note
 
     read_back = vault_ops.read_note(rel)
     assert "Hermes agent" in read_back["content"]
 
     hits = vault_ops.search("hermes", limit=5)
     assert any(h["path"] == rel for h in hits)
+
+
+def test_mcp_vault_health_ignores_code_example_links(tmp_path, monkeypatch):
+    """Example wikilinks inside fenced blocks or inline code are quotation, not
+    linkage: the bootstrapped _CLAUDE.md and init-written log pointers ship
+    fenced example links, which the MCP vault_health reported as persistent
+    false-positive wanted notes (the CLI got this stripping in #82/#93;
+    vault_ops kept the raw regex). A real link to an unwritten note must
+    still be counted."""
+    vault_ops = _load_vault_ops()
+    vault = tmp_path / "vault"
+    vault.mkdir()
+    monkeypatch.setenv("OBSIDIAN_VAULT_PATH", str(vault))
+
+    (vault / "log.md").write_text(
+        "---\ntype: log-pointer\nai-first: true\n---\n\n# Log\n\nExample entry:\n\n"
+        "```\n**09:14** - create | Created [[Projects/Tide Gateway]]\n```\n\n"
+        "Use `[[wikilinks]]` for every note touched. See [[Wanted Note]].\n",
+        encoding="utf-8",
+    )
+    (vault / "Other.md").write_text("---\ntype: note\n---\n\nLinks to [[Log]].\n", encoding="utf-8")
+
+    health = vault_ops.vault_health()
+    wanted = [w["link"] for w in health["wanted_notes"]["sample"]]
+    assert "Wanted Note" in wanted, wanted
+    assert "Projects/Tide Gateway" not in wanted, wanted
+    assert "wikilinks" not in wanted, wanted
 
 
 def test_mcp_vault_ops_search_ranks_title_over_noise(tmp_path, monkeypatch):
@@ -806,7 +909,7 @@ def test_mcp_vault_ops_update_note_guarded_edit(tmp_path, monkeypatch):
     note = vault / "Project Alpha.md"
     note.write_text(
         "---\ntype: project\nstatus: active\ntags:\n  - work\nai-first: true\n---\n\n"
-        "## For future Claude\nAlpha.\n",
+        "## For future agent\nAlpha.\n",
         encoding="utf-8",
     )
 
@@ -837,7 +940,7 @@ def test_mcp_vault_ops_validate_and_backlinks_and_health(tmp_path, monkeypatch):
     monkeypatch.setenv("OBSIDIAN_VAULT_PATH", str(vault))
     (vault / "Home.md").write_text(
         "---\ntype: note\ndate: 2026-06-27\ntags:\n  - x\nai-first: true\n---\n\n"
-        "## For future Claude\nSee [[Project Alpha]] and [[Ghost Note]].\n",
+        "## For future agent\nSee [[Project Alpha]] and [[Ghost Note]].\n",
         encoding="utf-8",
     )
     (vault / "Project Alpha.md").write_text(
@@ -848,7 +951,7 @@ def test_mcp_vault_ops_validate_and_backlinks_and_health(tmp_path, monkeypatch):
     v = vault_ops.validate_note("Project Alpha.md")
     assert v["ok"] is False
     joined = " ".join(v["issues"])
-    assert "For future Claude" in joined
+    assert "For future agent" in joined
     assert "date" in joined  # missing required key
 
     bl = vault_ops.backlinks("Project Alpha")
@@ -1049,11 +1152,11 @@ def test_mcp_search_supersedes_reverse_edge(tmp_path, monkeypatch):
 
 
 def test_validate_hook_flags_secrets(tmp_path):
-    """Check 6: real key material in a vault note must warn and exit 1; naming
-    a key by env-var NAME stays clean. High precision - prose about passwords
-    is not a finding."""
+    """Check 6: real key material in a vault note must warn via additionalContext;
+    naming a key by env-var NAME stays clean. High precision - prose about
+    passwords is not a finding."""
     hook = REPO_ROOT / "hooks/validate-ai-first.sh"
-    frontmatter = "---\ntype: note\ndate: 2026-07-18\ntags: [t]\nai-first: true\n---\n\n## For future Claude\n\n"
+    frontmatter = "---\ntype: note\ndate: 2026-07-18\ntags: [t]\nai-first: true\n---\n\n## For future agent\n\n"
 
     leaky = tmp_path / "leaky.md"
     leaky.write_text(frontmatter + "key sk-test1234567890abcdefghijklmnop here\n", encoding="utf-8")
@@ -1069,16 +1172,60 @@ def test_validate_hook_flags_secrets(tmp_path):
         )
 
     r_leaky = run(leaky)
-    assert r_leaky.returncode == 1
+    assert r_leaky.returncode == 0, r_leaky.stderr
+    leaky_out = json.loads(r_leaky.stdout)
+    assert "secret material" in leaky_out["systemMessage"]
+    assert leaky_out["decision"] == "block"
+    assert "secret material" in leaky_out["reason"]
+    assert "secret material" in leaky_out["hookSpecificOutput"]["additionalContext"]
     assert "secret material" in r_leaky.stderr
     r_clean = run(clean)
     assert r_clean.returncode == 0, r_clean.stderr
+    assert not r_clean.stdout.strip()
 
     # The bg-agent prompt must carry the sensitive-content staging constraint.
     bg = (REPO_ROOT / "hooks/obsidian-bg-agent.sh").read_text(encoding="utf-8")
     assert "SENSITIVE CONTENT" in bg
     assert "NEVER" in bg and "staging" in bg.lower()
 
+
+def test_validate_hook_accepts_vscode_extension_payload(tmp_path):
+    """VS Code Claude Code writes via create_file + tool_input.filePath.
+    Without that alias the hook fires, finds no path, and exits 0 silently -
+    so the AI-first rule enforces nothing in the extension (claude-code owner).
+
+    Warnings must be exit-0 JSON: systemMessage for the user, decision/reason
+    + additionalContext for the model. Plain stderr + exit 1 only hits the
+    extension hook log as NonBlockingError and never surfaces in chat."""
+    hook = REPO_ROOT / "hooks/validate-ai-first.sh"
+    bad = tmp_path / "bad.md"
+    bad.write_text("# bad note\njust a test\n", encoding="utf-8")
+
+    def run(payload: dict):
+        return subprocess.run(
+            ["bash", str(hook)],
+            input=json.dumps(payload),
+            env=dict(os.environ, OBSIDIAN_VAULT_PATH=str(tmp_path)),
+            capture_output=True,
+            text=True,
+        )
+
+    def assert_warn(result):
+        assert result.returncode == 0, result.stderr
+        assert "AI-first warning" in result.stderr
+        assert "frontmatter" in result.stderr
+        out = json.loads(result.stdout)
+        assert "AI-first warning" in out["systemMessage"]
+        assert "frontmatter" in out["systemMessage"]
+        assert out["decision"] == "block"
+        assert "AI-first warning" in out["reason"]
+        ctx = out["hookSpecificOutput"]["additionalContext"]
+        assert out["hookSpecificOutput"]["hookEventName"] == "PostToolUse"
+        assert "AI-first warning" in ctx
+        assert "frontmatter" in ctx
+
+    assert_warn(run({"tool_name": "Write", "tool_input": {"file_path": str(bad)}}))
+    assert_warn(run({"tool_name": "create_file", "tool_input": {"filePath": str(bad)}}))
 
 def test_recall_hook_contract(tmp_path):
     """Bounded recall: inert without the double gate, injects a bounded brief

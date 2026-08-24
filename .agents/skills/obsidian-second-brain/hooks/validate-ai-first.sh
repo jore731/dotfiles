@@ -2,19 +2,19 @@
 # =============================================================================
 # validate-ai-first.sh - Enforce the AI-first vault rule on Write/Edit
 # =============================================================================
-# Fires as a Claude Code PostToolUse hook after Write/Edit. Inspects the
-# written file and warns if it does not follow the AI-first rule defined in
-# references/ai-first-rules.md.
+# Fires as a Claude Code PostToolUse hook after Write/Edit (terminal) or
+# create_file (VS Code extension). Inspects the written file and warns if it
+# does not follow the AI-first rule defined in references/ai-first-rules.md.
 #
 # This is the write-time enforcement primitive: the vault stays AI-first
-# because every write is checked, not because future-Claude remembers all
+# because every write is checked, not because future agent remembers all
 # seven rules every time.
 #
 # Validation (warnings, non-blocking):
 #   1. Frontmatter delimiters (--- ... ---) are well-formed
 #   2. No tabs inside frontmatter (YAML requires spaces)
 #   3. Required AI-first fields present: date, type, tags, ai-first: true
-#   4. `## For future Claude` preamble exists in the body
+#   4. `## For future agent` preamble exists in the body
 #   5. No banned non-ASCII substitution characters (em/en-dashes, curly
 #      quotes, smart apostrophes, Unicode math). Reports codepoint +
 #      suggested ASCII replacement. Explicit ban list; anything not in
@@ -30,15 +30,36 @@
 #   - Skips any file not ending in .md
 #
 # Exit codes:
-#   0 = pass (silent)
-#   1 = warn (issue surfaced; write is NOT reverted)
+#   0 = pass (silent), or warn via JSON on stdout (write is NOT reverted)
 # =============================================================================
+
+# Warn via Claude Code hook JSON (systemMessage + additionalContext). stderr
+# is mirrored for logs; exit 0 so the host parses stdout.
+emit_ai_first_warning() {
+  local msg="$1"
+  printf '%s\n' "$msg" >&2
+  jq -n --arg msg "$msg" '{
+    systemMessage: $msg,
+    decision: "block",
+    reason: $msg,
+    hookSpecificOutput: {
+      hookEventName: "PostToolUse",
+      additionalContext: $msg
+    }
+  }'
+  exit 0
+}
 
 INPUT=$(cat)
 
-# Extract the written file path. Claude Code hook payload puts it at
-# .tool_input.file_path for Write and Edit.
-FILE=$(printf '%s' "$INPUT" | jq -r '.tool_input.file_path // .args.file_path // ""' 2>/dev/null)
+# Write/Edit: tool_input.file_path. VS Code create_file: tool_input.filePath.
+FILE=$(printf '%s' "$INPUT" | jq -r '
+  .tool_input.file_path
+  // .tool_input.filePath
+  // .args.file_path
+  // .args.filePath
+  // ""
+' 2>/dev/null)
 
 # Bail silently on unparseable input or empty path
 [[ -z "$FILE" ]] && exit 0
@@ -78,11 +99,9 @@ WARNINGS=()
 # ── Check 1: frontmatter delimiters ──────────────────────────────────────────
 FIRST_LINE=$(head -1 "$FILE")
 if [[ "$FIRST_LINE" != "---" ]]; then
-  WARNINGS+=("$BASENAME has no frontmatter (expected --- on the first line). AI-first notes need date/type/tags/ai-first metadata.")
-  # Without frontmatter we can't run the other checks meaningfully — surface
+  # Without frontmatter we can't run the other checks meaningfully - surface
   # this single warning and exit.
-  printf 'AI-first warning: %s\n' "${WARNINGS[0]}" >&2
-  exit 1
+  emit_ai_first_warning "AI-first warning: $BASENAME has no frontmatter (expected --- on the first line). AI-first notes need date/type/tags/ai-first metadata."
 fi
 
 DELIMITER_COUNT=$(grep -c '^---$' "$FILE")
@@ -113,10 +132,10 @@ if ! printf '%s\n' "$FRONTMATTER" | grep -qE '^ai-first:[[:space:]]*true[[:space
   WARNINGS+=("$BASENAME missing 'ai-first: true' in frontmatter.")
 fi
 
-# ── Check 4: 'For future Claude' preamble in body ────────────────────────────
+# ── Check 4: 'For future agent' preamble in body ────────────────────────────
 BODY=$(awk '/^---$/{c++; if (c<2) next; next} c>=2' "$FILE")
-if ! printf '%s\n' "$BODY" | grep -qE '^##[[:space:]]+For future Claude' ; then
-  WARNINGS+=("$BASENAME missing '## For future Claude' preamble (required by ai-first-rules.md rule #2).")
+if ! printf '%s\n' "$BODY" | grep -qE '^##[[:space:]]+For future (agent|AI|Claude|Codex)[[:space:]]*$' ; then
+  WARNINGS+=("$BASENAME missing '## For future agent' preamble (required by ai-first-rules.md rule #2).")
 fi
 
 # ── Check 5: non-ASCII substitution characters ───────────────────────────────
@@ -205,12 +224,12 @@ fi
 
 # ── Emit warnings ────────────────────────────────────────────────────────────
 if [[ ${#WARNINGS[@]} -gt 0 ]]; then
-  printf 'AI-first warnings on %s:\n' "$BASENAME" >&2
+  MSG="AI-first warnings on ${BASENAME}:"$'\n'
   for w in "${WARNINGS[@]}"; do
-    printf '  - %s\n' "$w" >&2
+    MSG+="  - ${w}"$'\n'
   done
-  printf '\nSee references/ai-first-rules.md for the full spec.\n' >&2
-  exit 1
+  MSG+=$'\n'"See references/ai-first-rules.md for the full spec."
+  emit_ai_first_warning "$MSG"
 fi
 
 exit 0

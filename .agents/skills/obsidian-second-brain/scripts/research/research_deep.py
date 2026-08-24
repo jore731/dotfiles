@@ -18,12 +18,12 @@ is required either way.
 
 import json
 import os
-import re
 import sys
 from datetime import datetime
 from pathlib import Path
 
 from .lib.config import VAULT_PATH
+from .lib.vault_terms import topic_terms
 
 MAX_BASELINE_NOTES = 8
 MAX_BASELINE_CHARS_PER_NOTE = 1500
@@ -38,7 +38,10 @@ def _vault_scan_dirs() -> list[str]:
 
 def vault_scan(topic: str) -> list[dict]:
     """Find vault notes whose path or content references the topic. Returns sorted hits."""
-    keywords = [w for w in re.split(r"\s+", topic.lower()) if len(w) > 2]
+    # Tokenize via the search tokenizer, never a private copy: the old
+    # whitespace split + len(w) > 2 here returned nothing for CJK topics and
+    # survived #159/#188/#192 because each fix landed elsewhere (issue #212).
+    keywords = topic_terms(topic)
     if not keywords:
         return []
     hits: list[dict] = []
@@ -346,7 +349,7 @@ def run_paid_deep(topic: str) -> int:
     # AI-first note save (Phase 5)
     now = datetime.now()
     preamble = (
-        f"For future Claude: This is a vault-first deep research delta on \"{topic}\" "
+        f"For future agent: This is a vault-first deep research delta on \"{topic}\" "
         f"performed on {now.strftime('%Y-%m-%d %H:%M')}. The vault was scanned first ({len(hits)} relevant notes), "
         f"gaps were identified, and {len(queries)} targeted queries filled them via Perplexity (web) + Grok (X). "
         f"This note focuses on WHAT'S NEW vs the vault's prior knowledge, contradictions to resolve, and recommended updates. "
@@ -364,7 +367,7 @@ def run_paid_deep(topic: str) -> int:
         "ai-first": True,
     }
     note_body = (
-        f"## For future Claude\n\n{preamble}\n\n"
+        f"## For future agent\n\n{preamble}\n\n"
         f"## Topic\n\n{topic}\n\n"
         f"## Vault Baseline Found\n\n"
         + ("\n".join(f"- [[{h['path']}]] (score={h['score']})" for h in hits) if hits else "(none)")

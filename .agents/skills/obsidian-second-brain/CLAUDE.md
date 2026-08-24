@@ -11,7 +11,7 @@ If you are Claude operating on a user's vault, you want `_CLAUDE.md` inside thei
 - `commands/` - 45 slash command definitions, one `.md` per command. **This is the platform-neutral source.** Adapters compile it for each platform.
 - `references/` - shared specs that commands link to. **`ai-first-rules.md` is the canonical vault-write spec** and is non-negotiable.
 - `scripts/` - Python helpers (`bootstrap_vault.py`, `vault_health.py`, the `research/` toolkit), plus `build.sh` (the adapter orchestrator) and `lib.sh`.
-- `adapters/` - platform translation layer. `lib.sh` holds shared parsing helpers. `claude-code/`, `codex-cli/`, `gemini-cli/`, `opencode/`, `hermes/`, `pi/`, `agent-skills/` each ship an `adapter.sh`.
+- `adapters/` - platform translation layer. `lib.sh` holds shared parsing helpers. `claude-code/`, `codex-cli/`, `gemini-cli/`, `opencode/`, `hermes/`, `pi/`, `agent-skills/`, `grok-bot/` each ship an `adapter.sh`.
 - `dist/` - build output, one tree per platform. **Gitignored.** Regenerate with `bash scripts/build.sh` (all platforms) or `bash scripts/build.sh --platform <name>`.
 - `hooks/` - Claude Code hooks shipped with the skill.
 - `SKILL.md` - full operating manual loaded by Claude when the skill activates.
@@ -22,15 +22,15 @@ If you are Claude operating on a user's vault, you want `_CLAUDE.md` inside thei
 
 ### The adapter pattern
 
-Source files in `commands/` use Claude Code's slash-command shape. The Claude Code adapter is an identity copy. The other adapters translate per platform: `codex-cli`, `hermes`, and `agent-skills` emit **native skills** (one `SKILL.md` per command; `agent-skills` is a single spec-compliant `.agents/skills/` tree that Codex, OpenCode, and Google Antigravity all read, with a shared `obsidian-core` engine skill), `pi` emits a Pi package (`.pi/prompts/` + `.pi/skills/`), and `gemini-cli` / `opencode` emit a dispatcher file (`GEMINI.md` / `AGENTS.md`) with an **auto-generated routing table** built from each command's `description:` frontmatter, plus the command bodies under `.gemini/` / `.opencode/`. Tool-name references like `Read tool` are rewritten to neutral wording (`read files`) so the instructions still make sense outside Claude Code.
+Source files in `commands/` use Claude Code's slash-command shape. The Claude Code adapter is an identity copy. The other adapters translate per platform: `codex-cli`, `hermes`, `agent-skills`, and `grok-bot` emit **native skills** (one `SKILL.md` per command; `agent-skills` is a single spec-compliant `.agents/skills/` tree that Codex, OpenCode, and Google Antigravity all read, with a shared `obsidian-core` engine skill; `grok-bot` emits Grok Bot / Sand skills that use the `user-obsidian-second-brain` MCP server for vault I/O), `pi` emits a Pi package (`.pi/prompts/` + `.pi/skills/`), and `gemini-cli` / `opencode` emit a dispatcher file (`GEMINI.md` / `AGENTS.md`) with an **auto-generated routing table** built from each command's `description:` frontmatter, plus the command bodies under `.gemini/` / `.opencode/`. Tool-name references like `Read tool` are rewritten to neutral wording (`read files`) so the instructions still make sense outside Claude Code.
 
 **When adding a new command, only edit `commands/<name>.md`.** The adapters pick it up automatically on the next build. Optional frontmatter fields: `exclude: [<platform>]` to opt out per platform.
 
 ## The AI-first rule (non-negotiable)
 
-Every command that writes to a user's vault MUST follow `references/ai-first-rules.md`. Vault notes are designed for **future-Claude retrieval**, not human reading. This means:
+Every command that writes to a user's vault MUST follow `references/ai-first-rules.md`. Vault notes are designed for **future agent retrieval**, not human reading. This means:
 
-- A `## For future Claude` preamble at the top of every note
+- A `## For future agent` preamble at the top of every note
 - Rich frontmatter: `type`, `date`, `tags`, `ai-first: true`, plus type-specific fields
 - `[[wikilinks]]` for every person, project, idea, decision referenced
 - External claims carry recency markers like `(as of 2026-04, source.com)`
@@ -50,7 +50,7 @@ If you are editing a command file in `commands/`, do not rewrite the AI-first pr
 
 1. Create `commands/<name>.md` with `description:` frontmatter and operating instructions.
 2. If it runs Python, add `scripts/research/<name>.py` (or appropriate subfolder).
-3. **Apply the AI-first rule to every vault write.** Reference `references/ai-first-rules.md` from the command body so future-Claude has the spec inline.
+3. **Apply the AI-first rule to every vault write.** Reference `references/ai-first-rules.md` from the command body so future agent has the spec inline.
 4. If the command produces a new note type, add its frontmatter schema to `references/ai-first-rules.md`.
 5. Update `SKILL.md` (Layer section + command list) and `README.md` (commands table).
 6. Add a `CHANGELOG.md` entry under "Unreleased".
@@ -84,8 +84,8 @@ If you change an adapter's output layout, update the matching assertion in `test
 
 ## What not to do
 
-- Do not rewrite vault output to be "more human-friendly." The vault is for future-Claude, not human readers.
-- Do not strip frontmatter or `## For future Claude` preambles from existing commands.
+- Do not rewrite vault output to be "more human-friendly." The vault is for future agent, not human readers.
+- Do not strip frontmatter or `## For future agent` preambles from existing commands.
 - Do not add emojis to command files or vault output (unless explicitly part of a UI element like a kanban column emoji).
 - Do not invent rates, dates, or relationships when writing project notes - mark unknowns as `TBD`.
 - **Contributors:** do not push to `main` directly - open a PR.
