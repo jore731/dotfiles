@@ -39,3 +39,4 @@ node-global/node_modules/
 .claude/.last-cleanup
 .claude/mcp-needs-auth-cache.json
 .claude/settings.json.bak
+.copilot/repo-metadata-cache.db*

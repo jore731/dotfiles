@@ -99,6 +99,7 @@ alias tm='task-master'
 alias taskmaster='task-master'
 alias sw="switch"
 alias dig-basf='dig @172.23.247.24'
+alias skills='pnpx skills@latest'
 
 # PATH
 export PATH="$HOME/.node-global/node_modules/.bin:$PATH"
@@ -157,3 +158,4 @@ esac
 
 export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 export ARM_USE_AZUREAD=True
+export OBSIDIAN_VAULT_PATH=~/secondbrain
