@@ -4,6 +4,8 @@ export ZSH_COMPDUMP="${ZDOTDIR:-$HOME}/.zcompdump"
 ZSH_DISABLE_COMPFIX=true
 plugins=(git history-substring-search macos nvm zsh-syntax-highlighting zsh-autosuggestions zsh-completions)
 
+eval "$(test -x $(brew --prefix)/bin/hermit && $(brew --prefix)/bin/hermit shell-hooks --print --zsh)"
+
 # Lazy-load nvm: real nvm.sh (~0.5s) is sourced only on first nvm/node/npm/npx use
 zstyle ':omz:plugins:nvm' lazy yes
 
