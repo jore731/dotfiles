@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>BASF Presentation</title>
+
+    <link rel="stylesheet" href="node_modules/reveal.js/dist/reset.css" />
+    <link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css" />
+
+    <!-- Link the compiled BASF theme here -->
+    <link rel="stylesheet" href="theme/basf-design-darkblue.css" id="theme" />
+
+    <!-- Code syntax highlighting -->
+    <link
+      rel="stylesheet"
+      href="node_modules/reveal.js/plugin/highlight/monokai.css"
+    />
+
+    <style>
+      /* Inject the BASF Logo for all slides */
+      .reveal .slide-logo {
+        position: absolute;
+        bottom: 0.5%;
+        right: 1%;
+        max-height: 80px;
+        width: auto;
+        z-index: 100;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- Markdown is loaded from slides.md -->
+        <section
+          data-markdown="slides.md"
+          data-separator="^\r?\n---\r?\n$"
+          data-separator-vertical="^\r?\n--\r?\n$"
+          data-separator-notes="^Note:"
+        ></section>
+      </div>
+      <!-- Logo Container -->
+      <img src="logos/BASF_Logo.png" class="slide-logo" alt="BASF" />
+    </div>
+
+    <script type="module">
+      import Reveal from "reveal.js";
+      import Markdown from "reveal.js/plugin/markdown/markdown.esm.js";
+      import Highlight from "reveal.js/plugin/highlight/highlight.esm.js";
+      import Notes from "reveal.js/plugin/notes/notes.esm.js";
+      import Search from "reveal.js/plugin/search/search.esm.js";
+      import Zoom from "reveal.js/plugin/zoom/zoom.esm.js";
+
+      Reveal.initialize({
+        width: 1920,
+        height: 1080,
+        margin: 0.04,
+        controls: true,
+        controlsTutorial: false,
+        progress: true,
+        slideNumber: "c/t",
+        showSlideNumber: "all",
+        hash: true,
+        history: true,
+        keyboard: true,
+        overview: true,
+        touch: true,
+        center: false,
+        navigationMode: "linear",
+        plugins: [Markdown, Highlight, Notes, Search, Zoom],
+      });
+    </script>
+  </body>
+</html>

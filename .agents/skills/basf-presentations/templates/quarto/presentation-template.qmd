@@ -1,0 +1,152 @@
+---
+title: "Presentation Title"
+subtitle: "Subtitle"
+author: "Author Name"
+date: today
+date-format: "DD.MM.YYYY"
+format:
+  revealjs:
+    theme: [default, basf-design-darkblue.scss]
+    css: basf-theme-switcher.css?v=20260316-logo-style-fix
+    width: 1920
+    height: 1080
+    margin: 0.08
+    transition: slide
+    slide-number: c/t
+    controls: true
+    hash: true
+    center: false
+    navigation-mode: linear
+    logo: logos/BASF_Logo.svg
+    include-after-body:
+      text: |
+        <script src="basf-runtime-fixes.js?v=20260316-logo-fix"></script>
+        <script src="basf-theme-switcher.js"></script>
+  pptx:
+    reference-doc: basf-reference.pptx
+    slide-level: 2
+---
+
+## Agenda {.divider-slide}
+
+Use this slide as a **table of contents**. Bold items indicate the current section.
+Active items are highlighted; others are dimmed automatically.
+
+1. **Introduction**
+2. Methodology
+3. Results
+4. Discussion
+5. Summary & Outlook
+
+## Section Break {.divider-slide}
+
+Use this slide as a **section break** between major topics.
+It provides a visual pause and signals the transition to the next chapter.
+
+## Content Slide {.content-slide}
+
+### Use this layout for text-heavy content
+
+Use this slide to present key information as a bullet list.
+A subtitle (h3) can be added below the slide title to provide additional context.
+
+- First bullet point with a key statement
+- Second bullet point with supporting detail
+- Third bullet point with nested sub-items
+  - Sub-item A
+  - Sub-item B
+- Fourth bullet point as a summary or conclusion
+
+## Two-Column Content {.content-slide}
+
+Use this layout to **compare two topics** or present parallel information side by side.
+Each column can contain text, lists, images, or code.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+### Left Column
+- First point on the left side
+- Second point with detail
+- Third supporting argument
+:::
+
+::: {.column width="50%"}
+### Right Column
+- Corresponding point on the right
+- Contrasting or complementary detail
+- Conclusion or comparison
+:::
+
+::::
+
+## Boxed Content {.content-box-slide}
+
+Use this layout to place content inside a **white rounded box**.
+Suitable for longer paragraphs, tables, code blocks, or embedded visuals
+that benefit from a clear visual boundary.
+
+::: {.content-box}
+Place your content here — text, tables, images, or other elements.
+
+The white box visually separates the content from the slide background
+and helps guide the reader's focus.
+:::
+
+## Highlight Slide {.highlight-slide}
+
+::: {.split-left}
+### Key Points
+
+- Supporting argument 1
+- Supporting argument 2
+- Supporting argument 3
+:::
+
+::: {.split-right}
+Place the **primary content** here — a chart, table, image, or detailed explanation.
+
+The right panel has a white background to visually emphasize the main message.
+:::
+
+## Argument Slide {.argument-slide}
+
+### AI changed the economics of code production. The quality loop has to change with it.
+
+<div class="argument-lead">
+Use this pattern when you need to frame a shift in conditions, then explain what
+the audience should do differently.
+</div>
+
+<div class="argument-grid">
+<div class="argument-card argument-card--tension">
+
+### Why the old signal breaks
+
+- The context changed
+- Old heuristics are no longer enough
+- The failure mode is now hidden deeper in the workflow
+
+<div class="argument-gap">
+<div class="argument-gap__label">Tension</div>
+<div>Everything looks fine until the untested edge case appears.</div>
+</div>
+
+</div>
+
+<div class="argument-card argument-card--response">
+
+### What the audience needs instead
+
+- Faster feedback
+- More specific signals
+- A tighter loop between diagnosis and action
+
+<div class="argument-note">
+This works best for narrative slides that explain why a new operating model is required.
+</div>
+
+</div>
+</div>
+
+## {.closing-slide}

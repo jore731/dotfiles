@@ -1,0 +1,391 @@
+// _basf-core-patterns.scss
+// ============================================================
+//  CORE LAYOUT PATTERNS
+//
+//  Pattern library derived from analysis of 62 PPTX slides.
+//  Each pattern maps a specific DOM structure to layout rules
+//  that guarantee zero-overflow rendering at 1920×1080.
+//
+//  Import order: official → compat → utilities → CORE-PATTERNS → native-overrides
+//
+//  Pattern catalog:
+//  ┌─────────────────────────────────────────────────────────┐
+//  │ TIER 1 — PRIMARY PATTERNS (>5 slides each)              │
+//  │   P01  H2 → .columns  (multi-col bullets/tables)   22× │
+//  │   P02  H2 → OL/UL  (agenda/divider list)            5× │
+//  │   P03  H2 → IMG  (hero image divider)                4× │
+//  │   P04  H2 → KPI-grid  (dashboard metrics)           4× │
+//  │   P05  H1 → H3  (title card)                        3× │
+//  │                                                         │
+//  │ TIER 2 — SECONDARY PATTERNS (2–4 slides each)           │
+//  │   P06  H1 → IMG → P  (title + hero photo)           2× │
+//  │   P07  H2 → P → IMG  (divider + subtitle + image)   3× │
+//  │   P08  H2 → chart+table cols  (data dashboard)      3× │
+//  │   P09  H2 → .image-grid → UL  (gallery + legend)    1× │
+//  │   P10  H2 → P  (statement divider)                  2× │
+//  │                                                         │
+//  │ TIER 3 — NICHE PATTERNS (1 slide each)                  │
+//  │   P11  H1 → P  (chapter title with date)            1× │
+//  │   P12  H2 → PLACEHOLDER  (template/workshop)        1× │
+//  │   P13  H2 → UL  (simple full-width list)            2× │
+//  │   P14  H2 → 4-col images (photo strip)              1× │
+//  │   P15  H2  (closing slide, hidden)                   1× │
+//  └─────────────────────────────────────────────────────────┘
+// ============================================================
+
+// ============================================================
+//  TIER 1 — PRIMARY PATTERNS
+// ============================================================
+
+// ── P01: Multi-Column Content ────────────────────────────────
+// H2 → .columns (with 1–4 .column children)
+// The most common pattern: heading followed by flexible columns
+// containing any mix of bullets, tables, charts, images.
+// Containment: columns flex-fill below heading, each column clips.
+.reveal .slides section.content-slide .columns {
+  display: flex !important;
+  width: 100% !important;
+  gap: 2em;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.reveal .slides section.content-slide .column {
+  flex-shrink: 1;
+  flex-grow: 1;
+  min-height: 0;
+  overflow: hidden;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+
+  // Column with image: image fills but never exceeds column height
+  .slide-image {
+    max-height: 100%;
+    width: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+  }
+
+  // Column with chart: chart stays within column bounds
+  .chart-container {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: 100%;
+  }
+}
+
+// ── P02: Divider Agenda List ─────────────────────────────────
+// H2 → OL(n) or H2 → UL(n)
+// Section-break with numbered or bulleted agenda.
+// Bold items get highlighted, others dim. Already handled
+// in _official.scss .divider-slide rules — this pattern
+// ensures the list never overflows the slide.
+.reveal .slides section.divider-slide ol,
+.reveal .slides section.divider-slide ul {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+// ── P03: Hero Image Divider ─────────────────────────────────
+// H2 → IMG (full-width image below heading)
+// Image must flex-fill remaining space after heading + padding.
+.reveal .slides section.divider-slide > .slide-image {
+  flex: 1 1 auto;
+  min-height: 0;
+  object-fit: contain;
+  align-self: center;
+}
+
+// ── P04: KPI Dashboard ──────────────────────────────────────
+// H2 → .kpi-grid (2×3 or 3×2 metric cards)
+// Grid auto-fills below heading. Fixed row height prevents overflow.
+.reveal .slides section.content-slide .kpi-grid {
+  flex: 1 1 auto;
+  min-height: 0;
+  align-content: start;
+}
+
+// ── P05: Title Card ─────────────────────────────────────────
+// H1 → H3 (title + subtitle, no media)
+// Centered vertically within safe area above logo bar.
+.reveal .slides section.title-slide > h3 {
+  flex: 0 0 auto;
+}
+
+// ============================================================
+//  TIER 2 — SECONDARY PATTERNS
+// ============================================================
+
+// ── P06: Title + Hero Photo ─────────────────────────────────
+// H1 → IMG → P (title slide with large background image + caption)
+// Image must shrink to fit between heading and bottom caption/logo bar.
+.reveal .slides section.title-slide > .slide-image {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: 650px;
+  object-fit: contain;
+  align-self: center;
+}
+
+// Caption below image pushed toward bottom
+.reveal .slides section.title-slide > .slide-image + p {
+  margin-top: auto;
+  font-size: 0.85em;
+}
+
+// ── P07: Divider + Subtitle + Image ─────────────────────────
+// H2 → P → IMG (divider with brief text + image below)
+// P sits snug under heading, image fills remaining space.
+.reveal .slides section.divider-slide > p + .slide-image {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+// ── P08: Data Dashboard (Chart + Table columns) ─────────────
+// H2 → .columns where one col has .chart-container, another has table
+// Chart and table share horizontal space within flex columns.
+.reveal .slides section.content-slide .column table {
+  font-size: 0.68em;
+  width: 100%;
+  border-collapse: collapse;
+  flex: 0 0 auto;
+}
+
+.reveal .slides section.content-slide .column .chart-container {
+  flex: 1 1 auto;
+  min-height: 80px;
+}
+
+// ── P09: Image Gallery + Legend ──────────────────────────────
+// H2 → .image-grid → UL (grid of images + bullet list below)
+// Gallery has fixed height; list scrolls if needed.
+.reveal .slides section.content-slide > .image-grid {
+  flex: 0 0 auto;
+}
+
+.reveal .slides section.content-slide > .image-grid + ul {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+// ── P10: Statement Divider ──────────────────────────────────
+// H2 → P (divider with single prose paragraph, no list/image)
+// Text stays compact; no special containment needed beyond base.
+
+// ============================================================
+//  TIER 3 — NICHE PATTERNS
+// ============================================================
+
+// ── P11: Chapter Title with Date ────────────────────────────
+// H1 → P (like P05 but with paragraph instead of subtitle)
+// Caption pushed to bottom for visual balance.
+.reveal .slides section.title-slide > h1 + p {
+  margin-top: auto;
+}
+
+// ── P12: Template / Workshop Placeholder ────────────────────
+// H2 → .template-placeholder (editable dashed-border box)
+// Placeholder fills remaining space below heading.
+.reveal .slides section.content-slide > .template-placeholder {
+  flex: 1 1 auto;
+  min-height: 200px;
+}
+
+// ── P13: Simple Full-Width List ─────────────────────────────
+// H2 → UL (no columns, no images — just heading + bullets)
+// List fills available height, hides overflow gracefully.
+.reveal .slides section.content-slide > ul {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+// ── P14: Photo Strip (4-column images) ──────────────────────
+// H2 → .columns with 4 .column children, each containing an image
+// Images are equal-width, shrink proportionally.
+// (Handled by P01 column rules + .slide-image max-height)
+
+// ── P15: Closing Slide ──────────────────────────────────────
+// H2 (hidden) — full blue background with centered logo
+// Already handled in _official.scss .closing-slide rules.
+
+// ============================================================
+//  CROSS-PATTERN OVERFLOW GUARDS
+//  These rules prevent any pattern from exceeding slide bounds.
+//  They act as safety nets when content density exceeds what
+//  a single slide can hold.
+// ============================================================
+
+// All section-level direct children participate in flex layout
+// to guarantee containment within the 1080px slide height.
+.reveal .slides section.content-slide,
+.reveal .slides section.divider-slide {
+  display: flex !important;
+  flex-direction: column !important;
+
+  // Direct child images auto-flex within remaining space
+  > img.slide-image {
+    flex: 0 1 auto;
+    min-height: 0;
+  }
+
+  // Direct child tables don't grow unbounded
+  > table {
+    flex: 0 0 auto;
+    max-height: 60%;
+    overflow: hidden;
+  }
+}
+
+// ============================================================
+//  RESPONSIVE IMAGE CONSTRAINTS
+//  Per-context max-height ensures images never push content
+//  outside the slide, regardless of source resolution.
+// ============================================================
+
+// Base: all .slide-image inside reveal slides
+.reveal .slides .slide-image {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  border-radius: 6px;
+  object-fit: contain;
+}
+
+// Title-slide hero: more vertical space consumed by heading + logo bar
+.reveal .slides section.title-slide .slide-image {
+  max-height: 650px;
+}
+
+// Divider-slide image: heading + optional text + padding
+.reveal .slides section.divider-slide .slide-image {
+  max-height: 750px;
+}
+
+// Column images: constrained to column height
+.reveal .slides section .column .slide-image {
+  max-height: 100%;
+}
+
+// Image grid children: constrained to grid container
+.image-grid .slide-image {
+  max-height: 100%;
+  object-fit: cover;
+}
+
+// ============================================================
+//  DENSE CONTENT SCALING
+//  Patterns that need smaller text when content is very dense.
+// ============================================================
+
+// Slides with 4 columns get tighter spacing
+.reveal .slides section.content-slide .columns:has(.col-25) {
+  gap: 1em;
+}
+
+// KPI cards in 3-column layout
+.kpi-grid.cols-3 .kpi-card {
+  padding: 0.6em 0.8em;
+}
+
+.kpi-grid.cols-3 .kpi-value {
+  font-size: 1.5em;
+}
+
+// ============================================================
+//  COMBO PATTERN: KPI ROW + COLUMNS
+//  Slide 30: H2 → .columns with 3 cols, each having .kpi-grid
+// ============================================================
+
+.reveal .slides section.content-slide .column .kpi-grid {
+  height: 100%;
+  align-content: start;
+}
+
+// ============================================================
+//  COMBO PATTERN: TABLE + BULLETS IN COLUMN
+//  Slide 52: single column with table header + long bullet list.
+//  Table stays compact, list fills remaining space.
+// ============================================================
+
+.reveal .slides section.content-slide .column > table + ul {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  margin-top: 0.5em;
+}
+
+// ============================================================
+//  SPARSE CONTENT — VERTICAL CENTERING
+//  Divider slides with just H2 + P (no list) should center
+//  content vertically, matching the BASF PPTX template design.
+//  Content slides with sparse content get flex-grow on tables
+//  and code blocks so they fill available space.
+// ============================================================
+
+// Divider slides without lists: center the heading + paragraph
+.reveal .slides section.divider-slide:not(:has(ol)):not(:has(ul)) {
+  justify-content: center !important;
+}
+
+// Content-slide: let tables grow to fill space (code blocks stay natural size)
+.reveal .slides section.content-slide > table {
+  flex: 1 0 auto;
+}
+
+// ============================================================
+//  QUARTO VERTICAL-SLIDE FALLBACK
+//  When Quarto generates <section> for ### Heading {.split-left}
+//  or ### Heading {.content-box}, Reveal.js treats them as
+//  vertical sub-slides. These rules ensure they render
+//  acceptably when shown standalone, and suppress Reveal.js
+//  vertical-slide navigation within layout slides.
+//
+//  Preferred fix: use ::: {.split-left} fenced divs in QMD
+//  instead of ### Heading {.split-left}.
+// ============================================================
+
+// Suppress vertical-slide behavior for nested sections inside
+// highlight-slide, content-box-slide — force them visible.
+.reveal .slides section.highlight-slide > section,
+.reveal .slides section.content-box-slide > section {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+// highlight-slide: section.split-left should render the same as div.split-left
+.reveal .slides section.highlight-slide > section.split-left {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+// highlight-slide: section.split-right should render the same as div.split-right
+.reveal .slides section.highlight-slide > section.split-right {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  align-self: stretch;
+}
+
+// content-box-slide: section.content-box should render like div.content-box
+.reveal .slides section.content-box-slide > section.content-box {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 40px 50px;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  display: flex !important;
+  flex-direction: column;
+}

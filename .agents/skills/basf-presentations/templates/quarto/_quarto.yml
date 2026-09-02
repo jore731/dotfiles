@@ -1,0 +1,12 @@
+# _quarto.yml — BASF presentation project configuration
+#
+# Place this file in the same folder as your presentation.qmd.
+# Adjust the path to lint-slides.py if it lives elsewhere.
+#
+# pre-render fires before every `quarto render` and warns about dense slides.
+# It exits 0 (warn-only) so the render always proceeds even when slides are
+# over budget.  Remove --warn-only to block the render on over-budget slides.
+
+project:
+  type: default
+  pre-render: python3 lint-slides.py --warn-only

@@ -1,0 +1,9 @@
+/*-- scss:defaults --*/
+/* Dark green theme: colors only. Shared layout lives in _basf-theme-structure.scss. */
+$basf-blue: #007a33;
+$basf-light-bg: #e6f2eb;
+$basf-gray: #8c8c8c;
+$basf-dark-gray: #3d3d3d;
+
+/*-- scss:rules --*/
+@import "basf-theme-structure";

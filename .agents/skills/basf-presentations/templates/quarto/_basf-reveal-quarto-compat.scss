@@ -1,0 +1,228 @@
+// Quarto adds a layer of Reveal theme variables and base element styling
+// when it compiles `/*-- scss:defaults --*/` theme assets. Native Sass
+// compilation does not, so we recreate the subset that materially affects
+// BASF slide fidelity.
+
+:root {
+  --r-background-color: #{$basf-light-bg};
+  --r-main-font: Arial, Helvetica Neue, Helvetica, sans-serif;
+  --r-main-font-size: 36px;
+  --r-main-color: #{$basf-dark-gray};
+  --r-block-margin: 12px;
+  --r-heading-margin: 0 0 12px 0;
+  --r-heading-font: Arial, Helvetica Neue, Helvetica, sans-serif;
+  --r-heading-color: #{$basf-blue};
+  --r-heading-line-height: 1.2;
+  --r-heading-letter-spacing: normal;
+  --r-heading-text-transform: none;
+  --r-heading-text-shadow: none;
+  --r-heading-font-weight: 600;
+  --r-heading1-text-shadow: none;
+  --r-heading1-size: 2.5em;
+  --r-heading2-size: 1.6em;
+  --r-heading3-size: 1.3em;
+  --r-heading4-size: 1em;
+  --r-code-font:
+    SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New,
+    monospace;
+  --r-link-color: #{$basf-blue};
+  --r-link-color-hover: #{$basf-blue};
+  --r-selection-background-color: #{$basf-blue};
+  --r-selection-color: #{$basf-light-bg};
+}
+
+.reveal-viewport {
+  background: $basf-light-bg;
+  background-color: var(--r-background-color);
+}
+
+.reveal {
+  font-family: var(--r-main-font);
+  font-size: var(--r-main-font-size);
+  font-weight: normal;
+  color: var(--r-main-color);
+}
+
+.reveal ::selection,
+.reveal ::-moz-selection {
+  color: var(--r-selection-color);
+  background: var(--r-selection-background-color);
+  text-shadow: none;
+}
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides section,
+.reveal .slides section > section {
+  line-height: 1.3;
+  font-weight: inherit;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  margin: var(--r-heading-margin);
+  color: var(--r-heading-color);
+  font-family: var(--r-heading-font);
+  font-weight: var(--r-heading-font-weight);
+  line-height: var(--r-heading-line-height);
+  letter-spacing: var(--r-heading-letter-spacing);
+  text-transform: var(--r-heading-text-transform);
+  text-shadow: var(--r-heading-text-shadow);
+  word-wrap: break-word;
+}
+
+.reveal h1 {
+  font-size: var(--r-heading1-size);
+  text-shadow: var(--r-heading1-text-shadow);
+}
+
+.reveal h2 {
+  font-size: var(--r-heading2-size);
+}
+
+.reveal h3 {
+  font-size: var(--r-heading3-size);
+}
+
+.reveal h4 {
+  font-size: var(--r-heading4-size);
+}
+
+.reveal p {
+  margin: var(--r-block-margin) 0;
+  line-height: 1.3;
+}
+
+.reveal h1:last-child,
+.reveal h2:last-child,
+.reveal h3:last-child,
+.reveal h4:last-child,
+.reveal h5:last-child,
+.reveal h6:last-child {
+  margin-bottom: 0;
+}
+
+.reveal img,
+.reveal video,
+.reveal iframe {
+  max-width: 95%;
+  max-height: 95%;
+}
+
+.reveal strong,
+.reveal b {
+  font-weight: bold;
+}
+
+.reveal em {
+  font-style: italic;
+}
+
+.reveal table {
+  margin: auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.reveal table th {
+  font-weight: bold;
+}
+
+.reveal table th,
+.reveal table td {
+  text-align: left;
+  padding: 0.2em 0.5em;
+  border-bottom: 1px solid;
+}
+
+.reveal table tbody tr:last-child th,
+.reveal table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.reveal a {
+  color: var(--r-link-color);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.reveal a:hover {
+  color: var(--r-link-color-hover);
+  text-shadow: none;
+  border: none;
+}
+
+.reveal pre {
+  width: 100%;
+  margin: 0;
+  text-align: left;
+  font-size: 0.55em;
+  line-height: 1.3;
+  box-shadow: none;
+  background-color: rgba($basf-blue, 0.05);
+  border: none;
+  font-family: var(--r-code-font);
+}
+
+.reveal pre code {
+  display: block;
+  padding: 6px 9px;
+  overflow: auto;
+  max-height: 500px;
+  white-space: pre;
+  word-wrap: normal;
+  background-color: $basf-light-bg;
+  color: $basf-dark-gray;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.reveal code {
+  color: $basf-blue;
+  font-size: 0.875em;
+  background-color: transparent;
+  white-space: pre-wrap;
+  font-family: var(--r-code-font);
+}
+
+.reveal blockquote {
+  display: block;
+  position: relative;
+  width: unset;
+  margin: var(--r-block-margin) auto;
+  padding: 0.625rem 1.75rem;
+  border-left: 0.25rem solid $basf-gray;
+  color: $basf-gray;
+  font-style: normal;
+  background: none;
+  box-shadow: none;
+}
+
+.reveal .controls {
+  color: var(--r-link-color);
+}
+
+.reveal .progress {
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--r-link-color);
+}
+
+.reveal .slide-number {
+  color: $basf-gray;
+}
+
+.reveal .columns > .column:first-child > :not(ul, ol) {
+  margin-right: 0.5rem;
+  margin-left: 0;
+}
+
+.reveal .columns > .column:last-child > :not(ul, ol) {
+  margin-right: 0;
+  margin-left: 0.5rem;
+}

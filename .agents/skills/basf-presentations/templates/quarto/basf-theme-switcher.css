@@ -1,0 +1,215 @@
+/* ============================================================
+   BASF Theme Switcher — CSS Custom Property Override Layer
+   Add this AFTER the main BASF theme scss in Quarto's css: list.
+   Switches colors via data-theme attribute on .reveal element.
+   Default: darkblue (no attribute needed).
+   ============================================================ */
+
+/* --- Theme definitions (CSS custom properties) --- */
+.reveal,
+.reveal[data-theme="darkblue"] {
+  --basf-accent: #004a96;
+  --basf-bg: #e0e9f2;
+  --basf-code-bg: rgba(0, 74, 150, 0.05);
+}
+
+.reveal[data-theme="lightblue"] {
+  --basf-accent: #21a0d2;
+  --basf-bg: #eff7fd;
+  --basf-code-bg: rgba(33, 160, 210, 0.05);
+}
+
+.reveal[data-theme="darkgreen"] {
+  --basf-accent: #007a33;
+  --basf-bg: #e6f2eb;
+  --basf-code-bg: rgba(0, 122, 51, 0.05);
+}
+
+.reveal[data-theme="orange"] {
+  --basf-accent: #f37021;
+  --basf-bg: #fef4e5;
+  --basf-code-bg: rgba(243, 112, 33, 0.05);
+}
+
+.reveal[data-theme="red"] {
+  --basf-accent: #e4002b;
+  --basf-bg: #fce5e8;
+  --basf-code-bg: rgba(228, 0, 43, 0.05);
+}
+
+.reveal[data-theme="softblack"] {
+  --basf-accent: #212427;
+  --basf-bg: #e9e9e9;
+  --basf-code-bg: rgba(33, 36, 39, 0.05);
+}
+
+/* --- Override compiled color values with custom properties --- */
+
+/* Reveal viewport background (outer area around slides) */
+.reveal-viewport {
+  background-color: var(--basf-bg) !important;
+}
+
+/* Slide backgrounds */
+.reveal .slides section.divider-slide,
+.reveal .slides section.content-slide,
+.reveal .slides section.content-box-slide,
+.reveal .slides section.highlight-slide,
+.reveal .slides section.quarto-title-block,
+.reveal .slides #title-slide {
+  background-color: var(--basf-bg) !important;
+}
+
+/* Headings */
+.reveal .slides h1,
+.reveal .slides h2,
+.reveal .slides h3 {
+  color: var(--basf-accent) !important;
+}
+
+/* Title slide title & subtitle */
+.reveal .slides .quarto-title-block h1.title,
+.reveal .slides .quarto-title-block .subtitle,
+#title-slide p.subtitle {
+  color: var(--basf-accent) !important;
+}
+
+/* Title slide — author name */
+#title-slide p.author,
+#title-slide .quarto-title-author-name {
+  color: var(--basf-accent) !important;
+}
+
+/* Heading separator line (h1 and h2) */
+.reveal .slides h1::after,
+.reveal .slides h2::after {
+  background-color: var(--basf-accent) !important;
+}
+
+/* Links */
+.reveal .slides a {
+  color: var(--basf-accent);
+}
+
+/* Bullet squares */
+.reveal .slides section.content-slide ul li::before,
+.reveal .slides section.highlight-slide .split-left ul li::before {
+  color: var(--basf-accent) !important;
+}
+
+/* Divider slide — active (bold) list item markers */
+.reveal .slides section.divider-slide li:has(> strong)::before {
+  color: var(--basf-accent) !important;
+}
+
+/* Content slide table header */
+.reveal .slides section.content-slide table thead {
+  background-color: var(--basf-accent) !important;
+}
+
+/* Code block background */
+.reveal .slides pre {
+  background-color: var(--basf-code-bg) !important;
+}
+
+/* Title slide decorative logo bar */
+.reveal:has(#title-slide.present)::before {
+  background-color: var(--basf-accent) !important;
+}
+
+/* Closing slide — accent background */
+.reveal .slides section.closing-slide {
+  background-color: var(--basf-accent) !important;
+}
+.reveal:has(section.closing-slide.present) .slide-background.present {
+  background-color: var(--basf-accent) !important;
+}
+
+/* Regular slides use a larger transparent BASF logo */
+.reveal .slide-logo {
+  background-color: transparent !important;
+  filter: none !important;
+  width: 132px !important;
+  height: auto !important;
+  max-height: none !important;
+  padding: 0 !important;
+}
+
+/* Title & closing slides: white logo on accent background */
+.reveal:has(#title-slide.present) .slide-logo,
+.reveal:has(section.closing-slide.present) .slide-logo {
+  background-color: transparent !important;
+  filter: brightness(0) invert(1) !important;
+}
+
+/* Reveal menu trigger */
+.reveal .slide-menu-button a,
+.reveal .slide-menu-button i {
+  color: var(--basf-accent) !important;
+}
+
+/* Closing slide */
+.reveal .slides section.closing-slide {
+  background-color: var(--basf-accent) !important;
+}
+
+/* Content-box white card border-top accent (if any) */
+.reveal .slides .content-box {
+  border-top-color: var(--basf-accent);
+}
+
+/* Active/bold list items in divider-slide */
+.reveal .slides section.divider-slide li strong {
+  color: var(--basf-accent) !important;
+}
+
+/* Slide number */
+.reveal .slide-number {
+  color: var(--basf-accent) !important;
+}
+
+/* Mermaid diagrams */
+.reveal .mermaid svg {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* --- Theme Switcher Widget --- */
+.basf-theme-switcher {
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  opacity: 0.4;
+  transition: opacity 0.3s;
+}
+
+.basf-theme-switcher:hover {
+  opacity: 1;
+}
+
+.basf-theme-swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
+}
+
+.basf-theme-swatch:hover {
+  transform: scale(1.2);
+}
+
+.basf-theme-swatch.active {
+  border-color: #333;
+}

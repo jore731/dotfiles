@@ -65,13 +65,13 @@
       "updatedAt": "2026-08-22T09:18:05.835Z"
     },
     "drawio": {
-      "source": "jore731/skills",
+      "source": "basf-global/skills",
       "sourceType": "github",
-      "sourceUrl": "https://github.com/jore731/skills.git",
+      "sourceUrl": "https://github.com/basf-global/skills.git",
       "skillPath": "skills/drawio/SKILL.md",
-      "skillFolderHash": "ed7d7a27c82f800d707510ef6832ee667de0ee68",
+      "skillFolderHash": "0a8bb8f8a98d5a3f41499685e416c632cec5a733",
       "installedAt": "2026-08-12T11:57:56.381Z",
-      "updatedAt": "2026-08-22T09:18:08.257Z"
+      "updatedAt": "2026-09-02T10:49:55.981Z"
     },
     "kubernetes": {
       "source": "jore731/skills",
@@ -889,6 +889,151 @@
       "pluginName": "mattpocock-skills",
       "installedAt": "2026-08-21T12:55:09.774Z",
       "updatedAt": "2026-08-21T12:55:09.774Z"
+    },
+    "cdkterrain": {
+      "source": "cdktn.io",
+      "sourceType": "well-known",
+      "sourceUrl": "https://cdktn.io/docs/.well-known/agent-skills/cdkterrain/skill.md",
+      "skillFolderHash": "",
+      "sourceBaseUrl": "https://cdktn.io/docs",
+      "wellKnownDigest": "sha256:a6550378f54343d2a97db2fc00d384feffeafff9dc573beafde4399c81584035",
+      "installedAt": "2026-08-24T14:35:34.911Z",
+      "updatedAt": "2026-08-24T14:35:34.911Z"
+    },
+    "excalidraw-diagram-generator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/github/awesome-copilot.git",
+      "skillPath": "skills/excalidraw-diagram-generator/SKILL.md",
+      "skillFolderHash": "dd3f9353c4106a8929217b399865db3952f8c13f",
+      "installedAt": "2026-08-25T11:17:18.505Z",
+      "updatedAt": "2026-08-25T11:17:18.505Z"
+    },
+    "drawio-skill": {
+      "source": "Agents365-ai/drawio-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/Agents365-ai/drawio-skill.git",
+      "skillPath": "skills/drawio-skill/SKILL.md",
+      "skillFolderHash": "1379ace7e3e3b833bf478a783d4a80ad2a3fad87",
+      "installedAt": "2026-08-25T13:00:59.087Z",
+      "updatedAt": "2026-08-25T13:00:59.087Z"
+    },
+    "basf-appstore": {
+      "source": "basf-global/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/basf-global/skills.git",
+      "skillPath": "skills/basf-appstore/SKILL.md",
+      "skillFolderHash": "939b0b524867edf94d1b3e0385ca14580e055a55",
+      "installedAt": "2026-09-02T10:49:55.734Z",
+      "updatedAt": "2026-09-02T10:49:55.734Z"
+    },
+    "basf-devhub-search": {
+      "source": "basf-global/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/basf-global/skills.git",
+      "skillPath": "skills/basf-devhub-search/SKILL.md",
+      "skillFolderHash": "c9b338dbbb5e603249136bb4be142226d3dcd784",
+      "installedAt": "2026-09-02T10:49:55.795Z",
+      "updatedAt": "2026-09-02T10:49:55.795Z"
+    },
+    "basf-images": {
+      "source": "basf-global/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/basf-global/skills.git",
+      "skillPath": "skills/basf-images/SKILL.md",
+      "skillFolderHash": "ac35981a96d8a66411774e3ab6b3c7c0dc4dc6ba",
+      "installedAt": "2026-09-02T10:49:55.870Z",
+      "updatedAt": "2026-09-02T10:49:55.870Z"
+    },
+    "basf-org-codes": {
+      "source": "basf-global/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/basf-global/skills.git",
+      "skillPath": "skills/basf-org-codes/SKILL.md",
+      "skillFolderHash": "a892b1ffd8f5030681e1d5b89d8aa5ea426903dd",
+      "installedAt": "2026-09-02T10:49:55.895Z",
+      "updatedAt": "2026-09-02T10:49:55.895Z"
+    },
+    "basf-presentations": {
+      "source": "basf-global/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/basf-global/skills.git",
+      "skillPath": "skills/basf-presentations/SKILL.md",
+      "skillFolderHash": "a8785dee5fabee8d6211ab614dc305ebb187250e",
+      "installedAt": "2026-09-02T10:49:55.922Z",
+      "updatedAt": "2026-09-02T10:49:55.922Z"
+    },
+    "corporate-rulebase-confluence": {
+      "source": "basf-global/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/basf-global/skills.git",
+      "skillPath": "skills/corporate-rulebase-confluence/SKILL.md",
+      "skillFolderHash": "a3a3f1134d790a36cde74e8898a3110adb8de01a",
+      "installedAt": "2026-09-02T10:49:55.948Z",
+      "updatedAt": "2026-09-02T10:49:55.948Z"
+    },
+    "creator-space-innovation": {
+      "source": "basf-global/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/basf-global/skills.git",
+      "skillPath": "skills/creator-space-innovation/SKILL.md",
+      "skillFolderHash": "d07ba3ec634004a38b912b497a676e44e462b335",
+      "installedAt": "2026-09-02T10:49:55.964Z",
+      "updatedAt": "2026-09-02T10:49:55.964Z"
+    },
+    "m365-cli": {
+      "source": "basf-global/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/basf-global/skills.git",
+      "skillPath": "skills/m365-cli/SKILL.md",
+      "skillFolderHash": "e544e7967df6a64dfaa0b4fcb1f4b5ff306ace98",
+      "installedAt": "2026-09-02T10:49:56.018Z",
+      "updatedAt": "2026-09-02T10:49:56.018Z"
+    },
+    "operations-database": {
+      "source": "basf-global/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/basf-global/skills.git",
+      "skillPath": "skills/operations-database/SKILL.md",
+      "skillFolderHash": "95604b907266b5128360064c3527d9db8afe95a8",
+      "installedAt": "2026-09-02T10:49:56.029Z",
+      "updatedAt": "2026-09-02T10:49:56.029Z"
+    },
+    "publish-skill": {
+      "source": "basf-global/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/basf-global/skills.git",
+      "skillPath": "skills/publish-skill/SKILL.md",
+      "skillFolderHash": "ce6a8d11e872ba86e027ae56ac68f807b2a82473",
+      "installedAt": "2026-09-02T10:49:56.040Z",
+      "updatedAt": "2026-09-02T10:49:56.040Z"
+    },
+    "thinking-frameworks": {
+      "source": "basf-global/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/basf-global/skills.git",
+      "skillPath": "skills/thinking-frameworks/SKILL.md",
+      "skillFolderHash": "078360f02575300c25b5061fdafd3577fb7b54dd",
+      "installedAt": "2026-09-02T10:49:56.051Z",
+      "updatedAt": "2026-09-02T10:49:56.051Z"
+    },
+    "public-confluence-access": {
+      "source": "basf-global/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/basf-global/skills.git",
+      "skillPath": "skills/public-confluence-access/SKILL.md",
+      "skillFolderHash": "5962e2d55ce36bd8f74149a38abacab76da1f751",
+      "installedAt": "2026-09-02T10:49:56.062Z",
+      "updatedAt": "2026-09-02T10:49:56.062Z"
+    },
+    "basf-rd-experts": {
+      "source": "basf-global/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/basf-global/skills.git",
+      "skillPath": "skills/basf-rd-experts/SKILL.md",
+      "skillFolderHash": "7516e5f2bab798bfaaa310ccd3e523c61d8b2506",
+      "installedAt": "2026-09-02T10:49:56.085Z",
+      "updatedAt": "2026-09-02T10:49:56.085Z"
     }
   },
   "dismissed": {

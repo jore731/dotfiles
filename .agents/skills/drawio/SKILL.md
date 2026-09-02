@@ -1,221 +1,302 @@
 ---
 name: drawio
-description: Always use when user asks to create, generate, draw, or design a diagram, flowchart, architecture diagram, ER diagram, sequence diagram, class diagram, network diagram, mockup, wireframe, or UI sketch, or mentions draw.io, drawio, drawoi, .drawio files, or diagram export to PNG/SVG/PDF.
+description: >
+  Create, edit, and style draw.io (.drawio) XML diagram files using BASF corporate
+  branding colors and visual best practices. Use when asked to create diagrams,
+  flowcharts, architecture diagrams, infographics, process maps, evidence maps,
+  decision trees, or any draw.io / diagrams.net file. Triggers on: "create a diagram",
+  "draw a flowchart", "make a drawio file", "draw.io", ".drawio", "diagrams.net",
+  "create a visual", "infographic".
+author: Daniel Kaesmayr
+metadata:
+  version: "1.1.0"
+  category: visualization
 ---
 
 # Draw.io Diagram Skill
 
-Generate draw.io diagrams as native `.drawio` files. Optionally export to PNG, SVG, or PDF with the diagram XML embedded (so the exported file remains editable in draw.io).
+## BASF Color Palette
 
-## How to create a diagram
+Always use BASF corporate colors (sRGB, source: [ZK note 20260127T133218763144000]):
 
-1. **Generate draw.io XML** in mxGraphModel format for the requested diagram
-2. **Write the XML** to a `.drawio` file in the current working directory using the Write tool
-3. **If the user requested an export format** (png, svg, pdf), locate the draw.io CLI (see below), export with `--embed-diagram`, then delete the source `.drawio` file. If the CLI is not found, keep the `.drawio` file and tell the user they can install the draw.io desktop app to enable export, or open the `.drawio` file directly
-4. **Open the result** — the exported file if exported, or the `.drawio` file otherwise. If the open command fails, print the file path so the user can open it manually
+| Role                  | Name        | Hex       | Usage                                               |
+| --------------------- | ----------- | --------- | --------------------------------------------------- |
+| **Primary**           | Orange      | `#F39500` | Headers, highlights, call-outs, accent shapes       |
+| **Trust / Structure** | Dark Blue   | `#004A96` | Primary structure, node borders, main flow elements |
+| **Information**       | Light Blue  | `#21A0D2` | Secondary nodes, informational boxes                |
+| **Sustainability**    | Light Green | `#65AC1E` | Positive outcomes, growth nodes                     |
+| **Deep Accent**       | Dark Green  | `#00793A` | Confirmed/validated states                          |
+| **Alert / Error**     | Red         | `#C50022` | Warnings, errors, contradictions only               |
+| **Text / Lines**      | Soft Black  | `#212427` | All text and strokes (never pure `#000000`)         |
+| **Background**        | White       | `#FFFFFF` | Canvas/shape fill default                           |
+| **Subtle Fill**       | Off-white   | `#F5F5F5` | Grouped background areas                            |
 
-## Choosing the output format
+### Accessibility Rules
 
-Check the user's request for a format preference. Examples:
+- Dark Blue `#004A96` on white → WCAG AAA ✓
+- Orange `#F39500` on white → WCAG AA ✓
+- Never use Light Blue `#21A0D2` for text (insufficient contrast)
+- Red `#C50022` only for alerts/errors, not decoration
 
-- `/drawio create a flowchart` → `flowchart.drawio`
-- `/drawio png flowchart for login` → `login-flow.drawio.png`
-- `/drawio svg: ER diagram` → `er-diagram.drawio.svg`
-- `/drawio pdf architecture overview` → `architecture-overview.drawio.pdf`
+---
 
-If no format is mentioned, just write the `.drawio` file and open it in draw.io. The user can always ask to export later.
+## Default draw.io JSON Configuration
 
-### Supported export formats
+Apply this to new diagrams via `Extras > Configuration`:
 
-| Format | Embed XML | Notes |
-|--------|-----------|-------|
-| `png` | Yes (`-e`) | Viewable everywhere, editable in draw.io |
-| `svg` | Yes (`-e`) | Scalable, editable in draw.io |
-| `pdf` | Yes (`-e`) | Printable, editable in draw.io |
-| `jpg` | No | Lossy, no embedded XML support |
-
-PNG, SVG, and PDF all support `--embed-diagram` — the exported file contains the full diagram XML, so opening it in draw.io recovers the editable diagram.
-
-## draw.io CLI
-
-The draw.io desktop app includes a command-line interface for exporting.
-
-### Locating the CLI
-
-First, detect the environment, then locate the CLI accordingly:
-
-#### WSL2 (Windows Subsystem for Linux)
-
-WSL2 is detected when `/proc/version` contains `microsoft` or `WSL`:
-
-```bash
-grep -qi microsoft /proc/version 2>/dev/null && echo "WSL2"
+```json
+{
+  "defaultVertexStyle": {
+    "fontFamily": "Arial",
+    "fontColor": "#212427",
+    "strokeColor": "#004A96",
+    "fillColor": "#FFFFFF",
+    "rounded": "1"
+  },
+  "defaultEdgeStyle": {
+    "fontFamily": "Arial",
+    "fontColor": "#212427",
+    "strokeColor": "#212427",
+    "edgeStyle": "orthogonalEdgeStyle",
+    "rounded": "1",
+    "jettySize": "auto",
+    "orthogonalLoop": "1"
+  },
+  "presetColors": [
+    "F39500",
+    "004A96",
+    "21A0D2",
+    "65AC1E",
+    "00793A",
+    "C50022",
+    "212427",
+    "FFFFFF",
+    "F5F5F5"
+  ],
+  "defaultColorSchemes": [
+    {
+      "commonStyle": {
+        "fontColor": "#212427",
+        "strokeColor": "#004A96",
+        "fillColor": "#F5F5F5"
+      }
+    },
+    {
+      "commonStyle": {
+        "fontColor": "#FFFFFF",
+        "strokeColor": "#004A96",
+        "fillColor": "#004A96"
+      }
+    },
+    {
+      "commonStyle": {
+        "fontColor": "#212427",
+        "strokeColor": "#F39500",
+        "fillColor": "#FFFFFF"
+      }
+    }
+  ]
+}
 ```
 
-On WSL2, use the Windows draw.io Desktop executable via `/mnt/c/...`:
+---
 
-```bash
-DRAWIO_CMD=`/mnt/c/Program Files/draw.io/draw.io.exe`
-```
+## Diagram Construction Rules
 
-The backtick quoting is required to handle the space in `Program Files` in bash.
+### Shapes / Vertices
 
-If draw.io is installed in a non-default location, check common alternatives:
+- Rounded corners on all rectangles (`rounded=1`)
+- Fill: `#FFFFFF` default; `#F5F5F5` for background grouping areas
+- Stroke: `#004A96` (Dark Blue) for primary elements
+- Use `#F39500` (Orange) fill for headers and hero nodes
+- Use `#004A96` fill with `fontColor=#FFFFFF` for emphasis boxes
 
-```bash
-# Default install path
-`/mnt/c/Program Files/draw.io/draw.io.exe`
+### Connectors / Edges
 
-# Per-user install (if the above does not exist)
-`/mnt/c/Users/$WIN_USER/AppData/Local/Programs/draw.io/draw.io.exe`
-```
+- Stroke: `#212427` (Soft Black) — never `#000000`
+- Arrowhead style: option 8, size 12 (double default)
+- Line type default: orthogonal/sharp for clarity
+- Complex diagrams with overlapping lines: use Rounded + arc jumps, arc size 12
 
-#### macOS
+### Typography
 
-```bash
-/Applications/draw.io.app/Contents/MacOS/draw.io
-```
+- Font: Arial throughout
+- Labels: `#212427` on light backgrounds; `#FFFFFF` on dark fills
+- Minimum font size: 11pt
 
-#### Linux (native)
+---
 
-```bash
-drawio   # typically on PATH via snap/apt/flatpak
-```
+## Workflow: Creating a New Diagram
 
-#### Windows (native, non-WSL2)
+1. **Plan structure** — identify node types, relationships, flow direction
+2. **Map BASF colors to roles** — use table above; Orange=highlight, Dark Blue=structure
+3. **Write draw.io XML** — produce valid `<mxGraphModel>` XML
+4. **Save as `.drawio`** — typically to `assets/diagrams/` or the research output directory
+5. **Validate XML** — ensure all tags close correctly; `mxCell` has `id`, `parent`, `vertex`/`edge`
 
-```
-"C:\Program Files\draw.io\draw.io.exe"
-```
-
-Use `which drawio` (or `where drawio` on Windows) to check if it's on PATH before falling back to the platform-specific path.
-
-### Export command
-
-```bash
-drawio -x -f <format> -e -b 10 -o <output> <input.drawio>
-```
-
-**WSL2 example:**
-
-```bash
-`/mnt/c/Program Files/draw.io/draw.io.exe` -x -f png -e -b 10 -o diagram.drawio.png diagram.drawio
-```
-
-Key flags:
-- `-x` / `--export`: export mode
-- `-f` / `--format`: output format (png, svg, pdf, jpg)
-- `-e` / `--embed-diagram`: embed diagram XML in the output (PNG, SVG, PDF only)
-- `-o` / `--output`: output file path
-- `-b` / `--border`: border width around diagram (default: 0)
-- `-t` / `--transparent`: transparent background (PNG only)
-- `-s` / `--scale`: scale the diagram size
-- `--width` / `--height`: fit into specified dimensions (preserves aspect ratio)
-- `-a` / `--all-pages`: export all pages (PDF only)
-- `-p` / `--page-index`: select a specific page (1-based)
-
-### Opening the result
-
-| Environment | Command |
-|-------------|---------|
-| macOS | `open <file>` |
-| Linux (native) | `xdg-open <file>` |
-| WSL2 | `cmd.exe /c start "" "$(wslpath -w <file>)"` |
-| Windows | `start <file>` |
-
-**WSL2 notes:**
-- `wslpath -w <file>` converts a WSL2 path (e.g. `/home/user/diagram.drawio`) to a Windows path (e.g. `C:\Users\...`). This is required because `cmd.exe` cannot resolve `/mnt/c/...` style paths.
-- The empty string `""` after `start` is required to prevent `start` from interpreting the filename as a window title.
-
-**WSL2 example:**
-
-```bash
-cmd.exe /c start "" "$(wslpath -w diagram.drawio)"
-```
-
-## File naming
-
-- Use a descriptive filename based on the diagram content (e.g., `login-flow`, `database-schema`)
-- Use lowercase with hyphens for multi-word names
-- For export, use double extensions: `name.drawio.png`, `name.drawio.svg`, `name.drawio.pdf` — this signals the file contains embedded diagram XML
-- After a successful export, delete the intermediate `.drawio` file — the exported file contains the full diagram
-
-## XML format
-
-A `.drawio` file is native mxGraphModel XML. Always generate XML directly — Mermaid and CSV formats require server-side conversion and cannot be saved as native files.
-
-### Basic structure
-
-Every diagram must have this structure:
+### Minimal XML Template
 
 ```xml
-<mxGraphModel adaptiveColors="auto">
-  <root>
-    <mxCell id="0"/>
-    <mxCell id="1" parent="0"/>
-    <!-- Diagram cells go here with parent="1" -->
-  </root>
-</mxGraphModel>
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" version="24.0.0">
+  <diagram name="Page-1" id="page1">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <!-- Use NUMERIC IDs only: "2", "3", "4", ... -->
+        <!-- Keep mxGraphModel attributes on ONE line -->
+        <!-- No unicode (em dash, middle dot, emoji) in value attrs -->
+        <!-- Only <b>, <br>, <i> HTML tags in values -->
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
 ```
 
-- Cell `id="0"` is the root layer
-- Cell `id="1"` is the default parent layer
-- All diagram elements use `parent="1"` unless using multiple layers
+### Cell Style Snippets
 
-Consult `references/xml-reference.md` for common styles, style properties, edge routing details (including waypoints), and container/group examples.
+**Header / Hero node (Orange):**
 
-## Edge routing
+```
+rounded=1;whiteSpace=wrap;html=1;fillColor=#F39500;strokeColor=#C47800;fontColor=#FFFFFF;fontStyle=1;fontSize=13;
+```
 
-**CRITICAL: Every edge `mxCell` must contain a `<mxGeometry relative="1" as="geometry" />` child element**, even when there are no waypoints. Self-closing edge cells (e.g. `<mxCell ... edge="1" ... />`) are invalid and will not render correctly. Always use the expanded form:
+**Primary node (Dark Blue):**
+
+```
+rounded=1;whiteSpace=wrap;html=1;fillColor=#004A96;strokeColor=#003070;fontColor=#FFFFFF;fontSize=11;
+```
+
+**Secondary node (Light Blue):**
+
+```
+rounded=1;whiteSpace=wrap;html=1;fillColor=#21A0D2;strokeColor=#1580A8;fontColor=#FFFFFF;fontSize=11;
+```
+
+**Neutral node (White + Blue border):**
+
+```
+rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#004A96;fontColor=#212427;fontSize=11;
+```
+
+**Background grouping area:**
+
+```
+rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#004A96;fontColor=#212427;opacity=50;
+```
+
+**Positive outcome (Green):**
+
+```
+rounded=1;whiteSpace=wrap;html=1;fillColor=#65AC1E;strokeColor=#4E8A18;fontColor=#FFFFFF;fontSize=11;
+```
+
+**Warning / Alert (Red):**
+
+```
+rounded=1;whiteSpace=wrap;html=1;fillColor=#C50022;strokeColor=#9A001A;fontColor=#FFFFFF;fontSize=11;
+```
+
+**Connector (default):**
+
+```
+edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#212427;strokeWidth=2;endArrow=block;endFill=1;endSize=12;
+```
+
+---
+
+## Troubleshooting: Common XML Errors
+
+### XML Character Escaping (CRITICAL)
+
+**Symptom**: "xmlParseEntityRef: no name" or "Cannot read properties of null" errors
+
+**Cause**: Unescaped special characters in `value` attributes
+
+**Required XML Escapes**:
+
+| Character | Must Write As | Example                                     |
+| --------- | ------------- | ------------------------------------------- |
+| `&`       | `&amp;`       | "R&D" → `value="R&amp;D"`                   |
+| `<`       | `&lt;`        | "A<B" → `value="A&lt;B"`                    |
+| `>`       | `&gt;`        | "A>B" → `value="A&gt;B"`                    |
+| `"`       | `&quot;`      | In attributes: `title="&quot;Test&quot;"`  |
+| `'`       | `&apos;`      | In attributes: `name='It&apos;s working'`  |
+
+**Common Culprits**:
+
+- Category names with ampersands: "QA & Testing" → `"QA &amp; Testing"`
+- Mathematical expressions: "A > B & C < D" → `"A &gt; B &amp; C &lt; D"`
+- Company names: "R&D", "Q&A", "Sales & Marketing"
+
+**How to Fix**:
+
+1. Search for `value="` in the `.drawio` file
+2. Within each `value="..."`, replace:
+   - Every standalone `&` with `&amp;`
+   - Every `<` with `&lt;`
+   - Every `>` with `&gt;`
+
+**Example Fix**:
+
 ```xml
-<mxCell id="e1" edge="1" parent="1" source="a" target="b" style="...">
-  <mxGeometry relative="1" as="geometry" />
-</mxCell>
+<!-- ❌ BROKEN (line 69 error) -->
+<mxCell id="cat1" value="SYNTHESIS & REPORTING" ...>
+
+<!-- ✅ FIXED -->
+<mxCell id="cat1" value="SYNTHESIS &amp; REPORTING" ...>
 ```
 
-- Use `edgeStyle=orthogonalEdgeStyle` for right-angle connectors (most common)
-- **Space nodes generously** — prefer 200px horizontal / 120px vertical gaps
-- **Leave room for arrowheads** — at least 20px of straight segment before the target
-- Add explicit **waypoints** when edges would overlap
-- Align all nodes to a grid (multiples of 10)
-- **Edge labels**: Do NOT wrap edge labels in HTML markup to reduce font size. The default font size for edge labels is already 11px (vs 12px for vertices), so they are already smaller. Just set the `value` attribute directly.
+### Validation Before Opening
 
-See `references/xml-reference.md` for full edge routing and container guidance.
+Run quick XML validation:
 
-## Containers and groups
+```bash
+xmllint --noout yourfile.drawio
+```
 
-Use parent-child containment (`parent="containerId"`) for nested elements — do **not** just stack shapes. Children use **relative coordinates** within the container. See `references/xml-reference.md` for container types, rules, and examples.
+If no output → valid. If errors → check line number and apply escaping rules above.
 
-## Dark mode colors
+---
 
-draw.io supports automatic dark mode rendering. How colors behave depends on the property:
+### "d.setId is not a function" Error (CRITICAL)
 
-- **`strokeColor`, `fillColor`, `fontColor`** default to `"default"`, which renders as black in light theme and white in dark theme. When no explicit color is set, colors adapt automatically.
-- **Explicit colors** (e.g. `fillColor=#DAE8FC`) specify the light-mode color. The dark-mode color is computed automatically by inverting the RGB values (blending toward the inverse at 93%) and rotating the hue by 180° (via `mxUtils.getInverseColor`).
-- **`light-dark()` function** — To specify both colors explicitly, use `light-dark(lightColor,darkColor)` in the style string, e.g. `fontColor=light-dark(#7EA6E0,#FF0000)`. The first argument is used in light mode, the second in dark mode.
+**Symptom**: draw.io shows `d.setId is not a function` when opening the file
 
-To enable dark mode color adaptation, the `mxGraphModel` element must include `adaptiveColors="auto"`.
+**Causes** (in order of likelihood):
 
-When generating diagrams, you generally do not need to specify dark-mode colors — the automatic inversion handles most cases. Use `light-dark()` only when the automatic inverse color is unsatisfactory.
+1. **String IDs with underscores or special characters** — draw.io can choke on IDs like `phaseA_bg`, `leg1t`, `e12`. Use **numeric string IDs** only: `"2"`, `"3"`, `"4"`, etc.
+2. **`<code>` tags inside `value` attributes** — HTML tags like `&lt;code&gt;` inside cell values can break parsing. Use plain text or only `&lt;b&gt;`, `&lt;br&gt;`, `&lt;i&gt;` tags.
+3. **Unicode characters in values** — Em dashes (`—`), middle dots (`·`), emoji (`📋`), and other non-ASCII characters can cause parsing failures. Use ASCII equivalents: `-` instead of `—`, `/` instead of `·`, omit emoji.
+4. **Multi-line XML attributes** — `<mxGraphModel>` attributes split across lines may cause parser issues. Keep all attributes on a single line.
+5. **XML comments** — `<!-- comment -->` inside `<root>` can sometimes confuse the parser. Avoid XML comments in the cell area.
+6. **Self-closing tags** — Use `<mxCell id="0"/>` not `<mxCell id="0" />` (no space before `/>`) for consistency, though both are valid XML.
 
-## Style reference
+**How to Fix**:
 
-For the complete draw.io style reference: https://www.drawio.com/doc/faq/drawio-style-reference.html
+```xml
+<!-- ❌ BROKEN: string IDs, unicode, code tags, comments -->
+<mxCell id="phaseA_bg" value="Data — Overview" ...>
+<mxCell id="cache" value="&lt;code&gt;field.users[]&lt;/code&gt;" ...>
+<!-- This is a section divider -->
 
-For the XML Schema Definition (XSD): https://www.drawio.com/assets/mxfile.xsd
+<!-- ✅ FIXED: numeric IDs, ASCII text, simple HTML only -->
+<mxCell id="3" value="Data - Overview" ...>
+<mxCell id="6" value="field.users[] = username" ...>
+```
 
-## Troubleshooting
+**Prevention Checklist**:
+- [ ] All `id` attributes are numeric strings (`"0"`, `"1"`, `"2"`, ...)
+- [ ] No `<code>`, `<span>`, `<div>`, or `<p>` tags in values (only `<b>`, `<br>`, `<i>`)
+- [ ] No Unicode beyond basic Latin in `value` attributes (no `—`, `·`, `→`, emoji)
+- [ ] `<mxGraphModel>` attributes all on one line
+- [ ] No XML comments inside `<root>` element
+- [ ] IDs `"0"` and `"1"` reserved for root cells only
 
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| draw.io CLI not found | Desktop app not installed or not on PATH | Keep the `.drawio` file and tell the user to install the draw.io desktop app, or open the file manually |
-| Export produces empty/corrupt file | Invalid XML (e.g. double hyphens in comments, unescaped special characters) | Validate XML well-formedness before writing; see the XML well-formedness section below |
-| Diagram opens but looks blank | Missing root cells `id="0"` and `id="1"` | Ensure the basic mxGraphModel structure is complete |
-| Edges not rendering | Edge mxCell is self-closing (no child mxGeometry element) | Every edge must have `<mxGeometry relative="1" as="geometry" />` as a child element |
-| File won't open after export | Incorrect file path or missing file association | Print the absolute file path so the user can open it manually |
+---
 
-## CRITICAL: XML well-formedness
+## Reference Files
 
-- **NEVER use double hyphens (`--`) inside XML comments.** `--` is illegal inside `<!-- -->` per the XML spec and causes parse errors. Use single hyphens or rephrase.
-- Escape special characters in attribute values: `&amp;`, `&lt;`, `&gt;`, `&quot;`
-- Always use unique `id` values for each `mxCell`
+- See [references/basf-colors.md](references/basf-colors.md) for full color specification including print/CMYK values and accessibility matrix
+- See [references/drawio-best-practices.md](references/drawio-best-practices.md) for detailed configuration options, line styling, and theming
