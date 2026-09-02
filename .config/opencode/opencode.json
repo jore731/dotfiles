@@ -506,9 +506,15 @@
     "github-corporate_list_commits": "allow",
     "github-corporate_get_pull_request_files": "allow",
     "github-corporate_search_code": "allow",
+    "github-corporate_get_issue": "allow",
+    "github-corporate_list_issues": "allow",
+    "github-corporate_get_pull_request_comments": "allow",
+    "github-corporate_search_issues": "allow",
+    "github-corporate_search_repositories": "allow",
     "gitlab_get_merge_request": "allow",
     "gitlab_get_merge_request_conflicts": "allow",
     "gitlab_get_merge_request_diffs": "allow",
+    "playwright_browser_snapshot": "allow",
     "stripe_list_available_accounts_or_orgs ": "allow",
     "stripe_stripe_api_search": "allow",
     "stripe_stripe_api_read": "allow",
@@ -516,8 +522,11 @@
     "bash": {
       "*": "ask",
       "ls *": "allow",
+      "rg *": "allow",
       "cat *": "allow",
       "pwd": "allow",
+      "dig *": "allow",
+      "drawio *": "allow",
       "git status *": "allow",
       "git fetch *": "allow",
       "git diff *": "allow",
@@ -549,6 +558,8 @@
       "command *": "allow",
       "true": "allow",
       "python3 -m compileall *": "allow",
+      "python3 /Users/jorgepulidolopez/.agents/skills/drawio-skill/scripts/shapesearch.py *": "allow",
+      "python3 /Users/jorgepulidolopez/.agents/skills/drawio-skill/scripts/validate.py *": "allow",
       "/Users/jorgepulidolopez/Library/Caches/copilot/marketplaces/eugeniughelbur-obsidian-second-brain/hooks/validate-ai-first.sh *": "allow"
     },
     "external_directory": {
@@ -556,7 +567,8 @@
       "~/**": "ask",
       "~/.agents/**": "allow",
       "~/.claude/**": "allow",
-      "~/secondbrain/**": "allow"
+      "~/secondbrain/**": "allow",
+      "~/.opencode/skills/**": "allow"
     },
   },
   "mcp": {
@@ -594,6 +606,6 @@
       "headers": {
         "Authorization": "Bearer {env:OBSIDIAN_REST_API_KEY}"
       }
-    }
+    },
   }
 }
