@@ -1,0 +1,340 @@
+{
+  "id": "da0ee3e607d403683254",
+  "status": "published",
+  "elements": [
+    {
+      "id": "e173436af68ff24d6a45",
+      "type": "line",
+      "x": 12.6,
+      "y": 5.4,
+      "width": 5.4,
+      "height": 5.4,
+      "angle": 0,
+      "strokeColor": "transparent",
+      "backgroundColor": "#0078D4",
+      "fillStyle": "solid",
+      "strokeWidth": 0.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [
+        "303ca2337473a550973b"
+      ],
+      "roundness": null,
+      "seed": 1,
+      "version": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 0,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          2.308,
+          4.634
+        ],
+        [
+          3.546000000000001,
+          3.244999999999999
+        ],
+        [
+          0.0,
+          3.244999999999999
+        ],
+        [
+          0.0,
+          2.1549999999999994
+        ],
+        [
+          3.546000000000001,
+          2.1549999999999994
+        ],
+        [
+          2.308,
+          0.7669999999999995
+        ],
+        [
+          2.992000000000001,
+          0.0
+        ],
+        [
+          5.4,
+          2.6999999999999993
+        ],
+        [
+          2.992000000000001,
+          5.4
+        ],
+        [
+          2.308,
+          4.634
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "polygon": true
+    },
+    {
+      "id": "69facbfad638304233fe",
+      "type": "line",
+      "x": 6.3,
+      "y": 4.5,
+      "width": 5.3999999999999995,
+      "height": 7.199999999999999,
+      "angle": 0,
+      "strokeColor": "transparent",
+      "backgroundColor": "#0078D4",
+      "fillStyle": "solid",
+      "strokeWidth": 0.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [
+        "303ca2337473a550973b"
+      ],
+      "roundness": null,
+      "seed": 2,
+      "version": 1,
+      "versionNonce": 2,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 0,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0.0,
+          1.0
+        ],
+        [
+          1.0,
+          0.0
+        ],
+        [
+          4.3999999999999995,
+          0.0
+        ],
+        [
+          5.3999999999999995,
+          1.0
+        ],
+        [
+          5.3999999999999995,
+          3.5999999999999996
+        ],
+        [
+          5.3999999999999995,
+          6.199999999999999
+        ],
+        [
+          4.3999999999999995,
+          7.199999999999999
+        ],
+        [
+          1.0,
+          7.199999999999999
+        ],
+        [
+          0.0,
+          6.199999999999999
+        ],
+        [
+          0.0,
+          3.5999999999999996
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "polygon": true
+    },
+    {
+      "id": "90f699e8f5a80fd91bed",
+      "type": "line",
+      "x": 6.3,
+      "y": 4.5,
+      "width": 5.3999999999999995,
+      "height": 7.199999999999999,
+      "angle": 0,
+      "strokeColor": "transparent",
+      "backgroundColor": "#0078D4",
+      "fillStyle": "solid",
+      "strokeWidth": 0.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [
+        "303ca2337473a550973b"
+      ],
+      "roundness": null,
+      "seed": 3,
+      "version": 1,
+      "versionNonce": 3,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 0,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          4.500000000000001,
+          2.7
+        ],
+        [
+          2.7,
+          0.9000000000000004
+        ],
+        [
+          0.9000000000000004,
+          2.7
+        ],
+        [
+          0.9000000000000004,
+          4.5
+        ],
+        [
+          2.7,
+          6.300000000000001
+        ],
+        [
+          4.500000000000001,
+          4.5
+        ],
+        [
+          4.500000000000001,
+          2.7
+        ],
+        [
+          2.000000000000001,
+          0.0
+        ],
+        [
+          0.0,
+          2.0
+        ],
+        [
+          0.0,
+          5.199999999999999
+        ],
+        [
+          2.000000000000001,
+          7.199999999999999
+        ],
+        [
+          3.3999999999999995,
+          7.199999999999999
+        ],
+        [
+          5.3999999999999995,
+          5.199999999999999
+        ],
+        [
+          5.3999999999999995,
+          2.0
+        ],
+        [
+          3.3999999999999995,
+          0.0
+        ],
+        [
+          2.000000000000001,
+          0.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "polygon": true
+    },
+    {
+      "id": "eae2f59c815487e98cfb",
+      "type": "line",
+      "x": 0.0,
+      "y": 5.4,
+      "width": 5.4,
+      "height": 5.4,
+      "angle": 0,
+      "strokeColor": "transparent",
+      "backgroundColor": "#0078D4",
+      "fillStyle": "solid",
+      "strokeWidth": 0.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [
+        "303ca2337473a550973b"
+      ],
+      "roundness": null,
+      "seed": 4,
+      "version": 1,
+      "versionNonce": 4,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 0,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          2.308,
+          4.634
+        ],
+        [
+          3.546,
+          3.244999999999999
+        ],
+        [
+          0.0,
+          3.244999999999999
+        ],
+        [
+          0.0,
+          2.1549999999999994
+        ],
+        [
+          3.546,
+          2.1549999999999994
+        ],
+        [
+          2.308,
+          0.7669999999999995
+        ],
+        [
+          2.992,
+          0.0
+        ],
+        [
+          5.4,
+          2.6999999999999993
+        ],
+        [
+          2.992,
+          5.4
+        ],
+        [
+          2.308,
+          4.634
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "polygon": true
+    }
+  ],
+  "created": 0,
+  "name": "03423 icon service Defender Relay"
+}

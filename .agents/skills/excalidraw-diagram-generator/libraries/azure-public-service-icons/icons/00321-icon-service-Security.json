@@ -1,0 +1,140 @@
+{
+  "id": "d1658b9d07af2ebff4b9",
+  "status": "published",
+  "elements": [
+    {
+      "id": "33308d7064f2372fa787",
+      "type": "line",
+      "x": 2.5,
+      "y": 1.205,
+      "width": 13.0,
+      "height": 15.53,
+      "angle": 0,
+      "strokeColor": "transparent",
+      "backgroundColor": "#0078d4",
+      "fillStyle": "solid",
+      "strokeWidth": 0.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [
+        "6d4fe714e58d23fb5916"
+      ],
+      "roundness": null,
+      "seed": 1,
+      "version": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 0,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          13.0,
+          7.279999999999999
+        ],
+        [
+          12.454,
+          9.682
+        ],
+        [
+          11.112,
+          11.798
+        ],
+        [
+          9.414,
+          13.538
+        ],
+        [
+          7.802,
+          14.812
+        ],
+        [
+          6.718,
+          15.53
+        ],
+        [
+          6.289999999999999,
+          15.53
+        ],
+        [
+          5.203,
+          14.812
+        ],
+        [
+          3.5890000000000004,
+          13.538
+        ],
+        [
+          1.8899999999999997,
+          11.798
+        ],
+        [
+          0.5459999999999998,
+          9.682
+        ],
+        [
+          0.0,
+          7.279999999999999
+        ],
+        [
+          0.0,
+          4.758
+        ],
+        [
+          0.0,
+          2.2359999999999998
+        ],
+        [
+          0.3999999999999999,
+          1.8359999999999999
+        ],
+        [
+          3.098,
+          1.3129999999999997
+        ],
+        [
+          4.474,
+          0.45199999999999996
+        ],
+        [
+          6.5,
+          0.0
+        ],
+        [
+          8.526,
+          0.45199999999999996
+        ],
+        [
+          9.902,
+          1.3129999999999997
+        ],
+        [
+          12.6,
+          1.8369999999999997
+        ],
+        [
+          13.0,
+          2.237
+        ],
+        [
+          13.0,
+          4.758
+        ],
+        [
+          13.0,
+          7.279999999999999
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "polygon": true
+    }
+  ],
+  "created": 0,
+  "name": "00321 icon service Security"
+}

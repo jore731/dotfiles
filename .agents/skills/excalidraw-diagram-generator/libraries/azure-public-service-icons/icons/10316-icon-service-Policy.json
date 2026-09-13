@@ -1,0 +1,324 @@
+{
+  "id": "dca079618acde66f6fd3",
+  "status": "published",
+  "elements": [
+    {
+      "id": "dbaedec00f0e83b9c5ea",
+      "type": "line",
+      "x": 1.0,
+      "y": 0.5,
+      "width": 12.68,
+      "height": 5.08,
+      "angle": 0,
+      "strokeColor": "transparent",
+      "backgroundColor": "#949494",
+      "fillStyle": "solid",
+      "strokeWidth": 0.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [
+        "2debe0955d70dddb2468"
+      ],
+      "roundness": null,
+      "seed": 1,
+      "version": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 0,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          1.4100000000000001,
+          5.08
+        ],
+        [
+          1.5,
+          5.0
+        ],
+        [
+          3.4400000000000004,
+          3.87
+        ],
+        [
+          5.38,
+          2.74
+        ],
+        [
+          7.32,
+          1.6099999999999999
+        ],
+        [
+          9.85,
+          3.0
+        ],
+        [
+          12.32,
+          4.39
+        ],
+        [
+          12.68,
+          4.18
+        ],
+        [
+          12.68,
+          3.09
+        ],
+        [
+          12.56,
+          2.88
+        ],
+        [
+          9.971,
+          1.425
+        ],
+        [
+          7.33,
+          0.0
+        ],
+        [
+          5.525,
+          1.035
+        ],
+        [
+          3.7199999999999998,
+          2.07
+        ],
+        [
+          1.915,
+          3.105
+        ],
+        [
+          0.1100000000000001,
+          4.14
+        ],
+        [
+          0.0,
+          4.22
+        ],
+        [
+          1.4100000000000001,
+          5.08
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "polygon": true
+    },
+    {
+      "id": "85a61a0780b27c54dc98",
+      "type": "line",
+      "x": 8.45,
+      "y": 13.14,
+      "width": 5.23,
+      "height": 4.329999999999998,
+      "angle": 0,
+      "strokeColor": "transparent",
+      "backgroundColor": "#949494",
+      "fillStyle": "solid",
+      "strokeWidth": 0.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [
+        "2debe0955d70dddb2468"
+      ],
+      "roundness": null,
+      "seed": 2,
+      "version": 1,
+      "versionNonce": 2,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 0,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          4.850000000000001,
+          0.0
+        ],
+        [
+          2.4800000000000004,
+          1.3650000000000002
+        ],
+        [
+          0.11000000000000121,
+          2.7299999999999986
+        ],
+        [
+          0.0,
+          2.7299999999999986
+        ],
+        [
+          0.0,
+          4.329999999999998
+        ],
+        [
+          0.11000000000000121,
+          4.329999999999998
+        ],
+        [
+          2.610000000000001,
+          2.8999999999999986
+        ],
+        [
+          5.110000000000001,
+          1.4699999999999989
+        ],
+        [
+          5.23,
+          1.2699999999999996
+        ],
+        [
+          5.23,
+          0.20999999999999908
+        ],
+        [
+          4.850000000000001,
+          0.0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "polygon": true
+    },
+    {
+      "id": "4871342a2e4260903b3b",
+      "type": "line",
+      "x": 1.0,
+      "y": 4.72,
+      "width": 7.449999999999999,
+      "height": 12.75,
+      "angle": 0,
+      "strokeColor": "transparent",
+      "backgroundColor": "#b3b3b3",
+      "fillStyle": "solid",
+      "strokeWidth": 0.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "groupIds": [
+        "2debe0955d70dddb2468"
+      ],
+      "roundness": null,
+      "seed": 3,
+      "version": 1,
+      "versionNonce": 3,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 0,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          7.449999999999999,
+          11.18
+        ],
+        [
+          7.32,
+          11.18
+        ],
+        [
+          5.38,
+          10.036999999999999
+        ],
+        [
+          3.4400000000000004,
+          8.893
+        ],
+        [
+          1.5,
+          7.750000000000001
+        ],
+        [
+          1.38,
+          7.55
+        ],
+        [
+          1.38,
+          5.36
+        ],
+        [
+          1.38,
+          3.17
+        ],
+        [
+          1.38,
+          0.9800000000000004
+        ],
+        [
+          1.38,
+          0.8600000000000003
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.1299999999999999
+        ],
+        [
+          0.0,
+          2.197
+        ],
+        [
+          0.0,
+          4.265
+        ],
+        [
+          0.0,
+          6.332
+        ],
+        [
+          0.0,
+          8.399999999999999
+        ],
+        [
+          0.1100000000000001,
+          8.61
+        ],
+        [
+          1.915,
+          9.645
+        ],
+        [
+          3.7199999999999998,
+          10.68
+        ],
+        [
+          5.525,
+          11.715
+        ],
+        [
+          7.33,
+          12.75
+        ],
+        [
+          7.449999999999999,
+          12.75
+        ],
+        [
+          7.449999999999999,
+          11.18
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": null,
+      "polygon": true
+    }
+  ],
+  "created": 0,
+  "name": "10316 icon service Policy"
+}

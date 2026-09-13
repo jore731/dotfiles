@@ -1,18 +1,19 @@
 <p align="center">
   <a href="https://github.com/eugeniughelbur/obsidian-second-brain">
-    <img src="media/banner.png" alt="obsidian-second-brain: one brain, eight platforms, 46 commands. A cross-platform skill for Obsidian that runs on Claude Code, Codex, Gemini, OpenCode, Antigravity, Hermes, Pi, and Grok Bot." width="100%" />
+    <img src="media/banner.png" alt="obsidian-second-brain: one brain, eight platforms, 47 commands. A cross-platform skill for Obsidian that runs on Claude Code, Codex, Gemini, OpenCode, Antigravity, Hermes, Pi, and Grok Bot." width="100%" />
   </a>
 </p>
 
 <p align="center">
   <a href="#install"><img src="https://img.shields.io/badge/Claude_Code-D97757?style=for-the-badge&logo=anthropic&logoColor=white" alt="Claude Code" /></a>
+  <a href="#grok-bot"><img src="https://img.shields.io/badge/Grok_Bot-000000?style=for-the-badge&logo=x&logoColor=white" alt="Grok Bot" /></a>
   <a href="#codex-cli--gemini-cli--opencode"><img src="https://img.shields.io/badge/Codex_CLI-412991?style=for-the-badge&logo=openai&logoColor=white" alt="Codex CLI" /></a>
   <a href="#codex-cli--gemini-cli--opencode"><img src="https://img.shields.io/badge/Gemini_CLI-4285F4?style=for-the-badge&logo=googlegemini&logoColor=white" alt="Gemini CLI" /></a>
   <a href="#codex-cli--gemini-cli--opencode"><img src="https://img.shields.io/badge/OpenCode-181818?style=for-the-badge&logo=opensourceinitiative&logoColor=white" alt="OpenCode" /></a>
 </p>
 
 <p align="center">
-  <strong>One codebase. Eight CLIs. Same brain.</strong>
+  <strong>Your vault is the memory. Claude, Grok Bot, Codex - same brain.</strong>
   <br />
   <em>Your vault outlives whichever CLI you switch to.</em>
 </p>
@@ -25,7 +26,7 @@
   <a href="https://github.com/sponsors/eugeniughelbur"><img src="https://img.shields.io/badge/Sponsor-EA4AAA?style=for-the-badge&logo=github-sponsors&logoColor=white" alt="Sponsor" /></a>
 </p>
 
-<h1 align="center">obsidian-second-brain: an AI second brain for Obsidian that Claude can actually search</h1>
+<h1 align="center">obsidian-second-brain: AI second brain for Obsidian - persistent memory for Claude Code and Grok Bot</h1>
 
 <p align="center">
   <strong>An evolution of <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f">Karpathy's LLM Wiki pattern</a>: a vault that rewrites itself.</strong>
@@ -64,8 +65,8 @@
 </p>
 
 <p align="center">
-  <strong>v0.14 - The Harvest (July 2026):</strong> we scanned all 408 forks of this repo and shipped the best ideas back upstream, crediting every author.<br/>
-  <em>Multi-turn /obsidian-brainstorm, bounded vault recall, full-page source reading, Brave + Tavily sources, a guarded updater, supersession-aware search, secret detection, pt-BR triggers - and one Agent Skills build serving Codex, OpenCode, Antigravity, and Copilot CLI (v0.13). 198-test CI wall.</em>
+  <strong>v0.15 - The Port (September 2026):</strong> the plugin now runs on Windows the way it runs on macOS and Linux, fixed end to end by a contributor across two PRs.<br/>
+  <em>Windows paths, CRLF and BOM notes, UTF-8 everywhere, a USERPROFILE-aware config home; plus Gemini-first /podcast with a free Whisper fallback, tag syntax and taxonomy checks, Simplified Chinese triggers, /obsidian-reindex, an Obsidian lint plugin, platform ownership, AI-FIRST.md, a reproducible retrieval benchmark, a generated docs site, typed edges, and the callout preamble. 763-test CI wall.</em>
   <a href="CHANGELOG.md">See the changelog &rarr;</a>
 </p>
 
@@ -73,7 +74,7 @@
 
 ## The Problem
 
-You use Claude every day. Every session starts from scratch. You re-explain everything. The conversation ends. Everything disappears. Claude Code has no persistent memory across sessions, and neither does Codex, Gemini, or any of the others.
+You use Claude every day. Every session starts from scratch. You re-explain everything. The conversation ends. Everything disappears. Claude Code has no persistent memory across sessions - and neither does Grok Bot, Codex, Gemini, or any of the others.
 
 You take notes in Obsidian. Hundreds of files. They just sit there. You make the same decision twice because you forgot you made it six months ago. Ideas rot in daily notes. Nobody connects the dots.
 
@@ -263,7 +264,7 @@ Free transcript via youtube-transcript-api. Optional metadata + top comments via
   +------------------------------------------+
 ```
 
-46 commands total. The calendar command (`/obsidian-calendar`) is Claude Code only (needs the Google Calendar MCP), so the Codex / Gemini / OpenCode / Hermes / Pi / Agent Skills builds ship 45.
+47 commands total. The calendar command (`/obsidian-calendar`) is Claude Code only (needs the Google Calendar MCP), so the Codex / Gemini / OpenCode / Hermes / Pi / Agent Skills builds ship 46.
 
 **Layer 1** saves, organizes, ingests, reconciles, exports, schedules your calendar, and maintains your vault.
 **Layer 2** challenges your ideas, surfaces hidden patterns, bridges unrelated domains, and graduates ideas into projects.
@@ -273,7 +274,7 @@ Free transcript via youtube-transcript-api. Optional metadata + top comments via
 
 ---
 
-## 46 Commands
+## 47 Commands
 
 ### Operations -- Claude remembers
 
@@ -299,7 +300,8 @@ Free transcript via youtube-transcript-api. Optional metadata + top comments via
 | `/obsidian-board-hygiene` | Bulk-triage a board -- surface stale/overdue items, then archive / reschedule / mark-Done in one pass |
 | `/obsidian-project` | Project note with board and daily links |
 | `/obsidian-projects` | Live project status from git + local docs -- infers all context from vault notes, no config required |
-| `/obsidian-health` | Vault audit -- contradictions, gaps, stale claims, orphans, freshness violations (the [freshness policy](references/freshness-policy.md): every fact timeless, dated, or a pointer), and typed-edge lint (unknown types, dangling targets, contradiction cycles in the `relations:` graph) |
+| `/obsidian-health` | Vault audit -- contradictions, gaps, stale claims, orphans, freshness violations (the [freshness policy](references/freshness-policy.md): every fact timeless, dated, or a pointer), typed-edge lint (unknown types, dangling targets, contradiction cycles in the `relations:` graph), and a tag taxonomy audit ([opt-in](references/taxonomy-format.md) via `_meta/taxonomy.md`) |
+| `/obsidian-merge` | Merge two near-duplicate notes from `/obsidian-health` into one -- dry run by default, frontmatter union, retired note becomes a redirect (never deleted) |
 | `/obsidian-reindex` | Refreshes the incremental semantic index and reports coverage before and after, with clear embedding-backend failures |
 | `/obsidian-retrieval-eval` | Measures vault search quality -- recall@k + MRR on natural-language questions, with the concrete failures and ranked fixes |
 | `/obsidian-decide [--formal]` | Logs decisions to the right project notes; `--formal` writes a full ADR record (the vault knows why it's structured this way) |
@@ -635,7 +637,7 @@ Rather than ask you to take that on faith, here is what each build currently pas
 
 <img src="media/plugin-install.gif" alt="Installing obsidian-second-brain through the Claude Code plugin marketplace: marketplace add, plugin install, status enabled." width="100%" />
 
-That ships all 46 commands, the skill manual, the session-context hook, the opt-in background agent (inert until you arm it - see [hooks/postcompact.hook.example.json](hooks/postcompact.hook.example.json)), and the vault MCP server. Then tell Claude where your vault lives by adding to the `env` section of `~/.claude/settings.json`:
+That ships all 47 commands, the skill manual, the session-context hook, the opt-in background agent (inert until you arm it - see [hooks/postcompact.hook.example.json](hooks/postcompact.hook.example.json)), and the vault MCP server. Then tell Claude where your vault lives by adding to the `env` section of `~/.claude/settings.json`:
 
 ```json
 "env": { "OBSIDIAN_VAULT_PATH": "/path/to/your/vault" }
@@ -770,7 +772,7 @@ What to expect (open models follow instructions less reliably than Claude, so th
 
 The 7 research commands use API keys (2 of them fall back to free sources without any).
 
-**Installed the plugin?** You have no repo checkout, so `install.sh`, `.env.example`, and `uv sync` are not on your disk. Create the env file by hand instead - the research scripts read this path regardless of how you installed, and the plugin's MCP server already runs under `uv run --with 'mcp<2'`, so there is nothing to `uv sync`:
+**Installed the plugin?** You have no repo checkout, so `install.sh`, `.env.example`, and `uv sync` are not on your disk. Create the env file by hand instead - the research scripts read this path regardless of how you installed, and the plugin's MCP server already runs under `uv run --no-project --with 'mcp<2'`, so there is nothing to `uv sync`:
 
 ```bash
 mkdir -p ~/.config/obsidian-second-brain
@@ -778,6 +780,15 @@ touch ~/.config/obsidian-second-brain/.env
 chmod 600 ~/.config/obsidian-second-brain/.env
 # then paste the keys from the table below into that file
 ```
+
+**On Windows** (Git Bash / MSYS2) the file lives under your Windows profile, `%USERPROFILE%\.config\obsidian-second-brain\.env`: that is where Python (`Path.home()`), Claude Code, and the bash scripts resolve the home, even when a corporate `HOME` points at another drive. Bash's own `~` still follows `HOME`, so on such a machine create the file from `USERPROFILE` instead of with the commands above:
+
+```bash
+CONFIG="$(cygpath -u "$USERPROFILE")/.config/obsidian-second-brain"
+mkdir -p "$CONFIG" && touch "$CONFIG/.env" && chmod 600 "$CONFIG/.env"
+```
+
+To keep the file anywhere else, set `OBSIDIAN_ENV_FILE` to its full path; every reader and writer (the research loaders, the eval, the MCP server, the write-time hook, `install.sh`, `scripts/setup.sh`) honors it. On Windows give it a native path (`C:/Users/me/osb.env`, or with backslashes), which bash and Python can both open; the Git Bash spellings `/c/...` and `/cygdrive/c/...` mean something to bash only. This assumes the native Windows Python that `uv` installs; a Cygwin- or MSYS-built Python resolves its home from `HOME` instead, so use `OBSIDIAN_ENV_FILE` there.
 
 **Installed from a clone?** Run `install.sh` and answer "y" to the research prompt, which does the same thing for you. Or do it manually:
 
@@ -867,7 +878,10 @@ The maintenance layer, given a name. Its one rule: every stored fact must be tim
 Approximate per-call costs as of 2026-04: `/x-read` ~$0.05, `/x-pulse` ~$0.13, `/research` ~$0.04, `/research-deep` ~$0.40-$0.80, `/youtube` ~$0.04, `/podcast` ~$0.04 Grok call (plus ~$0.006/min if Whisper is used; free if RSS provides a `<podcast:transcript>` tag or you accept the show-notes fallback). Costs for paid calls (Grok, Perplexity, Gemini) are logged to `~/.research-toolkit/usage.log` for visibility. No hard caps. You're trusted to monitor your own spend.
 
 ### Can I use this on Windows or Linux?
-The core vault commands work anywhere Claude Code runs. `install.sh` supports Linux, macOS, and Windows (MSYS2/Git Bash): on Linux/macOS slash commands are symlinked so `git pull` keeps them current; on Windows they are copied and `update.sh` refreshes them. The research toolkit auto-open step uses `open` on macOS, `xdg-open` on Linux, and `notepad` on Windows.
+The core vault commands work anywhere Claude Code runs. `install.sh` supports Linux, macOS, and Windows (MSYS2/Git Bash): on Linux/macOS slash commands are symlinked so `git pull` keeps them current; on Windows they are copied and `update.sh` refreshes them. The research toolkit auto-open step uses `open` on macOS, `xdg-open` on Linux, and `notepad` on Windows. On Windows the config file and Claude Code state hang off `%USERPROFILE%` (see the research toolkit section); `OBSIDIAN_ENV_FILE` relocates the config file for every part of the toolkit.
+
+### A research command said it saved, but my daily note or `log.md` did not change (Windows)
+Since #248 the research toolkit (`/research`, `/research-deep`, `/x-pulse`, `/youtube`, `/podcast`) reads and writes vault files as UTF-8 on every platform. Before appending to today's daily note or to `log.md` it checks that the existing file is valid UTF-8. A file that is not - typically a note an earlier Windows run rewrote in the system code page (cp1252) before that fix - is left exactly as it is and the append is skipped, because UTF-8 bytes added to a cp1252 file would leave something that decodes correctly as neither. The research note itself is still saved; only the daily-note or log append is skipped, and a `[vault]` line on stderr says so. Re-save that one file as UTF-8 once (Obsidian and VS Code both do this on save, or `iconv -f cp1252 -t utf-8 old.md > new.md`) and the next run appends normally. Files the toolkit creates are always UTF-8.
 
 ### Can I have a separate vault per project (multi-repo workflows)?
 Yes. The default `scripts/setup.sh` writes `OBSIDIAN_VAULT_PATH` globally to `~/.claude/settings.json`, but every hook in this skill reads that env var at fire-time. Claude Code merges per-project `.claude/settings.json` on top of the global one, so you can put `{"env": {"OBSIDIAN_VAULT_PATH": "/path/to/repo-vault"}}` in each repo's `.claude/settings.json` and Claude will use that repo's vault whenever you launch a session from that directory. The slash commands and hooks remain globally installed; only the vault path changes. Full recipe in [`SKILL.md`](SKILL.md#per-project-vaults-multi-repo-workflows). One thing this does NOT give you: isolation within a single vault (no `--scope` on commands yet).

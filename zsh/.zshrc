@@ -66,10 +66,6 @@ export NIX_SSL_CERT_FILE=$SSL_CERT_FILE
 # Node.js ignores SSL_CERT_FILE; it only honors NODE_EXTRA_CA_CERTS
 export NODE_EXTRA_CA_CERTS=$SSL_CERT_FILE
 
-# Devbox
-DEVBOX_NO_PROMPT=true
-eval "$(devbox global shellenv --init-hook)"
-
 # nvm — NVM_DIR points at the data dir (nvm.sh symlinks to brew's); loaded lazily by the OMZ nvm plugin
 export NVM_DIR="$HOME/.nvm"
 

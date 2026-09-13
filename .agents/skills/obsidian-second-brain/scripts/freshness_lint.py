@@ -51,7 +51,7 @@ import json
 import re
 import sys
 from datetime import date, datetime
-from pathlib import Path
+from pathlib import Path, PurePath
 
 from vault_scan import BASE_EXCLUDE_DIRS  # noqa: E402
 
@@ -137,7 +137,12 @@ URL = re.compile(r"https?://\S+")
 HEADING = re.compile(r"^(#{1,6})\s")
 # Typed-pointer prefixes that are just URI schemes or common false positives.
 POINTER_IGNORE = {"http", "https", "mailto", "file", "obsidian", "tel", "ftp",
-                  "note", "example", "type", "status", "date", "source"}
+                  "note", "example", "type", "status", "date", "source",
+                  # RDF / ontology vocabulary prefixes (owl:Class, rdfs:label,
+                  # skos:broader): CURIEs name terms in a vocabulary, not a record
+                  # in a home system, so there is nothing to map or refresh.
+                  "owl", "rdf", "rdfs", "xsd", "skos", "foaf", "dc", "dcterms",
+                  "schema", "prov", "sh", "dbo", "wdt"}
 
 
 def parse_frontmatter(lines: list[str]) -> tuple[dict, int]:
@@ -265,7 +270,12 @@ def lint_file(path: Path, rel: str, cfg: dict, today: date) -> list[dict]:
         stripped = HTML_COMMENT.sub("", stripped)
 
         # FRESH-3: typed pointers must be mapped (URLs are always fine).
-        for pm in TYPED_POINTER.finditer(stripped):
+        # Drop URLs before scanning: a path segment such as Medium's
+        # `/resize:fit:1400/` inside a URL matched the pointer shape and rang
+        # FRESH-3 on every image link, while the URL guard below only sees the
+        # match itself.
+        pointer_text = URL.sub(" ", stripped)
+        for pm in TYPED_POINTER.finditer(pointer_text):
             prefix = pm.group(1).lower()
             if prefix in POINTER_IGNORE or URL.search(pm.group(0)):
                 continue
@@ -343,6 +353,17 @@ def lint_file(path: Path, rel: str, cfg: dict, today: date) -> list[dict]:
 SKIP_DIRS = frozenset(d.lower() for d in BASE_EXCLUDE_DIRS)  # see scripts/vault_scan.py
 
 
+def _report_path(path: PurePath, root: PurePath) -> str:
+    """The `file` of a finding: vault-relative and forward-slash on every platform.
+
+    The report is the contract (the --json output, the tests, and the vault's
+    own link form), and str(Path) is backslash-separated on Windows, so a
+    finding would have named Boards/Work.md with backslashes there and with a
+    slash everywhere else.
+    """
+    return path.relative_to(root).as_posix()
+
+
 def lint_folder(root: Path, today: date | None = None) -> dict:
     today = today or datetime.now().date()
     cfg = load_config(root)
@@ -354,7 +375,7 @@ def lint_folder(root: Path, today: date | None = None) -> dict:
             continue
         if exempt and any("/".join(parts[:i + 1]) in exempt for i in range(len(parts) - 1)):
             continue
-        findings.extend(lint_file(path, str(path.relative_to(root)), cfg, today))
+        findings.extend(lint_file(path, _report_path(path, root), cfg, today))
     errors = sum(1 for f in findings if f["severity"] == "error")
     warnings = sum(1 for f in findings if f["severity"] == "warning")
     return {"errors": errors, "warnings": warnings, "findings": findings}

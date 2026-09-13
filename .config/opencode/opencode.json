@@ -26,8 +26,6 @@
   },
   "default_agent": "build",
   "instructions": [
-    "AGENTS.md",
-    "CONTRIBUTING.md",
     "instructions/INSTRUCTIONS.md",
     "skills/tdd-workflow/SKILL.md",
     "skills/security-review/SKILL.md",
@@ -47,7 +45,7 @@
   ],
   "skills": {
     "paths": [
-      "../skills"
+      "skills"
     ]
   },
   "agent": {
@@ -511,6 +509,8 @@
     "github-corporate_get_pull_request_comments": "allow",
     "github-corporate_search_issues": "allow",
     "github-corporate_search_repositories": "allow",
+    "github-corporate_list_pull_requests": "allow",
+    "github-corporate_get_pull_request_reviews": "allow",
     "gitlab_get_merge_request": "allow",
     "gitlab_get_merge_request_conflicts": "allow",
     "gitlab_get_merge_request_diffs": "allow",

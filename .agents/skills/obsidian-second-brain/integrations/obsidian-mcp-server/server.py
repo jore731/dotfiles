@@ -7,12 +7,36 @@ and add notes to an Obsidian vault. This is the "second brain as a tool" connect
 doorway into the knowledge vault.
 
 Run:
-    OBSIDIAN_VAULT_PATH=/path/to/vault uv run --with 'mcp<2' python server.py
+    OBSIDIAN_VAULT_PATH=/path/to/vault uv run --no-project --with 'mcp<2' python server.py
 
 or wire it into a client's MCP config (see README.md).
 """
 
-from __future__ import annotations
+# DO NOT add `from __future__ import annotations` to this module.
+#
+# Symptom if you do: the server dies during startup and the client lists zero
+# vault tools, with "issubclass() arg 1 must be a class" in the logs.
+#
+# Cause: PEP 563 turns every annotation in this module into a plain string.
+# fastmcp inspects each tool's signature at registration time and calls
+# `issubclass(param.annotation, Context)` to find the context parameter.
+# `issubclass` needs a real class, so a string annotation raises TypeError on
+# the FIRST @mcp.tool() it walks, which aborts registration for all of them.
+#
+# This is a fastmcp limitation, not a defect in this file. Annotations below
+# are therefore evaluated eagerly at import time, so every name used in an
+# annotation on a decorated function must be importable at module scope
+# (no `if TYPE_CHECKING:` guarded names in those positions).
+#
+# Note that the `mcp<2` pin in .claude-plugin/plugin.json does not prevent
+# this. On a current index `mcp<2` resolves to the latest 1.x (1.29.1 as of
+# 2026-08, where fastmcp handles string annotations and all 12 tools register
+# with the import present), but a resolver that lands on an older 1.x such as
+# 1.9.4 hits the issubclass path above. The pin guards against the 2.x rewrite
+# dropping `mcp.server.fastmcp` entirely; it does not pin a 1.x that is safe
+# here. Leaving the import out keeps the server working on every 1.x. If the
+# pin is ever lifted to 2.x, recheck the issubclass path before bringing the
+# import back.
 
 import json
 import sys
@@ -64,6 +88,11 @@ def obsidian_save_note(
     `summary` becomes the platform-neutral `## For future agent` preamble. If
     content already begins with a legacy or generic future-agent heading, the
     server normalizes it and never duplicates it.
+
+    The result reports the write and its bookkeeping separately: `saved`,
+    `validation` (ok, issues), `index` (what happened in index.md), `log` (the
+    operation-log file written), and `post_write` when OBSIDIAN_POST_WRITE_CMD
+    is set. "saved" alone never implies the rest happened.
     """
     return json.dumps(
         vault_ops.save_note(
@@ -74,7 +103,12 @@ def obsidian_save_note(
 
 @mcp.tool()
 def obsidian_capture(text: str, tags: list[str] | None = None) -> str:
-    """Quick-capture an idea or thought as a lightweight note (type: idea) in the vault."""
+    """Quick-capture an idea or thought as a lightweight note (type: idea) in the vault.
+
+    Bookkeeping is done by the server and reported alongside `saved`: validation,
+    an index.md entry when the catalog has an `## Inbox/` section, the operation-log
+    line, and the outcome of OBSIDIAN_POST_WRITE_CMD when it is configured.
+    """
     return json.dumps(vault_ops.capture_idea(text, tags=tags))
 
 

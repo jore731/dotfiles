@@ -738,7 +738,7 @@ def test_link_graph_resolves_unicode_composition(tmp_path):
     )
     graph = json.loads(subprocess.run(
         [sys.executable, str(REPO_ROOT / "scripts/link_graph.py"), "--path", str(vault)],
-        capture_output=True, text=True, check=True,
+        capture_output=True, text=True, encoding="utf-8", check=True,
     ).stdout)
     assert graph["stats"]["dangling_link_count"] == 0, (
         "a composed link to a decomposed filename must resolve, not dangle"
@@ -777,7 +777,7 @@ def test_link_graph_typed_edges_and_lint(tmp_path):
 
     graph = json.loads(subprocess.run(
         [sys.executable, str(REPO_ROOT / "scripts/link_graph.py"), "--path", str(vault)],
-        capture_output=True, text=True, check=True,
+        capture_output=True, text=True, encoding="utf-8", check=True,
     ).stdout)
     # Overlay is separate from connectivity: three honored typed edges, and the
     # legacy scalar is read as a typed edge too.
@@ -1034,6 +1034,7 @@ def test_research_key_in_config_env_selects_paid_mode(tmp_path, module, paid_fn,
 
     env = os.environ.copy()
     env["HOME"] = str(fake_home)
+    env["USERPROFILE"] = str(fake_home)  # what Path.home() reads on Windows; HOME is ignored there
     env.pop("PERPLEXITY_API_KEY", None)
     env.pop("OBSIDIAN_VAULT_PATH", None)
 
@@ -1227,6 +1228,103 @@ def test_validate_hook_accepts_vscode_extension_payload(tmp_path):
     assert_warn(run({"tool_name": "Write", "tool_input": {"file_path": str(bad)}}))
     assert_warn(run({"tool_name": "create_file", "tool_input": {"filePath": str(bad)}}))
 
+
+def test_validate_hook_accepts_the_callout_preamble(tmp_path):
+    """Rule 2 accepts the Obsidian callout form of the preamble as well as the
+    heading (#237): `> [!info]- For future agent` is plain text, needs no
+    plugin, and folds so a human sees the note content first. The hook used to
+    match the heading only, so every such note raised a false warning on every
+    write. A bold line or a paragraph without the title is still not a preamble."""
+    hook = REPO_ROOT / "hooks/validate-ai-first.sh"
+    vault = tmp_path / "vault"
+    vault.mkdir()
+    fm = "---\ntype: note\ndate: 2026-09-04\ntags: [t]\nai-first: true\n---\n\n"
+
+    def run(name, body):
+        note = vault / name
+        note.write_text(fm + body, encoding="utf-8")
+        return subprocess.run(
+            ["bash", str(hook)],
+            input=json.dumps({"tool_name": "Write", "tool_input": {"file_path": str(note)}}),
+            env=dict(os.environ, OBSIDIAN_VAULT_PATH=str(vault)),
+            capture_output=True, text=True,
+        )
+
+    for body in (
+        "> [!info]- For future agent\n> A folded callout preamble, two sentences long.\n\nBody.\n",
+        "> [!note]+ For future agent\n> An expanded callout of another type.\n",
+        ">[!abstract] For future Claude\n> Legacy label, still valid.\n",
+        "## For future agent\nThe heading form keeps working.\n",
+    ):
+        r = run("ok.md", body)
+        assert r.returncode == 0, r.stderr
+        assert r.stdout == "", f"a valid preamble must be silent, got: {r.stdout[:200]}"
+
+    for body in (
+        "**For future agent**\nBold is not a preamble.\n",
+        "For future agent: a bare paragraph is not one either.\n",
+        "> A callout without the title.\n",
+    ):
+        r = run("bad.md", body)
+        assert r.returncode == 0, r.stderr
+        assert "preamble" in json.loads(r.stdout)["systemMessage"], body
+
+
+def test_validate_hook_is_loud_when_the_payload_has_no_known_path_key(tmp_path):
+    """The matcher fired, so a write happened; a payload whose path sits under a
+    key the hook does not read (a new editor, a renamed field) used to exit 0,
+    indistinguishable from "not a vault file", and the write went unchecked
+    (#171). Now: one stderr line naming the tool and the keys, exit 1, still
+    non-blocking. Input with no tool_name stays silent, and a NotebookEdit
+    payload is read through notebook_path and dropped by the .md gate."""
+    hook = REPO_ROOT / "hooks/validate-ai-first.sh"
+    vault = tmp_path / "vault"
+    vault.mkdir()
+    bad = vault / "bad.md"
+    bad.write_text("# no frontmatter\n", encoding="utf-8")
+    env = dict(os.environ, OBSIDIAN_VAULT_PATH=str(vault))
+
+    def run(payload):
+        return subprocess.run(
+            ["bash", str(hook)], input=json.dumps(payload), env=env,
+            capture_output=True, text=True,
+        )
+
+    r = run({"tool_name": "create_file", "tool_input": {"path": str(bad)}})
+    assert r.returncode == 1
+    assert r.stdout == ""
+    assert "found no file path" in r.stderr and "create_file" in r.stderr and "path" in r.stderr
+    assert "NOT validated" in r.stderr
+
+    r = run({"tool_input": {"path": str(bad)}})  # no tool_name: nothing fired
+    assert r.returncode == 0 and r.stdout == "" and r.stderr == ""
+
+    r = run({"tool_name": "NotebookEdit", "tool_input": {"notebook_path": str(vault / "n.ipynb")}})
+    assert r.returncode == 0 and r.stdout == "" and r.stderr == ""
+
+    r = run({"tool_name": "Write", "tool_input": {"file_path": str(bad)}})  # the known shape still warns
+    assert r.returncode == 0
+    assert "frontmatter" in json.loads(r.stdout)["systemMessage"]
+
+
+def test_mcp_validate_note_accepts_the_callout_preamble(tmp_path, monkeypatch):
+    """The MCP validator and the hook must agree on rule 2 (#237)."""
+    vault_ops = _load_vault_ops()
+    vault = tmp_path / "vault"
+    vault.mkdir()
+    monkeypatch.setenv("OBSIDIAN_VAULT_PATH", str(vault))
+    fm = "---\ntype: note\ndate: 2026-09-04\ntags:\n  - x\nai-first: true\n---\n\n"
+    (vault / "Callout.md").write_text(
+        fm + "> [!info]- For future agent\n> A folded callout preamble.\n\nBody.\n", encoding="utf-8"
+    )
+    (vault / "Empty.md").write_text(fm + "> [!info]- For future agent\n>\n\n## Body\n", encoding="utf-8")
+    (vault / "Bold.md").write_text(fm + "**For future agent**\nNot a preamble.\n", encoding="utf-8")
+
+    assert vault_ops.validate_note("Callout.md")["ok"] is True
+    assert "future-agent preamble is empty" in vault_ops.validate_note("Empty.md")["issues"]
+    assert any("preamble" in i for i in vault_ops.validate_note("Bold.md")["issues"])
+
+
 def test_recall_hook_contract(tmp_path):
     """Bounded recall: inert without the double gate, injects a bounded brief
     on a relevant prompt, abstains (silently, exit 0) on an irrelevant one,
@@ -1374,3 +1472,75 @@ def test_relative_reference_citations_are_not_silent():
         "outside the install root skips the rule silently:\n  "
         + "\n  ".join(offenders[:15])
     )
+
+
+def test_validate_hook_flags_tags_obsidian_renders_broken(tmp_path):
+    """Check 7 (#221): digits-only, dotted and spaced tags render struck through in
+    Obsidian with no error anywhere, so the hook must be the thing that says so.
+    Valid tags - Unicode letters, nested paths, digits mixed with letters - stay
+    silent. Inline, scalar and block forms are all read."""
+    hook = REPO_ROOT / "hooks/validate-ai-first.sh"
+    head = "---\ntype: note\ndate: 2026-08-27\n"
+    tail = "ai-first: true\n---\n\n## For future agent\n\nbody\n"
+
+    def run(f):
+        return subprocess.run(
+            ["bash", str(hook)],
+            input=json.dumps({"tool_input": {"file_path": str(f)}}),
+            env=dict(os.environ, OBSIDIAN_VAULT_PATH=str(tmp_path)),
+            capture_output=True, text=True,
+        )
+
+    bad_inline = tmp_path / "bad_inline.md"
+    bad_inline.write_text(head + "tags: [project, 33, 2.0, q3 2026]\n" + tail, encoding="utf-8")
+    r = run(bad_inline)
+    assert r.returncode == 0, r.stderr
+    msg = json.loads(r.stdout)["systemMessage"]
+    assert "render broken" in msg
+    assert "tag `33` is digits only" in msg and "store-33" in msg
+    assert "tag `2.0` contains `.`" in msg
+    assert "tag `q3 2026` contains whitespace" in msg
+    assert "`project`" not in msg
+
+    bad_block = tmp_path / "bad_block.md"
+    bad_block.write_text(head + "tags:\n  - person\n  - 033\n" + tail, encoding="utf-8")
+    r = run(bad_block)
+    msg = json.loads(r.stdout)["systemMessage"]
+    assert "tag `033` is digits only" in msg
+
+    good = tmp_path / "good.md"
+    good.write_text(head + "tags: [project, store-33, v2-0, area/sub-topic, ideas_2026, знания, 学习]\n" + tail,
+                    encoding="utf-8")
+    r = run(good)
+    assert r.returncode == 0, r.stderr
+    assert r.stdout.strip() == "", r.stdout
+
+
+def test_validate_hook_skips_claude_dir(tmp_path):
+    """#249: slash-command files copied into a vault's .claude/commands/ (the
+    Windows and project-scoped install layout) carry `description:` frontmatter
+    and no AI-first preamble by design. The hook used to warn on each of them -
+    47 warnings per refresh. Anything under .claude/ is skipped like templates/."""
+    hook = REPO_ROOT / "hooks/validate-ai-first.sh"
+    cmd = tmp_path / ".claude" / "commands" / "obsidian-ingest.md"
+    cmd.parent.mkdir(parents=True)
+    cmd.write_text("---\ndescription: a command\n---\n\nNo preamble here.\n", encoding="utf-8")
+    note = tmp_path / "Knowledge" / "Note.md"
+    note.parent.mkdir()
+    note.write_text("---\ndescription: not a note schema\n---\n\nNo preamble here.\n", encoding="utf-8")
+
+    def run(f):
+        return subprocess.run(
+            ["bash", str(hook)],
+            input=json.dumps({"tool_name": "Write", "tool_input": {"file_path": str(f)}}),
+            env=dict(os.environ, OBSIDIAN_VAULT_PATH=str(tmp_path)),
+            capture_output=True, text=True,
+        )
+
+    skipped = run(cmd)
+    assert skipped.returncode == 0, skipped.stderr
+    assert not skipped.stdout.strip(), skipped.stdout
+    # The same content outside .claude/ still warns: the skip is by path, not by shape.
+    checked = run(note)
+    assert checked.returncode == 0, checked.stderr
+    assert "AI-first" in checked.stdout or "warning" in checked.stdout.lower(), checked.stdout

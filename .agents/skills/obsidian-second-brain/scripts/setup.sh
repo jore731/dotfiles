@@ -15,10 +15,15 @@
 set -euo pipefail
 
 SKILL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SETTINGS="$HOME/.claude/settings.json"
+# Home for config and Claude Code state (OSB_HOME, OSB_WIN): USERPROFILE on
+# Windows shells, HOME elsewhere. See scripts/platform-home.sh.
+. "$SKILL_DIR/scripts/platform-home.sh"
+osb_platform_home
+SETTINGS="$OSB_HOME/.claude/settings.json"
 HOOK_SCRIPT="$SKILL_DIR/hooks/obsidian-bg-agent.sh"
 SESSION_HOOK="$SKILL_DIR/hooks/load_vault_context.py"
-ENV_FILE="$HOME/.config/obsidian-second-brain/.env"
+ENV_FILE="${OBSIDIAN_ENV_FILE:-$OSB_HOME/.config/obsidian-second-brain/.env}"
+if [[ "$OSB_WIN" = 1 ]]; then ENV_FILE="${ENV_FILE//\\//}"; fi
 
 # ── helpers ──────────────────────────────────────────────────────────────────
 
@@ -28,7 +33,7 @@ red()    { printf '\033[0;31m%s\033[0m\n' "$1"; }
 step()   { printf '\n\033[1m%s\033[0m\n' "$1"; }
 
 if ! command -v jq >/dev/null 2>&1; then
-  red "Error: jq is required (it edits ~/.claude/settings.json safely)."
+  red "Error: jq is required (it edits $SETTINGS safely)."
   echo "Install it: brew install jq   |   sudo apt install jq   |   https://jqlang.github.io/jq/"
   exit 1
 fi
@@ -70,7 +75,7 @@ green "   Done - $SESSION_HOOK"
 
 # ── ensure settings.json exists ───────────────────────────────────────────────
 
-step "2. Updating ~/.claude/settings.json..."
+step "2. Updating $SETTINGS..."
 
 if [[ ! -f "$SETTINGS" ]]; then
   echo "{}" > "$SETTINGS"
@@ -166,10 +171,10 @@ fi
 
 # ── register slash commands ──────────────────────────────────────────────────
 
-step "3. Registering slash commands in ~/.claude/commands/..."
+step "3. Registering slash commands in $OSB_HOME/.claude/commands/..."
 
 COMMANDS_SRC="$SKILL_DIR/commands"
-COMMANDS_DST="$HOME/.claude/commands"
+COMMANDS_DST="$OSB_HOME/.claude/commands"
 
 if [[ ! -d "$COMMANDS_SRC" ]]; then
   yellow "   No commands/ directory in skill - skipping"
@@ -205,14 +210,14 @@ echo "   It is optional: in Claude Code, Claude reads/writes vault files directl
 echo "   and everything works without it. The server is mainly useful for other"
 echo "   MCP clients (Claude Desktop, Cursor, Hermes). It needs 'uv' on PATH."
 echo ""
-MCP_CMD="claude mcp add obsidian-second-brain -s user -e OBSIDIAN_VAULT_PATH=\"$VAULT\" -- uv run --with 'mcp<2' python \"$SKILL_DIR/integrations/obsidian-mcp-server/server.py\""
+MCP_CMD="claude mcp add obsidian-second-brain -s user -e OBSIDIAN_VAULT_PATH=\"$VAULT\" -- uv run --no-project --with 'mcp<2' python \"$SKILL_DIR/integrations/obsidian-mcp-server/server.py\""
 REPLY=n
 if [[ -t 0 ]]; then
   read -r -p "   Configure the bundled MCP server? [y/N] " REPLY
 fi
 if [[ "$REPLY" =~ ^[Yy]$ ]]; then
   if command -v claude &>/dev/null && command -v uv &>/dev/null; then
-    claude mcp add obsidian-second-brain -s user -e OBSIDIAN_VAULT_PATH="$VAULT" -- uv run --with 'mcp<2' python "$SKILL_DIR/integrations/obsidian-mcp-server/server.py"
+    claude mcp add obsidian-second-brain -s user -e OBSIDIAN_VAULT_PATH="$VAULT" -- uv run --no-project --with 'mcp<2' python "$SKILL_DIR/integrations/obsidian-mcp-server/server.py"
     green "   MCP server configured"
   else
     yellow "   claude and/or uv CLI not found - skipping MCP setup"

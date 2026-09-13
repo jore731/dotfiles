@@ -1,9 +1,9 @@
 ---
 name: azure-devops
-description: Expert knowledge for Azure DevOps development including troubleshooting, best practices, decision making, architecture & design patterns, limits & quotas, security, configuration, integrations & coding patterns, and deployment. Use when managing agent pools, pipelines, work item tracking, Analytics/OData/Power BI, or Azure DevOps Server deployments, and other Azure DevOps related development tasks. Not for Azure Boards (use azure-boards), Azure Pipelines (use azure-pipelines), Azure Repos (use azure-repos), Azure Test Plans (use azure-test-plans).
+description: Expert knowledge for Azure DevOps development including troubleshooting, best practices, decision making, architecture & design patterns, limits & quotas, security, configuration, integrations & coding patterns, and deployment. Use when managing agent pools, work item processes, analytics/OData reports, org limits, or Server deployments, and other Azure DevOps related development tasks. Not for Azure Boards (use azure-boards), Azure Pipelines (use azure-pipelines), Azure Repos (use azure-repos), Azure Test Plans (use azure-test-plans).
 compatibility: Requires network access. Uses mcp_microsoftdocs:microsoft_docs_fetch or fetch_webpage to retrieve documentation.
 metadata:
-  generated_at: "2026-08-16"
+  generated_at: "2026-09-06"
   generator: "docs2skills/1.0.0"
 ---
 # Azure DevOps Skill
@@ -24,15 +24,15 @@ This skill requires **network access** to fetch documentation content:
 
 | Category | Lines | Description |
 |----------|-------|-------------|
-| Troubleshooting | L37-L53 | Diagnosing and fixing Azure DevOps issues: Managed DevOps Pools, MCP servers, performance, notifications/email, connectivity/IP allowlists, permissions, wikis restore, Analytics/Power BI, and upgrades. |
-| Best Practices | L54-L69 | Guidance on optimizing Azure DevOps performance, analytics, and reporting: pools, permissions, OData/Power BI queries, flow metrics, caches, and on-prem data cleanup. |
-| Decision Making | L70-L87 | Guidance for architectural and migration decisions in Azure DevOps: agent pools, costs, org geography, auth, team structure, wikis, work tracking, analytics/reporting, and Server deployment/upgrade. |
-| Architecture & Design Patterns | L88-L99 | Architectural guidance for Azure DevOps/Server: pool architecture, reliability/DR, SQL/database dependencies, and design patterns for simple to complex multi-server topologies and analytics modeling. |
-| Limits & Quotas | L100-L115 | Limits, quotas, and constraints in Azure DevOps: org/project naming, images, deletes/retention/recovery, work item/wiki/portfolio limits, dashboards, pipelines size limits, and Analytics data availability |
-| Security | L116-L172 | Configuring authentication, authorization, identities, permissions, roles, groups, and auditing for secure access to Azure DevOps organizations, projects, repos, pipelines, analytics, and servers. |
-| Configuration | L173-L247 | Configuring Azure DevOps/Server: managed pools (VMs, networking, scaling), notifications, work item/process customization, Analytics/OData, dashboards, backups, services, SQL, and server admin settings. |
-| Integrations & Coding Patterns | L248-L292 | Integrating Azure DevOps with tools (VS, SIEM, notifications, clients) and building Analytics/OData- and Power BI–based reports for work items, pipelines, and test/requirements metrics. |
-| Deployment | L293-L324 | Installing, configuring, scaling, moving, backing up, restoring, and upgrading Azure DevOps Server/TFS deployments, including SQL, SharePoint, domains, and project collections |
+| Troubleshooting | L37-L54 | Diagnosing and fixing Azure DevOps issues: pools/MCP servers, performance, notifications/email, connectivity/permissions, wikis, dashboards/analytics, and server upgrades. |
+| Best Practices | L55-L70 | Guidance on optimizing Azure DevOps performance, analytics, and reporting: pools, permissions, OData/Power BI queries, flow metrics, caches, and on-prem data cleanup. |
+| Decision Making | L71-L88 | Guidance for architectural and migration decisions in Azure DevOps: agent pools, costs, org geography, auth, team structure, wikis, work tracking, analytics/reporting, and Server deployment/upgrade. |
+| Architecture & Design Patterns | L89-L99 | Architectural guidance for Azure DevOps/Server: pool architecture, reliability/DR, SQL/database dependencies, and design patterns for simple to complex multi-server topologies and analytics modeling. |
+| Limits & Quotas | L100-L115 | Limits, quotas, and naming rules for orgs/projects/work items, dashboards, wikis, pipelines, Managed DevOps Pools, plus data retention and Analytics availability. |
+| Security | L116-L173 | Configuring Azure DevOps and Azure DevOps Server security: identities, auth (Entra, OAuth), permissions/roles, groups, access levels, auditing, and secure service accounts/SSL. |
+| Configuration | L174-L250 | Configuring Azure DevOps/Server: pools, agents, networks, notifications, auditing, work item/process customization, analytics/dashboards, backups, services, SQL, and server administration settings. |
+| Integrations & Coding Patterns | L251-L294 | Integrating Azure DevOps with tools (VS, SIEM, notifications, clients) and building Analytics/OData- and Power BI–based reports for work items, pipelines, and test/requirements metrics. |
+| Deployment | L295-L326 | Installing, configuring, scaling, moving, backing up, restoring, and upgrading Azure DevOps Server/TFS deployments, including SQL, SharePoint, domains, and project collections |
 
 ### Troubleshooting
 | Topic | URL |
@@ -47,6 +47,7 @@ This skill requires **network access** to fetch documentation content:
 | Allowlist IPs and URLs for Azure DevOps connectivity | https://learn.microsoft.com/en-us/azure/devops/organizations/security/allow-list-ip-url?view=azure-devops |
 | Troubleshoot Azure DevOps access and permission issues | https://learn.microsoft.com/en-us/azure/devops/organizations/security/troubleshoot-permissions?view=azure-devops |
 | Restore deleted Azure DevOps wikis using REST API and recycle bin | https://learn.microsoft.com/en-us/azure/devops/project/wiki/restore-deleted-wiki?view=azure-devops |
+| Resolve common Azure DevOps dashboard and chart issues | https://learn.microsoft.com/en-us/azure/devops/report/dashboards/faqs?view=azure-devops |
 | Troubleshoot Azure DevOps Analytics views for Power BI | https://learn.microsoft.com/en-us/azure/devops/report/powerbi/troubleshooting-views?view=azure-devops |
 | Azure DevOps Server administration FAQ and support guidance | https://learn.microsoft.com/en-us/azure/devops/server/faq?view=azure-devops-server |
 | Troubleshoot Azure DevOps project collection upgrade failures | https://learn.microsoft.com/en-us/azure/devops/server/troubleshooting/collection-upgrade-failure?view=azure-devops-server |
@@ -88,7 +89,6 @@ This skill requires **network access** to fetch documentation content:
 ### Architecture & Design Patterns
 | Topic | URL |
 |-------|-----|
-| Understand architecture of Managed DevOps Pools | https://learn.microsoft.com/en-us/azure/devops/managed-devops-pools/architecture-overview?view=azure-devops |
 | Understand reliability and disaster recovery for Managed DevOps Pools | https://learn.microsoft.com/en-us/azure/devops/managed-devops-pools/reliability-managed-devops-pools?view=azure-devops |
 | Model historical and trend data in Azure DevOps Analytics | https://learn.microsoft.com/en-us/azure/devops/report/powerbi/analytics-historical-filtering?view=azure-devops |
 | Understand Azure DevOps Server resource dependencies | https://learn.microsoft.com/en-us/azure/devops/server/admin/app-dependencies?view=azure-devops-server |
@@ -100,7 +100,7 @@ This skill requires **network access** to fetch documentation content:
 ### Limits & Quotas
 | Topic | URL |
 |-------|-----|
-| Understand quotas and SKUs for Managed DevOps Pools | https://learn.microsoft.com/en-us/azure/devops/managed-devops-pools/faq?view=azure-devops |
+| Understand quotas and VM SKUs for Managed DevOps Pools | https://learn.microsoft.com/en-us/azure/devops/managed-devops-pools/faq?view=azure-devops |
 | Change Azure DevOps organization image within size limits | https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/change-organization-image?view=azure-devops |
 | Delete Azure DevOps organization and data retention | https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/delete-your-organization?view=azure-devops |
 | Recover deleted Azure DevOps organizations within retention limits | https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/recover-your-organization?view=azure-devops |
@@ -118,6 +118,7 @@ This skill requires **network access** to fetch documentation content:
 |-------|-----|
 | Configure managed identities for Managed DevOps Pools | https://learn.microsoft.com/en-us/azure/devops/managed-devops-pools/configure-identity?view=azure-devops |
 | Configure security for Azure Managed DevOps Pools | https://learn.microsoft.com/en-us/azure/devops/managed-devops-pools/configure-security?view=azure-devops |
+| Set Azure permissions for Managed DevOps Pools | https://learn.microsoft.com/en-us/azure/devops/managed-devops-pools/prerequisites?view=azure-devops |
 | Configure Azure DevOps organization access security policies | https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/change-application-access-policies?view=azure-devops |
 | Manage Azure DevOps organization ownership and permissions | https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/change-organization-ownership?view=azure-devops |
 | Configure Azure DevOps access via Microsoft Entra ID | https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/faq-azure-access?view=azure-devops |
@@ -175,15 +176,17 @@ This skill requires **network access** to fetch documentation content:
 |-------|-----|
 | Configure advanced settings for Managed DevOps Pools | https://learn.microsoft.com/en-us/azure/devops/managed-devops-pools/configure-advanced-settings?view=azure-devops |
 | Configure VM images for Managed DevOps Pools agents | https://learn.microsoft.com/en-us/azure/devops/managed-devops-pools/configure-images?view=azure-devops |
-| Configure networking for Azure Managed DevOps Pools | https://learn.microsoft.com/en-us/azure/devops/managed-devops-pools/configure-networking?view=azure-devops |
+| Configure virtual network settings for DevOps Pools | https://learn.microsoft.com/en-us/azure/devops/managed-devops-pools/configure-networking?view=azure-devops |
 | Configure settings for Managed DevOps Pools | https://learn.microsoft.com/en-us/azure/devops/managed-devops-pools/configure-pool-settings?view=azure-devops |
 | Configure scaling settings for Managed DevOps Pools | https://learn.microsoft.com/en-us/azure/devops/managed-devops-pools/configure-scaling?view=azure-devops |
 | Configure data disk storage for Managed DevOps Pool agents | https://learn.microsoft.com/en-us/azure/devops/managed-devops-pools/configure-storage?view=azure-devops |
 | Configure pipeline demands for Managed DevOps Pools | https://learn.microsoft.com/en-us/azure/devops/managed-devops-pools/demands?view=azure-devops |
-| Configure prerequisites for Managed DevOps Pools | https://learn.microsoft.com/en-us/azure/devops/managed-devops-pools/prerequisites?view=azure-devops |
+| Configure remote Azure DevOps MCP Server endpoint | https://learn.microsoft.com/en-us/azure/devops/mcp-server/remote-mcp-server?view=azure-devops |
 | Configure organization and user time zones in Azure DevOps | https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/change-time-zone?view=azure-devops |
 | Reference list of Azure DevOps auditing events | https://learn.microsoft.com/en-us/azure/devops/organizations/audit/auditing-events?view=azure-devops |
+| Configure Azure DevOps audit data streaming | https://learn.microsoft.com/en-us/azure/devops/organizations/audit/auditing-streaming?view=azure-devops |
 | Exclude event initiators from Azure DevOps notifications | https://learn.microsoft.com/en-us/azure/devops/organizations/notifications/exclude-self-from-email?view=azure-devops |
+| Configure team and organization notifications in Azure DevOps | https://learn.microsoft.com/en-us/azure/devops/organizations/notifications/manage-team-group-global-organization-notifications?view=azure-devops |
 | Configure default Azure DevOps notification subscriptions | https://learn.microsoft.com/en-us/azure/devops/organizations/notifications/oob-built-in-notifications?view=azure-devops |
 | Reference event types for Azure DevOps notifications | https://learn.microsoft.com/en-us/azure/devops/organizations/notifications/oob-supported-event-types?view=azure-devops |
 | View and unsubscribe from Azure DevOps notifications | https://learn.microsoft.com/en-us/azure/devops/organizations/notifications/unsubscribe-default-notification?view=azure-devops |
@@ -248,7 +251,6 @@ This skill requires **network access** to fetch documentation content:
 ### Integrations & Coding Patterns
 | Topic | URL |
 |-------|-----|
-| Stream Azure DevOps audit logs to external SIEM | https://learn.microsoft.com/en-us/azure/devops/organizations/audit/auditing-streaming?view=azure-devops |
 | Integrate Azure DevOps notifications with third-party services | https://learn.microsoft.com/en-us/azure/devops/organizations/notifications/integrate-third-party-services?view=azure-devops |
 | Connect various clients to Azure DevOps projects | https://learn.microsoft.com/en-us/azure/devops/organizations/projects/connect-to-projects?view=azure-devops |
 | Automate Azure DevOps wiki management using CLI commands | https://learn.microsoft.com/en-us/azure/devops/project/wiki/manage-wikis?view=azure-devops |
